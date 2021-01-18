@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block formulario %}
-<article>
+<div>
 	<img src='{% static "assets/padlock.svg" %}' class='rounded mx-auto d-block' alt='' />
 
 	<p class='text-muted text-justify'>
@@ -13,5 +13,5 @@
 		<button class='btn btn-link' onclick='window.location.href=`{% url "login" %}`'>Voltar</button>
 		<button class='btn btn-link' onclick='window.location.href=`{% url "reset" %}`'>Redefinir senha</button>
 	</div>
-</article>
+</div>
 {% endblock %}

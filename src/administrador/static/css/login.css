@@ -16,7 +16,7 @@ body, input, button {
   	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
-main.background {
+.background {
 	background-image: url('../assets/login.jpg');
 	background-size: cover;
 	height: 100%;
@@ -24,7 +24,7 @@ main.background {
 	-webkit-font-smoothing: antialiased;
 }
 
-main.background section.error-overlay {
+.background .error-overlay {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -35,19 +35,19 @@ main.background section.error-overlay {
 	z-index: 1;
 }
 
-main.background section.error-overlay .container .card {
+.background .error-overlay .container .card {
 	max-width: 35em;
 	margin: 5em auto;
 }
 
-main.background section.error-overlay .container .card .card-body h5 {
+.background .error-overlay .container .card .card-body h5 {
 	color: #333;
   	font-family: Tahoma, Arial, sans-serif;
   	margin-bottom: 0.938em;
   	font-weight: bold;
 }
 
-main.background section.error-overlay .container .card .card-body button {
+.background .error-overlay .container .card .card-body button {
 	position: absolute;
 	top: 15px;
 	right: 15px;
@@ -55,55 +55,55 @@ main.background section.error-overlay .container .card .card-body button {
   	font-size: 25px;
 }
 
-main.background section.error-overlay .container .card .card-body button:hover {
+.background .error-overlay .container .card .card-body button:hover {
   	color: #06D85F;
 }
 
-main.background section.error-overlay .container .card .card-body p {
+.background .error-overlay .container .card .card-body p {
 	font-size: 1em;
   	color: #666;
   	text-align: center;
 }
 
-main.background section.content {
+.background .content {
 	padding-top: 10em;
 }
 
-main.background section.content .form {
+.background .content .form {
 	margin: auto;
 	width: 100%;
 	max-width: 35em;
 }
 
-main.background section.content .form header {
+.background .content .form header {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
 
-main.background section.content .form header img {
+.background .content .form header img {
 	width: 15em;
   	margin-bottom: 1em;
 }
 
-main.background section.content .form p {
+.background .content .form p {
 	margin-top: 1.5em;
 }
 
-main.background section.content .form form button[type='submit'] {
+.background .content .form form button[type='submit'] {
 	margin-top: 1.5em;
 }
 
-main.background section.content .form form canvas {
+.background .content .form form canvas {
 	display: none;
 }
 
-main.background section.content .form form video {
+.background .content .form form video {
 	display: none;
 }
 
-main.background section.content .form .loader * {
+.background .content .form .loader * {
 	box-sizing: border-box;
 	-o-box-sizing: border-box;
 	-ms-box-sizing: border-box;
@@ -111,7 +111,7 @@ main.background section.content .form .loader * {
 	-moz-box-sizing: border-box;
 }
 
-main.background section.content .form .loader {
+.background .content .form .loader {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -132,7 +132,7 @@ main.background section.content .form .loader {
 	-moz-transform-style: perserve-3d;
 }
 
-main.background section.content .form .dots {
+.background .content .form .dots {
 	width: 100%;
 	height: 100%;
 	
@@ -154,7 +154,7 @@ main.background section.content .form .dots {
 	-moz-animation: dots 6900ms cubic-bezierrgb(0,0,0) infinite;
 }
 
-main.background section.content .form .dot {
+.background .content .form .dot {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -180,7 +180,7 @@ main.background section.content .form .dot {
 	-moz-animation: dot 1725ms cubic-bezier(.7,.05,.39,.88) infinite;
 }
 
-main.background section.content .form .dot:nth-child(1) {
+.background .content .form .dot:nth-child(1) {
 	transform: translateY(-30px);
 	-o-transform: translateY(-30px);
 	-ms-transform: translateY(-30px);
@@ -188,7 +188,7 @@ main.background section.content .form .dot:nth-child(1) {
 	-moz-transform: translateY(-30px);
 }
 
-main.background section.content .form .dot:nth-child(2) {
+.background .content .form .dot:nth-child(2) {
 	transform: translateX(-15px) translateY(-15px);
 	-o-transform: translateX(-15px) translateY(-15px);
 	-ms-transform: translateX(-15px) translateY(-15px);
@@ -201,7 +201,7 @@ main.background section.content .form .dot:nth-child(2) {
 	-moz-animation-name: dot2;
 }
 
-main.background section.content .form .dot:nth-child(3) {
+.background .content .form .dot:nth-child(3) {
 	transform: translateX(15px) translateY(-15px);
 	-o-transform: translateX(15px) translateY(-15px);
 	-ms-transform: translateX(15px) translateY(-15px);
@@ -214,7 +214,7 @@ main.background section.content .form .dot:nth-child(3) {
 	-moz-animation-name: dot3;
 }
 
-main.background section.content .form .dot:nth-child(4) {
+.background .content .form .dot:nth-child(4) {
 	transform: translateX(-30px) translateY(0px);
 	-o-transform: translateX(-30px) translateY(0px);
 	-ms-transform: translateX(-30px) translateY(0px);
@@ -227,7 +227,7 @@ main.background section.content .form .dot:nth-child(4) {
 	-moz-animation-name: dot4;
 }
 
-main.background section.content .form .dot:nth-child(5) {
+.background .content .form .dot:nth-child(5) {
 	transform: translateX(0px) translateY(0px);
 	-o-transform: translateX(0px) translateY(0px);
 	-ms-transform: translateX(0px) translateY(0px);
@@ -240,7 +240,7 @@ main.background section.content .form .dot:nth-child(5) {
 	-moz-animation-name: dot5;
 }
 
-main.background section.content .form .dot:nth-child(6) {
+.background .content .form .dot:nth-child(6) {
 	transform: translateX(30px) translateY(0px);
 	-o-transform: translateX(30px) translateY(0px);
 	-ms-transform: translateX(30px) translateY(0px);
@@ -253,7 +253,7 @@ main.background section.content .form .dot:nth-child(6) {
 	-moz-animation-name: dot6;
 }
 
-main.background section.content .form .dot:nth-child(7) {
+.background .content .form .dot:nth-child(7) {
 	transform: translateX(-15px) translateY(15px);
 	-o-transform: translateX(-15px) translateY(15px);
 	-ms-transform: translateX(-15px) translateY(15px);
@@ -266,7 +266,7 @@ main.background section.content .form .dot:nth-child(7) {
 	-moz-animation-name: dot7;
 }
 
-main.background section.content .form .dot:nth-child(8) {
+.background .content .form .dot:nth-child(8) {
 	transform: translateX(15px) translateY(15px);
 	-o-transform: translateX(15px) translateY(15px);
 	-ms-transform: translateX(15px) translateY(15px);
@@ -278,7 +278,7 @@ main.background section.content .form .dot:nth-child(8) {
 	-webkit-animation-name: dot8;
 	-moz-animation-name: dot8;
 }
-main.background section.content .form .dot:nth-child(9) {
+.background .content .form .dot:nth-child(9) {
 	transform: translateX(0px) translateY(30px);
 	-o-transform: translateX(0px) translateY(30px);
 	-ms-transform: translateX(0px) translateY(30px);

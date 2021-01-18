@@ -76,7 +76,59 @@ def admincreate_view(request):
 
 @login_required(login_url='login')
 @csrf_protect
+def adminedit_view(request, id=0):
+	if id == 0:
+		return redirect('adminlist')
+
+	editar = True
+
+	if request.method == 'POST':
+		formulario = FormEditar(request.POST, request.FILES or None)
+
+		if formulario.is_valid():
+			campos = formulario.clean_form()
+
+			try:
+				editar_administrador = Administrador.objects.get(id=id)
+				editar_administrador.foto = campos['foto']
+				editar_administrador.nome = campos['nome']
+				editar_administrador.email = campos['email']
+
+				if request.POST.get('senha') != '':
+					editar_administrador.senha_hash = campos['senha_hash']
+
+				editar_administrador.save()
+				return redirect('adminlist')
+
+			except:
+				formulario = request.POST
+				erro = 'Não foi possível atualizar este administrador'
+		else:
+			formulario = request.POST
+			erro = 'Alguns campos não foram preenchidos corretamente'
+	else:
+		try:
+			formulario = Administrador.objects.get(id=id)
+			erro = None
+
+		except:
+			return redirect('adminlist')
+
+	contexto = {
+		'form': formulario,
+		'erro': erro,
+		'editar': editar,
+	}
+
+	contexto.update(csrf(request))
+	return render(request, 'administrator/form.html', contexto)
+
+@login_required(login_url='login')
+@csrf_protect
 def admindelete_view(request, id=0):
+	if id == 0:
+		return redirect('adminlist')
+
 	if request.method == 'POST':
 		try:
 			administrator = Administrador.objects.get(id=id)

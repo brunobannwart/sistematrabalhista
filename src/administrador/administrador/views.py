@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 
 from administradores.models import Administrador
 from .backend import BackendLogin
-from .forms import FormLogin, FormRedefinir
+from .forms import FormLogin, FormRedefinir, FormTrocar
 from .utils import rebuild_image, send_mail, hash_password, random_password
 
 import os, requests
@@ -135,3 +136,57 @@ def reset_view(request):
 
 	contexto.update(csrf(request))
 	return render(request, 'login/reset.html', contexto)
+
+#@login_required(login_url='login')
+@csrf_protect
+def changepassword_view(request):
+	if request.method == 'POST':
+		formulario = FormTrocar(request.POST)
+
+		if formulario.is_valid():
+			campos = formulario.clean_form()
+
+			try:
+				administrador = Administrador.objects.get(email=campos['cpf'])
+
+				if campos['senha_hash'] == campos['confirma_hash']:
+					administrador.senha_hash = campos['senha_hash']
+					administrador.save()
+					return redirect('adminlist')
+
+				else:
+					formulario = request.POST
+					erro = 'Senhas não são idênticas'
+
+			except:
+				formulario = request.POST
+				erro = 'CPF não cadastrado'
+		else:
+			formulario = request.POST
+			erro = 'Preencher campos corretamente'
+	else:
+		formulario = {
+			'email': '',
+			'senha': '',
+			'confirma': ''
+		}
+
+		erro = None
+
+	contexto = {
+		'form': formulario,
+		'erro': erro,
+	}
+
+	contexto.update(csrf(request))
+	return render(request, 'option/changepassword.html', contexto)
+
+def logout_view(request):
+	try:
+		email = request.user.email
+		logout(request)
+		administrador = Administrador.objects.get(email=email)
+		administrador.is_authenticated = False
+		administrador.save()
+	finally:
+		return redirect('login')

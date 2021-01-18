@@ -58,7 +58,55 @@ def coursecreate_view(request):
 
 @login_required(login_url='login')
 @csrf_protect
+def courseedit_view(request, id=0):
+	if id == 0:
+		return redirect('courselist')
+
+	editar = True
+
+	if request.method == 'POST':
+		formulario = FormEditar(request.POST, request.FILES or None)
+
+		if formulario.is_valid():
+			campos = formulario.clean_form()
+
+			try:
+				editar_curso = Curso.objects.get(id=id)
+				editar_curso.logo = campos['logo']
+				editar_curso.titulo = campos['titulo']
+				editar_curso.data_exp = campos['data_exp']
+				editar_curso.descricao = campos['descricao']
+				editar_curso.save()
+
+			except:
+				formulario = request.POST
+				erro = 'Não foi possível atualizar este curso'
+		else:
+			formulario = request.POST
+			erro = 'Alguns campos não foram preenchidos corretamente'
+	else:
+		try:
+			formulario = Curso.objects.get(id=id)
+			erro = None
+
+		except:
+			return redirect('courselist')
+
+	contexto = {
+		'form': formulario,
+		'erro': erro,
+		'editar': editar
+	}
+
+	contexto.update(csrf(request))
+	return redirect(request, 'course/form.html', contexto)
+
+@login_required(login_url='login')
+@csrf_protect
 def coursedelete_view(request, id=0):
+	if id == 0:
+		return redirect('courselist')
+
 	if request.method == 'POST':	
 		try:
 			curso = Curso.objects.get(id=id)
