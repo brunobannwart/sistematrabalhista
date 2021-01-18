@@ -1,0 +1,17 @@
+{% extends 'login/index.html' %}
+{% load static %}
+
+{% block formulario %}
+<article>
+	<img src='{% static "assets/padlock.svg" %}' class='rounded mx-auto d-block' alt='' />
+
+	<p class='text-muted text-justify'>
+		Para recuperar seu acesso, clique em <b>Redefinir senha</b> abaixo. Informe o seu email, e receba uma nova senha.
+	</p>
+
+	<div class='form-row'>
+		<button class='btn btn-link' onclick='window.location.href=`{% url "login" %}`'>Voltar</button>
+		<button class='btn btn-link' onclick='window.location.href=`{% url "reset" %}`'>Redefinir senha</button>
+	</div>
+</article>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang='pt-br'>
+<head>
+	<meta charset='utf-8' />
+	<meta name='viewport' content='width=device-width, initial-scale=1' />
+	<link rel='stylesheet' type='text/css' href='{% static "bootstrap/css/bootstrap.min.css" %}' />
+	<link rel='stylesheet' type='text/css' href='{% static "css/base.css" %}' />
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+	<script type='text/javascript' src='{% static "bootstrap/js/bootstrap.min.js" %}' />
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
+	<script src='https://kit.fontawesome.com/50797efa34.js'></script>
+	<title>Trabalhista - Administrativo</title>
+</head>
+<body>
+	<header class='navbar navbar-expand-lg navbar-dark static-top'>
+		<span class='navbar-brand'>
+			<img src='' alt='' class='d-inline-block align-top' />
+		</span>
+		{% block titulo %}
+		{% endblock %}
+		<button type='button' class='navbar-toggler collapsed' data-toggle='collapse' data-target='#lateral' aria-controls='lateral' aria-expanded='false'>
+			<span class='navbar-toggler-icon'></span>
+		</button>
+	</header>
+	<main class='container-fluid'>
+		<div class='row'>
+			<nav id='lateral' class='col-md-3 col-lg-2 d-md-block sidebar collapse'>
+				<header class='sidebar-header'>
+					<i class='fas fa-home'>Administrativo</i>
+				</header>
+				<aside class='sidebar-sticky pt-3'>
+					<strong class='sidebar-heading d-flex mt-4'>Contas</strong>
+					<ul class='nav flex-column mb-2'>
+						<li class='nav-item'>
+							<a class='nav-link' href='{% url "adminlist" %}'>
+								<i class='fas fa-user-shield'>
+									Administradores
+								</i>
+							</a>
+						</li>
+						<li class='nav-item'>
+							<a class='nav-link' href='{% url "login" %}'>
+								<i class='fas fa-user-tie'>
+									Empresas
+								</i>
+							</a>
+						</li>
+						<li class='nav-item'>
+							<a class='nav-link' href='{% url "login" %}'>
+								<i class='fa fa-users'>
+									Trabalhadores
+								</i>
+							</a>
+						</li>
+					</ul>
+					<strong class='sidebar-heading d-flex mt-4'>Contéudo</strong>
+					<ul class='nav flex-column mb-2'>
+						<li class='nav-item'>
+							<a class='nav-link' href='{% url "login" %}'>
+								<i class='fa fa-print'>
+									Currículos
+								</i>
+							</a>
+						</li>
+						<li class='nav-item'>
+							<a class='nav-link' href='{% url "courselist" %}'>
+								<i class='fas fa-book'>
+									Cursos
+								</i>
+							</a>
+						</li>
+						<li class='nav-item'>
+							<a class='nav-link' href='{% url "login" %}'>
+								<i class='fas fa-palette'>
+									Eventos culturais
+								</i>
+							</a>
+						</li>
+						<li class='nav-item'>
+							<a class='nav-link' href='{% url "login" %}'>
+								<i class='fas fa-gamepad'>
+									Jogos
+								</i>
+							</a>
+						</li>
+						<li class='nav-item'>
+							<a class='nav-link' href='{% url "login" %}'>
+								<i class='fas fa-briefcase'>
+									Vagas de emprego
+								</i>
+							</a>
+						</li>
+						<li class='nav-item'>
+							<a class='nav-link' href='{% url "login" %}'>
+								<i class='fab fa-youtube'>
+									Videoaulas
+								</i>
+							</a>
+						</li>
+					</ul>
+					<strong class='sidebar-heading d-flex mt-4'>Opções</strong>
+					<ul class='nav flex-column mb-2'>
+						<li class='nav-item'>
+							<a class='nav-link' href='{% url "login" %}'>
+								<i class='fas fa-sign-out-alt'>
+									Sair
+								</i>
+							</a>
+						</li>
+					</ul>
+				</aside>
+			</nav>
+			<div class='col-md-9 ml-sm-auto col-lg-10 px-md-4'>
+				{% block pagina %}
+				{% endblock %}
+			</div>
+		</div>
+	</main>
+</body>
+</html>

@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+* {
+  	margin: 0;
+  	padding: 0;
+  	outline: 0;
+  	box-sizing: border-box;
+}
+
+html, body {
+  	height: 100%;
+  	width: 100%;
+}
+
+body, input, button {
+  	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+header.navbar {
+	color: #FFF;
+	background-color: #3F51B5;
+}
+
+main.container-fluid .row nav {
+	background-color: #222;
+	height: 100%;
+	min-height: 100vh;
+}
+
+main.container-fluid .row nav header.sidebar-header {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+main.container-fluid .row nav header.sidebar-header i {
+	font-size: 1em;
+	color: #FFF;
+	margin-top: 1em;
+}
+
+main.container-fluid .row nav aside strong {
+	color: #FFF;
+	font-size: 1em;
+}
+
+main.container-fluid .row nav aside ul:not(:last-child) {
+	border-bottom: 1px solid rgb(225, 225, 225, 0.3);
+}
+
+main.container-fluid .row nav aside ul li a {
+    color: #CCC;
+    display: block;
+    font-size: 1em;
+}
+
+main.container-fluid .row nav aside ul li:hover {
+	background-color: #444;
+}

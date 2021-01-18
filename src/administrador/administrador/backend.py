@@ -6,7 +6,7 @@ class BackendLogin(BaseBackend):
 		try:
 			administrador = Administrador.objects.get(email=email)
 
-			if administrador.senha_hash = senha:
+			if administrador.senha_hash == senha:
 				return administrador
 
 			else:

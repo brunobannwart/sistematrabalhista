@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+	<h3 class='text-center'>Lista de Administradores</h3>
+{% endblock %}
+
+{% block pagina %}
+<button onclick='window.location.href=`{% url "admincreate" %}`'>Novo
+</button>
+{% endblock %}
