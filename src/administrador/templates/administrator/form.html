@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block titulo %}
-	<h3>Formulário de Videoaula</h3>
+	<h3>Formulário de Administrador</h3>
 {% endblock %}
 
 {% block pagina %}
@@ -38,7 +38,7 @@
 					<div class='col'>
 						{% if editar is True %}
 							<img 
-								src='{{ form.logo.url }}'
+								src='{{ form.foto.url }}'
 								class='img-fluid' 
 								alt='Prévia'
 								id='previa'
@@ -54,61 +54,77 @@
 					<div class='col'>
 						<div class='input-group mb-3'>
 							<div class='input-group-prepend'>
-								<label class='input-group-text'>Logo do curso</label>
+								<label class='input-group-text'>Foto do administrador</label>
 							</div>
 							<div class='custom-file'>
 								<input 
 									type='file'
 									class='custom-file-input'
 									accept='image/*'
-									id='logo' 
-									name='logo'
+									id='foto' 
+									name='foto'
 								/>
-								<label class='custom-file-label'>Escolher logo</label>
+								<label class='custom-file-label'>Escolher foto</label>
 							</div>
 						</div>
 					</div>
 				</header>
 
-				<div class='form-row'>
-					<div class='col'>
-						<label for='titulo'>Título</label>
-						<input
-							type='text'
-							id='titulo'
-							name='titulo'
-							value='{{ form.titulo }}'
-							class='form-control'
-							required
-							placeholder='Preencha com o título da videoaula'
-							maxlength='50'
-						/>
-					</div>
-					<div class='col'>
-						<label for='url'>URL</label>
-						<input
-							type='url'
-							id='url'
-							name='url'
-							value='{{ form.url }}'
-							class='form-control'
-							maxlength='100'
-							placeholder='Preencha com a URL da videoaula'
-							required
-						>
-					</div>
+				<div class='form-group'>
+					<label for='nome'>Nome</label>
+					<input
+						type='text'
+						id='nome'
+						name='nome'
+						value='{{ form.nome }}'
+						class='form-control'
+						required
+						placeholder='Preencha com o nome do administrador'
+						maxlength='45'
+					/>
 				</div>
 
-				<div class='form-group' style='margin-top: 1.5em;'>
-					<label for='descricao'>Descrição</label>
-					<textarea
-						id='descricao'
-						name='descricao'
-						placeholder='Preencha com a descrição da videoaula'
-						required
-						maxlenth='150'
-						class='form-control'
-					>{{ form.descricao }}</textarea>
+				<div class='form-row'>
+					<div class='col'>
+						<label for='email'>Email</label>
+						{% if editar is True %}
+							<input
+								type='email'
+								id='email'
+								name='email'
+								placeholder='Preencha campo com o email do administrador'
+								required
+								maxlenth='45'
+								class='form-control'
+								value='{{ form.email }}'
+								readonly
+							/>
+						{% else %}
+							<input
+								type='email'
+								id='email'
+								name='email'
+								placeholder='Preencha campo com o email do administrador'
+								required
+								maxlenth='45'
+								class='form-control'
+								value='{{ form.email }}'
+							/>
+						{% endif %}
+					</div>
+					<div class='col'>
+						<label for='senha'>Senha</label>
+						<input
+							type='password'
+							id='senha'
+							name='senha'
+							placeholder='Preencha campo com a senha do administrador'
+							required
+							maxlenth='100'
+							class='form-control'
+							value='{{ form.senha }}'
+						/>
+					</div>
 				</div>
 
 				<div class='form-row'>
@@ -116,7 +132,7 @@
 						<button
 							type='button'
 							class='btn btn-danger btn-lg btn-block'
-							onclick='window.location.href=`{% url "videolessonlist" %}`'
+							onclick='window.location.href=`{% url "adminlist" %}`'
 						>
 							Cancelar
 						</button>
@@ -135,12 +151,12 @@
 	</div>
 </div>
 <script type='text/javascript'>
-	const botao = document.getElementById('logo');
+	const botao = document.getElementById('foto');
 	const imagem = document.getElementById('previa')
 
 	botao.addEventListener('change', function() {
 		const arquivo = this.files[0];
-
+		
 		if (arquivo) {
 			const leitor = new FileReader();
 

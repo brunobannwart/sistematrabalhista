@@ -32,7 +32,7 @@ def treino_facial():
 	try:
 		grupo = request.form['grupo']
 
-		if 'file' in request.files:
+		if not 'file' in request.files:
 			return tratar_erro('Requer imagem')
 
 		arquivo = request.files['file']
@@ -45,6 +45,7 @@ def treino_facial():
 		arquivo.save(caminho)
 
 		treino = app.face.adicionarFace(caminho, grupo)
+		os.remove(caminho)
 
 		if treino:
 			saida = json.dumps({'treino': treino.getID() })
@@ -60,7 +61,7 @@ def reconhecimento_facial():
 	try:
 		grupo = request.form['grupo']
 
-		if 'file' in request.files:
+		if not 'file' in request.files:
 			return tratar_erro('Requer imagem')
 
 		arquivo = request.files['file']
@@ -73,6 +74,7 @@ def reconhecimento_facial():
 		arquivo.save(caminho)
 
 		encontrados = app.face.encontrarConhecidos(caminho, grupo)
+		os.remove(caminho)
 
 		if len(encontrados):
 			reconhecido = encontrados[0]

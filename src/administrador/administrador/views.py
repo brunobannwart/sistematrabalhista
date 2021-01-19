@@ -27,7 +27,7 @@ def login_view(request):
 					administrador.save()
 
 					login(request, administrador, backend='administrador.backend.BackendLogin')
-					return redirect('cids')
+					return redirect('adminlist')
 
 				else:
 					formulario = request.POST
@@ -64,10 +64,12 @@ def camera_view(request):
 		foto = rebuild_image(endereco)
 
 		try:
-			resposta = request.post('http://127.0.0.1:5000/api/reconhecimento', data={'grupo': 'administrador'}, files={ 'file': ('foto.png', foto, 'image/png')})
+			resposta = requests.post('http://127.0.0.1:5000/api/reconhecimento', data={'grupo': 'administrador'}, files={ 'file': ('foto.png', foto, 'image/png')})
 
 			if resposta.status_code  == 200:
 				resposta = resposta.json()
+
+				print(resposta['reconhecimento'])
 
 				try:
 					administrador = Administrador.objects.get(treino=resposta['reconhecimento'])
@@ -75,7 +77,7 @@ def camera_view(request):
 					administrador.save()
 
 					login(request, administrador, backend='administrador.backend.BackendLogin')
-					return redirect('cids')
+					return redirect('adminlist')
 
 				except:
 					return redirect('login')
@@ -114,7 +116,7 @@ def reset_view(request):
 
 				return redirect('login')
 
-			except Exception as e:
+			except:
 				formulario = request.POST
 				erro = 'Alguma falha ocorreu'
 

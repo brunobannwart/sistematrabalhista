@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block titulo %}
-	<h3 class='text-center'>Formulário de Jogo</h3>
+	<h3>Formulário de Jogo</h3>
 {% endblock %}
 
 {% block pagina %}
@@ -31,7 +31,7 @@
 <div class='form'>
 	<div class='card'>
 		<div class='card-body'>
-			<form method='post' action='.' autocomplete='off'>
+			<form method='post' action='.' autocomplete='off' enctype='multipart/form-data'>
 				{% csrf_token %}
 
 				<header class='row'>

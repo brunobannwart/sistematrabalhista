@@ -12,18 +12,22 @@
 	<script type='text/javascript' src='{% static "bootstrap/js/bootstrap.min.js" %}' />
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
 	<script src='https://kit.fontawesome.com/50797efa34.js'></script>
+	<script type='text/javascript' src='{% static "js/search.js" %}'></script>
+	<script type='text/javascript' src='{% static "js/mask.js" %}'></script> 
 	<title>Trabalhista - Administrativo</title>
 </head>
 <body>
 	<header class='navbar navbar-expand-lg navbar-dark static-top'>
-		<span class='navbar-brand'>
-			<img src='' alt='' class='d-inline-block align-top' />
-		</span>
-		{% block titulo %}
-		{% endblock %}
-		<button type='button' class='navbar-toggler collapsed' data-toggle='collapse' data-target='#lateral' aria-controls='lateral' aria-expanded='false'>
-			<span class='navbar-toggler-icon'></span>
-		</button>
+		<div class='container-fluid'>
+			<span class='navbar-brand'>
+				<img src='{{ request.user.foto.url }}' alt='{{ request.user.nome }}' class='d-inline-block align-top' />
+			</span>
+			{% block titulo %}
+			{% endblock %}
+			<button type='button' class='navbar-toggler collapsed' data-toggle='collapse' data-target='#lateral' aria-controls='lateral' aria-expanded='false'>
+				<span class='navbar-toggler-icon'></span>
+			</button>
+		</div>
 	</header>
 	<div class='container-fluid'>
 		<div class='row'>
@@ -42,7 +46,7 @@
 							</a>
 						</li>
 						<li class='nav-item'>
-							<a class='nav-link' href='{% url "login" %}'>
+							<a class='nav-link' href='{% url "companylist" %}'>
 								<i class='fas fa-user-tie'>
 									Empresas
 								</i>

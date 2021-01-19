@@ -24,7 +24,7 @@ def admincreate_view(request):
 	editar = False
 
 	if request.method == 'POST':
-		formulario = FormCadastro(request.POST)
+		formulario = FormCadastro(request.POST, request.FILES)
 
 		if formulario.is_valid():
 			campos = formulario.clean_form()
@@ -35,7 +35,7 @@ def admincreate_view(request):
 
 			else:
 				try:
-					resposta = request.post('http://127.0.0.1:5000/api/treino', data={'grupo': 'administrador'}, files={ 'file': campos['foto'] })
+					resposta = requests.post('http://127.0.0.1:5000/api/treino', data={'grupo': 'administrador'}, files={ 'file': campos['foto'] })
 
 					if resposta.status_code == 200:
 						resposta = resposta.json()
@@ -49,7 +49,8 @@ def admincreate_view(request):
 					else:
 						formulario = request.POST
 						erro = 'Foto inválida'
-				except:
+				except Exception as e:
+					print(e)
 					formulario = request.POST
 					erro = 'Não foi possível cadastrar novo administrador'
 		else:
@@ -131,12 +132,12 @@ def admindelete_view(request, id=0):
 
 	if request.method == 'POST':
 		try:
-			administrator = Administrador.objects.get(id=id)
-			treino = administrator.treino
+			administrador = Administrador.objects.get(id=id)
+			treino = administrador.treino
 			resposta = requests.post('http://127.0.0.1:5000/api/remover', data={'treino': treino})
 			
 			if resposta.status_code == 200:
-				administrator.delete()
+				administrador.delete()
 
 		finally:
 			return redirect('adminlist')

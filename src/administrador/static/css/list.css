@@ -35,3 +35,14 @@
 	margin: 1.250em auto;
 	cursor: pointer;
 }
+
+.list table tbody tr {
+	background-color: #FFF;
+}
+
+.list table tbody tr td img {
+	display: block;
+	width: 3em;
+    height: 3em;
+    border-radius: 50%;
+}

@@ -1,7 +1,7 @@
 import cv2, face_recognition, os, pickle
 import numpy as np
 from .Database import Database
-from .models.Face import Face
+from .modelos.Face import Face
 
 class ReconhecimentoFacial:
 	def __init__(self, tolerancia=0.6):
@@ -27,7 +27,7 @@ class ReconhecimentoFacial:
 		return self.db.salvarFace(arquivo, codificacao, grupo)
 
 	def __encontrarFaces(self, caminho):
-		treino = []
+		faces = []
 
 		imagem = face_recognition.load_image_file(caminho)
 		arquivo = os.path.basename(caminho)
@@ -37,14 +37,26 @@ class ReconhecimentoFacial:
 		for codigo in codigos:
 			face = Face(arquivo)
 			face.setCodigos(codigo)
-			treino.append(face)
+			faces.append(face)
 
-		return treino
+		return faces
 
-	def __foiEncontrado(self, conhecidos, face):
-		encontrados = []
-		encontrados = face_recognition.compare_faces(conhecidos, face.getCodigos(), tolerance=self.tolerancia)
-		return encontrados
+	def __encontrarCombinacao(self, conhecidos, face):
+		combinacao = []
+		combinacao = face_recognition.compare_faces(conhecidos, face.getCodigos(), tolerance=self.tolerancia)
+		return combinacao
+
+	def adicionarFace(self, caminho, grupo):
+		faces = self.__encontrarFaces(caminho)
+
+		if len(faces):
+			faces[0].setGrupo(grupo)
+			id_ = self.__novaFace(faces[0])
+			faces[0].setID(id_)
+			self.conhecidos.append(faces[0])
+			return faces[0]
+
+		return None
 
 	def removerFace(self, id_):
 		contador = 0
@@ -60,3 +72,27 @@ class ReconhecimentoFacial:
 			contador += 1
 
 		return False
+
+	def encontrarConhecidos(self, caminho, grupo):
+		encontrados = []
+		conhecidosGrupo = []
+		codigos = []
+
+		faces = self.__encontrarFaces(caminho)
+
+		for conhecido in self.conhecidos:
+			if conhecido.getGrupo() == grupo:
+				conhecidosGrupo.append(conhecido)
+
+		for conhecidoGrupo in conhecidosGrupo:
+			codigos.append(conhecidoGrupo.getCodigos())
+		for face in faces:
+			combinacao = self.__encontrarCombinacao(codigos, face)
+
+			if len(combinacao) and True in combinacao:
+				indice = combinacao.index(True)
+				encontrado = conhecidosGrupo[indice]
+				encontrados.append(encontrado.parseDados())
+
+		return encontrados
+

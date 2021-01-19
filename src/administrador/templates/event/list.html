@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block titulo %}
-	<h3 class='text-center'>Lista de Eventos</h3>
+	<h3>Lista de Eventos</h3>
 {% endblock %}
 
 {% block pagina %}
@@ -9,7 +9,7 @@
 	{% if eventos|length > 0 %}
 		<div class='input-group mb-3'>
 			<div class='input-group-prepend'>
-				<button class='btn btn-outline-success' type='button' onclick='window.location.href=`{% url "eventcreate" %}`'>Cadastrar</button>
+				<button class='btn btn-success' type='button' onclick='window.location.href=`{% url "eventcreate" %}`'>Cadastrar</button>
 			</div>
 			<input type='text' class='form-control' placeholder='Pesquisar evento pelo titulo' />
 			<div class='input-group-append'>
@@ -33,7 +33,7 @@
 									<div class='col'>
 										<button 
 											type='button' 
-											class='btn btn-outline-primary btn-md btn-block'
+											class='btn btn-primary btn-md btn-block'
 											onclick='window.location.href=`{% url "eventedit" evento.id %}`'
 										>
 											Alterar
@@ -42,7 +42,7 @@
 									<div class='col'>
 										<form method='post' action='{% url "eventdelete" evento.id %}'>
 											{% csrf_token %}
-											<button type='submit' class='btn btn-outline-danger btn-md btn-block'>Remover</button>
+											<button type='submit' class='btn btn-danger btn-md btn-block'>Remover</button>
 										</form>
 									</div>
 								</div>
