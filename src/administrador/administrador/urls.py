@@ -21,6 +21,7 @@ from django.views.static import serve
 
 from administrador.views import login_view, camera_view, forgot_view, reset_view, changepassword_view, logout_view
 from administradores.views import adminlist_view, admincreate_view, adminedit_view, admindelete_view
+from associados.views import associatedlist_view, associatedcreate_view, associatededit_view, associateddelete_view
 from cursos.views import courselist_view, coursecreate_view, courseedit_view, coursedelete_view
 from empresas.views import companylist_view, companycreate_view, companyedit_view, companydelete_view
 from eventos.views import eventlist_view, eventcreate_view, eventedit_view, eventdelete_view
@@ -41,6 +42,11 @@ urlpatterns = [
 	path('administradores/formulario/', admincreate_view, name='admincreate'),
 	path('administradores/formulario/<int:id>/', adminedit_view, name='adminedit'),
 	path('administradores/excluir/<int:id>/', admindelete_view, name='admindelete'),
+
+	path('associados/', associatedlist_view, name='associatedlist'),
+	path('associados/formulario/', associatedcreate_view, name='associatedcreate'),
+	path('associados/formulario/<int:id>/', associatededit_view, name='associatededit'),
+	path('associados/excluir/<int:id>/', associateddelete_view, name='associateddelete'),
 
 	path('cursos/', courselist_view, name='courselist'),
 	path('cursos/formulario/', coursecreate_view, name='coursecreate'),

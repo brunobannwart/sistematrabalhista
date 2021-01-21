@@ -69,8 +69,6 @@ def camera_view(request):
 			if resposta.status_code  == 200:
 				resposta = resposta.json()
 
-				print(resposta['reconhecimento'])
-
 				try:
 					administrador = Administrador.objects.get(treino=resposta['reconhecimento'])
 					administrador.is_authenticated = True
@@ -126,7 +124,7 @@ def reset_view(request):
 
 	else:
 		formulario = {
-			'cpf': '',
+			'email': '',
 		}
 
 		erro = None
@@ -139,7 +137,7 @@ def reset_view(request):
 	contexto.update(csrf(request))
 	return render(request, 'login/reset.html', contexto)
 
-#@login_required(login_url='login')
+@login_required(login_url='login')
 @csrf_protect
 def changepassword_view(request):
 	if request.method == 'POST':
@@ -149,7 +147,7 @@ def changepassword_view(request):
 			campos = formulario.clean_form()
 
 			try:
-				administrador = Administrador.objects.get(email=campos['cpf'])
+				administrador = Administrador.objects.get(email=campos['email'])
 
 				if campos['senha_hash'] == campos['confirma_hash']:
 					administrador.senha_hash = campos['senha_hash']
@@ -162,7 +160,7 @@ def changepassword_view(request):
 
 			except:
 				formulario = request.POST
-				erro = 'CPF não cadastrado'
+				erro = 'Email não cadastrado'
 		else:
 			formulario = request.POST
 			erro = 'Preencher campos corretamente'

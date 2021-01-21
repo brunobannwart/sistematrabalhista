@@ -43,3 +43,15 @@ def rebuild_image(url):
 	foto.seek(0)
 
 	return foto
+
+def render_to_pdf(pagina, contexto={}):
+	fragmento = get_template(pagina)
+	folha = fragmento.render(contexto)
+	resultado = BytesIO()
+
+	pdf = pisa.pisaDocument(BytesIO(folha.encode('utf-8')), resultado)
+
+	if not pdf.err:
+		return HttpResponse(resultado.getvalue(), content_type='application/pdf')
+	
+	return None

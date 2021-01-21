@@ -29,7 +29,7 @@ def companycreate_view(request):
 		if formulario.is_valid():
 			campos = formulario.clean_form()
 
-			if Empresa.objects.filter(email=campos['email'] | Empresa.objects.filter(cnpj=campos['cnpj'])):
+			if Empresa.objects.filter(email=campos['email']) | Empresa.objects.filter(cnpj=campos['cnpj']):
 				formulario = request.POST
 				
 				if Empresa.objects.filter(email=campos['email']):
@@ -101,7 +101,7 @@ def companyedit_view(request, id=0):
 			try:
 				editar_empresa = Empresa.objects.get(id=id)
 				editar_empresa.foto = campos['foto']
-				editar_empresa.logo = campos['nome']
+				editar_empresa.logo = campos['logo']
 				editar_empresa.razao_social = campos['razao_social']
 				editar_empresa.email = campos['email']
 				editar_empresa.nome_contato = campos['nome_contato']

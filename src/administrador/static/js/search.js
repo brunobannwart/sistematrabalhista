@@ -44,7 +44,7 @@ function pesquisarEmpresa() {
   }
 }
 
-function pesquisarTrabalhador() {
+function pesquisarAssociado() {
   const entrada = document.getElementsByTagName('input')[0];
   const filtro = entrada.value.toUpperCase();
   const tabela = document.getElementsByTagName('table')[0];
