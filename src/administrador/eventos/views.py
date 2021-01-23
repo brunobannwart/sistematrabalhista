@@ -72,7 +72,11 @@ def eventedit_view(request, id=0):
 
 			try:
 				editar_evento = Evento.objects.get(id=id)
-				editar_evento.logo = campos['logo']
+
+				if 'logo' in request.FILES:
+					editar_evento.removeLogo()
+					editar_evento.logo = campos['logo']
+				
 				editar_evento.titulo = campos['titulo']
 				editar_evento.data_exp = campos['data_exp']
 				editar_evento.descricao = campos['descricao']

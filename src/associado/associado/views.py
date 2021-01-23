@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 from django.views.decorators.csrf import csrf_protect
@@ -17,7 +18,7 @@ def login_view(request):
 	if request.method == 'POST':
 		try:
 			formulario = FormLogin(request.POST)
-
+			
 			if formulario.is_valid():
 				campos = formulario.clean_form()
 
@@ -41,7 +42,8 @@ def login_view(request):
 			else:
 				formulario = request.POST
 				erro = 'Preencher campos corretamente'
-		except:
+		except Exception as e:
+			print(e)
 			formulario = request.POST
 			erro = 'Não foi possível realizar o login. Tente novamente'
 	else:
@@ -114,16 +116,31 @@ def reset_view(request):
 			campos = formulario.clean_form()
 
 			try:
-				return redirect('login')
+				with connection.cursor() as cursor:
+					cursor.execute("SELECT nome FROM associado WHERE email=%s", [campos['email']])
+					resultado = cursor.fetchone()
+				
+					contexto = {
+						'nome': resultado[0],
+						'senha': random_password('0123456789', 6)
+					}
+
+					send_mail('Esqueci minha senha', 'option/email.html', 
+						contexto, [campos['email']], settings.DEFAULT_FROM_EMAIL
+					)
+
+					cursor.execute("UPDATE associado SET senha_hash=%s WHERE email=%s", 
+						[hash_password(contexto['senha']), campos['email']]
+					)
+
+					return redirect('login')
 
 			except:
 				formulario = request.POST
 				erro = 'Alguma falha ocorreu'
-
 		else:
 			formulario = request.POST
 			erro = 'Preencher campos corretamente'
-
 	else:
 		formulario = {
 			'email': '',
@@ -150,7 +167,7 @@ def changepassword_view(request):
 
 			if campos['senha_hash'] == campos['confirma_hash']:
 				try:
-					with connection.cursor as cursor:
+					with connection.cursor() as cursor:
 						cursor.execute("UPDATE associado SET senha_hash=%s WHERE email=%s", [campos['senha_hash'], campos['email']])
 
 					return redirect('home')

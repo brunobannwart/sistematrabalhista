@@ -1,10 +1,13 @@
+from django.conf import settings
 from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from django.db import connection
 
 from administradores.models import Administrador
+from empresas.models import Empresa
 from .backend import BackendLogin
 from .forms import FormLogin, FormRedefinir, FormTrocar
 from .utils import rebuild_image, send_mail, hash_password, random_password
@@ -190,3 +193,69 @@ def logout_view(request):
 		administrador.save()
 	finally:
 		return redirect('login')
+
+@login_required(login_url='login')
+def joblist_view(request):
+	vagas = []
+
+	with connection.cursor() as cursor:
+		cursor.execute("SELECT * FROM vaga WHERE data_exp >= CURDATE() ORDER BY titulo ASC")
+		resultados = cursor.fetchall()
+
+		for resultado in resultados:
+			try:
+				empresa = Empresa.objects.get(id=resultado[1])
+
+			except:
+				empresa = None
+
+			if empresa:
+				vaga = {
+					'id': resultado[0],
+					'razao_social': empresa.razao_social,
+					'logo': settings.MEDIA_URL + resultado[2],
+					'titulo': resultado[3],
+					'data_exp': resultado[4],
+					'descricao': resultado[5],
+				}
+
+				vagas.append(vaga)
+
+	contexto = {
+		'vagas': vagas
+	}
+
+	return render(request, 'other/job/list.html', contexto)
+
+@login_required(login_url='login')
+def jobread_view(request, id=0):
+	if id == 0:
+		return redirect('joblist')
+
+	with connection.cursor() as cursor:
+		cursor.execute("SELECT * FROM vaga WHERE id=%s", [id])
+		resultado = cursor.fetchone()
+
+		if resultado:
+			try:
+				empresa = Empresa.objects.get(id=resultado[X])
+
+				formulario = {
+					'id': resultado[0],
+					'razao_social': empresa.razao_social,
+					'logo': settings.MEDIA_URL + resultado[2],
+					'titulo': resultado[3],
+					'data_exp': resultado[4],
+					'descricao': resultado[5],
+				}
+
+				contexto = {
+					'form': formulario
+				}
+
+				return render(request, 'other/job/read.html', contexto)
+
+			except:
+				return redirect('joblist')
+		else:
+			return redirect('joblist')

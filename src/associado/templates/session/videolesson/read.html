@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block pagina %}
+<div class='list'>
+	<div class='container'>
+		<div class='card'>
+			<div class='card-body text-center'>
+				<h5 class='card-title text-center'>{{ form.titulo }}</h5>
+				<iframe
+					src='{{ form.url }}'
+					height='450'
+					frameborder='0'
+					allowfullscreen
+					class='embed-responsive embed-responsive-16by9'
+				/>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}	

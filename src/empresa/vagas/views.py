@@ -8,7 +8,7 @@ from .forms import FormCadastro, FormEditar
 # Create your views here.
 @login_required(login_url='login')
 def joblist_view(request):
-	vagas = Vaga.objects.all()
+	vagas = Vaga.objects.all(empresa_id=request.user.id)
 
 	contexto = {
 		'vagas': vagas,
@@ -27,7 +27,7 @@ def jobcreate_view(request):
 			campos = formulario.clean_form()
 
 			try:
-				nova_vaga = Vaga.objects.create(logo=campos['logo'], titulo=campos['titulo'], data_exp=campos['data_exp'], descricao=campos['descricao'])
+				nova_vaga = Vaga.objects.create(empresa_id=request.user.id, logo=campos['logo'], titulo=campos['titulo'], data_exp=campos['data_exp'], descricao=campos['descricao'])
 				nova_vaga.save()
 				return redirect('joblist')
 
@@ -72,7 +72,11 @@ def jobedit_view(request, id=0):
 
 			try:
 				editar_vaga = Vaga.objects.get(id=id)
-				editar_vaga.logo = campos['logo']
+
+				if 'logo' in request.FILES:
+					editar_vaga.removeLogo()
+					editar_vaga.logo = campos['logo']
+
 				editar_vaga.titulo = campos['titulo']
 				editar_vaga.data_exp = campos['data_exp']
 				editar_vaga.descricao = campos['descricao']

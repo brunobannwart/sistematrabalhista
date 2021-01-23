@@ -17,7 +17,7 @@ body, input, button {
 }
 
 .background {
-	background-image: url('../assets/login.jpeg');
+	background-image: url('../assets/login.jpg');
 	background-size: cover;
 	height: 100%;
 	width: 100%;

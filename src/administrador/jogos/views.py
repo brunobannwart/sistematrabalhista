@@ -72,7 +72,11 @@ def gameedit_view(request, id=0):
 
 			try:
 				editar_jogo = Jogo.objects.get(id=id)
-				editar_jogo.logo = campos['logo']
+
+				if 'logo' in request.FILES:
+					editar_jogo.removeLogo()
+					editar_jogo.logo = campos['logo']
+
 				editar_jogo.titulo = campos['titulo']
 				editar_jogo.url = campos['url']
 				editar_jogo.descricao = campos['descricao']

@@ -100,8 +100,15 @@ def companyedit_view(request, id=0):
 
 			try:
 				editar_empresa = Empresa.objects.get(id=id)
-				editar_empresa.foto = campos['foto']
-				editar_empresa.logo = campos['logo']
+
+				if 'foto' in request.FILES:
+					editar_empresa.removePhoto()
+					editar_empresa.foto = campos['foto']
+
+				if 'logo' in request.FILES:
+					editar_empresa.removeLogo()
+					editar_empresa.logo = campos['logo']
+
 				editar_empresa.razao_social = campos['razao_social']
 				editar_empresa.email = campos['email']
 				editar_empresa.nome_contato = campos['nome_contato']

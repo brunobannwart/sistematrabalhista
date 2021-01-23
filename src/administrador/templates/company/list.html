@@ -30,6 +30,11 @@
 					{% for empresa in empresas %}
 						<tr>
 							<td class='text-center align-middle'>
+								<img 
+									src='{{ empresa.logo.url }}' 
+									alt='{{ empresa.razao_social }}' 
+									class='d-inline-block align-top'
+								/>
 							</td>
 							<td class='text-center align-middle'>{{ empresa.razao_social }}</td>
 							<td class='text-center align-middle'>{{ empresa.cnpj }}</td>

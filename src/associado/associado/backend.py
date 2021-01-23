@@ -24,7 +24,7 @@ class BackendLogin(BaseBackend):
 							sessao = LoginAssociado.objects.get(id=campos['id'])
 							sessao.delete()
 
-						associado = LoginAssociado.objects.create(id=campos['id'], foto=campos['foto'], nome=campos['nome'], senha_hash=campos['senha_hash'])
+						associado = LoginAssociado.objects.create(id=campos['id'], foto=campos['foto'], nome=campos['nome'], email=campos['email'], senha_hash=campos['senha_hash'])
 						return associado
 
 					else:
@@ -36,7 +36,7 @@ class BackendLogin(BaseBackend):
 
 	def get_user(self, id):
 		try:
-			return LoginEmpresa.objects.get(id=id)
+			return LoginAssociado.objects.get(id=id)
 
 		except:
 			return None

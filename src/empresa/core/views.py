@@ -18,7 +18,15 @@ def associatedlist_view(request):
 		for resultado in resultados:
 			associado = {
 				'id': resultado[0],
-				'foto': settings.MEDIA_URL,
+				'foto': settings.MEDIA_URL + resultado[1],
+				'nome': resultado[2],
+				'data_nascimento': resultado[3],
+				'cpf': resultado[4],
+				'celular': resultado[5],
+				'email': resultado[6],
+				'cep': resultado[8],
+				'numero': resultado[9],
+				'outras_informacoes': resultado[10],
 			}
 
 			associados.append(associado)
@@ -43,7 +51,15 @@ def associatedread_view(request, id=0):
 		if resultado != None:
 			formulario = {
 				'id': resultado[0],
-				'foto': settings.MEDIA_URL,
+				'foto': settings.MEDIA_URL + resultado[1],
+				'nome': resultado[2],
+				'data_nascimento': resultado[3],
+				'cpf': resultado[4],
+				'celular': resultado[5],
+				'email': resultado[6],
+				'cep': resultado[8],
+				'numero': resultado[9],
+				'outras_informacoes': resultado[10],
 			}
 
 			contexto = {
@@ -67,14 +83,22 @@ def associatedpdf_view(request, id=0):
 		if resultado != None:
 			formulario = {
 				'id': resultado[0],
-				'foto': settings.MEDIA_URL,
+				'foto': settings.MEDIA_URL + resultado[1],
+				'nome': resultado[2],
+				'data_nascimento': resultado[3],
+				'cpf': resultado[4],
+				'celular': resultado[5],
+				'email': resultado[6],
+				'cep': resultado[8],
+				'numero': resultado[9],
+				'outras_informacoes': resultado[10],
 			}
 
 			contexto = {
 				'form': formulario,
 			}
 
-			return render(request, 'core/associated/read.html', contexto)
+			return render(request, 'core/associated/pdf.html', contexto)
 
 		else:
 			return redirect('associatedlist')

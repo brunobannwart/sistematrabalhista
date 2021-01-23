@@ -72,7 +72,11 @@ def courseedit_view(request, id=0):
 
 			try:
 				editar_curso = Curso.objects.get(id=id)
-				editar_curso.logo = campos['logo']
+
+				if 'logo' in request.FILES:
+					editar_curso.removeLogo()
+					editar_curso.logo = campos['logo']
+
 				editar_curso.titulo = campos['titulo']
 				editar_curso.data_exp = campos['data_exp']
 				editar_curso.descricao = campos['descricao']

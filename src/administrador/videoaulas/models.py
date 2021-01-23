@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Videoaula(models.Model):
-	logo = models.ImageField(verbose_name='Logo', upload_to='logo/jogo', null=False, blank=False)
+	logo = models.ImageField(verbose_name='Logo', upload_to='logo/videoaula', null=False, blank=False)
 	titulo = models.CharField(verbose_name='Titulo', max_length=50)
 	url	= models.URLField(verbose_name='URL', max_length=100)
 	descricao = models.TextField(verbose_name='Descrição', blank=False, null=False, max_length=150)

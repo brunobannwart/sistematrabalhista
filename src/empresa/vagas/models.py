@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Vaga(models.Model):
+	empresa_id = models.IntegerField(verbose_name='ID da empresa')
 	logo = models.ImageField(verbose_name='Logo', upload_to='logo/vaga', null=False, blank=False)
 	titulo = models.CharField(verbose_name='Titulo', max_length=50)
 	data_exp = models.DateField(verbose_name='Data de expiração')

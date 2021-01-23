@@ -101,7 +101,11 @@ def associatededit_view(request, id=0):
 
 			try:
 				editar_associado = Associado.objects.get(id=id)
-				editar_associado.foto = campos['foto']
+
+				if 'foto' in request.FILES:
+					editar_associado.removePhoto()
+					editar_associado.foto = campos['foto']
+
 				editar_associado.nome = campos['nome']
 				editar_associado.data_nascimento = campos['data_nascimento']
 				editar_associado.email = campos['email']

@@ -17,52 +17,19 @@ body, input, button {
   	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
-header.navbar {
+nav.navbar {
 	color: #FFF;
-	background-color: #D10000;
+	background-color: #25623F;
 }
 
-header.navbar .navbar-brand img {
-	width: 3em;
-    height: 3em;
-    border-radius: 50%;
-    border: 2px solid #FFF;
-}
-
-.container-fluid .row aside {
-	background-color: #222;
-	height: 100%;
-	min-height: 100vh;
-}
-
-.container-fluid .row aside header.sidebar-header {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-}
-
-.container-fluid .row aside header.sidebar-header i {
-	font-size: 1em;
-	color: #FFF;
-	margin-top: 1em;
-}
-
-.container-fluid .row aside nav strong {
+nav.navbar li a.nav-link {
 	color: #FFF;
 	font-size: 1em;
 }
 
-.container-fluid .row aside nav ul:not(:last-child) {
-	border-bottom: 1px solid rgb(225, 225, 225, 0.3);
-}
-
-.container-fluid .row aside nav ul li a {
-    color: #CCC;
-    display: block;
-    font-size: 1em;
-}
-
-.container-fluid .row aside nav ul li:hover {
-	background-color: #444;
+nav.navbar .navbar-brand img {
+  width: 3em;
+  height: 3me;
+  border-radius: 50%;
+  border: 2px solid #FFF;
 }

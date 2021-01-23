@@ -72,11 +72,16 @@ def videolessonedit_view(request, id=0):
 
 			try:
 				editar_videoaula = Videoaula.objects.get(id=id)
-				editar_videoaula.logo = campos['logo']
+
+				if 'logo' in request.FILES:
+					editar_videoaula.removeLogo()
+					editar_videoaula.logo = campos['logo']
+
 				editar_videoaula.titulo = campos['titulo']
 				editar_videoaula.url = campos['url']
 				editar_videoaula.descricao = campos['descricao']
 				editar_videoaula.save()
+				return redirect('videolessonlist')
 
 			except:
 				formulario = request.POST
@@ -99,7 +104,7 @@ def videolessonedit_view(request, id=0):
 	}
 
 	contexto.update(csrf(request))
-	return redirect(request, 'videolesson/form.html', contexto)
+	return render(request, 'videolesson/form.html', contexto)
 
 @login_required(login_url='login')
 @csrf_protect

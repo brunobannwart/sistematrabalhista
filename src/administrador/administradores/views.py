@@ -49,8 +49,7 @@ def admincreate_view(request):
 					else:
 						formulario = request.POST
 						erro = 'Foto inválida'
-				except Exception as e:
-					print(e)
+				except:
 					formulario = request.POST
 					erro = 'Não foi possível cadastrar novo administrador'
 		else:
@@ -91,7 +90,11 @@ def adminedit_view(request, id=0):
 
 			try:
 				editar_administrador = Administrador.objects.get(id=id)
-				editar_administrador.foto = campos['foto']
+				
+				if 'foto' in request.FILES:
+					editar_administrador.removePhoto()
+					editar_administrador.foto = campos['foto']
+
 				editar_administrador.nome = campos['nome']
 				editar_administrador.email = campos['email']
 

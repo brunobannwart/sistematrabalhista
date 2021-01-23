@@ -192,7 +192,7 @@
 						<label for='email'>Email</label>
 						{% if editar is True %}
 							<input
-								type='text'
+								type='email'
 								id='email'
 								name='email'
 								value='{{ form.email }}'
@@ -204,7 +204,7 @@
 							/>
 						{% else %}
 							<input
-								type='text'
+								type='email'
 								id='email'
 								name='email'
 								value='{{ form.email }}'
@@ -218,7 +218,7 @@
 					<div class='col'>
 						<label for='senha'>Senha</label>
 						<input
-							type='text'
+							type='password'
 							id='senha'
 							name='senha'
 							value='{{ form.senha }}'
@@ -267,7 +267,7 @@
 						<button
 							type='button'
 							class='btn btn-danger btn-lg btn-block'
-							onclick='window.location.href=`{% url "adminlist" %}`'
+							onclick='window.location.href=`{% url "companylist" %}`'
 						>
 							Cancelar
 						</button>

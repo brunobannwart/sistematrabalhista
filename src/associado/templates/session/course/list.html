@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block pagina %}
+<div class='list'>
+	<ul class='row'>
+		{% for curso in cursos %}
+			<li class='col-sm-2 pb-4'>
+				<div class='card'>
+					<img 
+						src='{{ curso.logo }}'
+						alt='{{ curso.titulo }}'
+						class='card-img-top'
+					/>
+					<div class='card-body'>
+						<h5 class='card-title text-center'>{{ curso.titulo }}</h5>
+						<p class='card-text'>{{ curso.descricao }}</p>
+						<button 
+							type='button'
+							class='btn btn-secondary btn-block'
+							onclick='window.location.href=`{% url "courseread" curso.id %}`'
+						>
+							Acessar
+						</button>
+					</div>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endblock %}
