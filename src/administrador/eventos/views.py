@@ -103,7 +103,7 @@ def eventedit_view(request, id=0):
 	}
 
 	contexto.update(csrf(request))
-	return redirect(request, 'event/form.html', contexto)
+	return render(request, 'event/form.html', contexto)
 
 @login_required(login_url='login')
 @csrf_protect

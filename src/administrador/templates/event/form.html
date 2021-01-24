@@ -90,7 +90,7 @@
 							type='date'
 							id='data_exp'
 							name='data_exp'
-							value='{{ form.data_exp }}'
+							value='{{ form.data_exp|date:"Y-m-d" }}'
 							class='form-control'
 							required
 						>

@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 from django.views.decorators.csrf import csrf_protect
@@ -10,7 +11,7 @@ from administradores.models import Administrador
 from empresas.models import Empresa
 from .backend import BackendLogin
 from .forms import FormLogin, FormRedefinir, FormTrocar
-from .utils import rebuild_image, send_mail, hash_password, random_password
+from .utils import rebuild_image, send_mail, hash_password, random_password, render_to_pdf
 
 import os, requests
 
@@ -213,6 +214,7 @@ def joblist_view(request):
 				vaga = {
 					'id': resultado[0],
 					'razao_social': empresa.razao_social,
+					'email': empresa.email,
 					'logo': settings.MEDIA_URL + resultado[2],
 					'titulo': resultado[3],
 					'data_exp': resultado[4],
@@ -225,7 +227,7 @@ def joblist_view(request):
 		'vagas': vagas
 	}
 
-	return render(request, 'other/job/list.html', contexto)
+	return render(request, 'job/list.html', contexto)
 
 @login_required(login_url='login')
 def jobread_view(request, id=0):
@@ -238,11 +240,12 @@ def jobread_view(request, id=0):
 
 		if resultado:
 			try:
-				empresa = Empresa.objects.get(id=resultado[X])
+				empresa = Empresa.objects.get(id=resultado[1])
 
 				formulario = {
 					'id': resultado[0],
 					'razao_social': empresa.razao_social,
+					'email': empresa.email,
 					'logo': settings.MEDIA_URL + resultado[2],
 					'titulo': resultado[3],
 					'data_exp': resultado[4],
@@ -253,8 +256,51 @@ def jobread_view(request, id=0):
 					'form': formulario
 				}
 
-				return render(request, 'other/job/read.html', contexto)
+				return render(request, 'job/read.html', contexto)
 
+			except:
+				return redirect('joblist')
+		else:
+			return redirect('joblist')
+
+@login_required(login_url='login')
+def jobpdf_view(request, id=0):
+	if id == 0:
+		return redirect('joblist')
+
+	with connection.cursor() as cursor:
+		cursor.execute("SELECT * FROM vaga WHERE id=%s", [id])
+		resultado = cursor.fetchone()
+
+		if resultado:
+			try:
+				empresa = Empresa.objects.get(id=resultado[1])
+
+				formulario = {
+					'id': resultado[0],
+					'razao_social': empresa.razao_social,
+					'email': empresa.email,
+					'logo': settings.MEDIA_ROOT + '/' + resultado[2],
+					'titulo': resultado[3],
+					'data_exp': resultado[4],
+					'descricao': resultado[5],
+				}
+
+				contexto = {
+					'form': formulario
+				}
+
+				pdf = render_to_pdf('job/pdf.html', contexto)
+
+				if pdf:
+					resposta = HttpResponse(pdf, content_type='application/pdf')
+					nomearquivo = resultado[3].replace(' ', '_').lower() + '.pdf'
+					conteudo = 'inline; filename=%s' % (nomearquivo)
+					resposta['Content-Disposition'] = conteudo
+					return resposta
+
+				else:
+					return redirect('jobread', id=id)
 			except:
 				return redirect('joblist')
 		else:

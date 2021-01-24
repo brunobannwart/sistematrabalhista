@@ -25,13 +25,13 @@
 		<div class='collapse navbar-collapse flex-row-reverse' id='menu'>
 			<ul class='navbar-nav'>
 				<li class='nav-item'>
-					<a class='nav-link' href='{% url "login" %}'>Currículo</a>
+					<a class='nav-link' href='{% url "resumecreate" %}'>Currículo</a>
 				</li>
 				<li class='nav-item'>
-					<a class='nav-link' href='{% url "login" %}'>Cursos</a>
+					<a class='nav-link' href='{% url "courselist" %}'>Cursos</a>
 				</li>
 				<li class='nav-item'>
-					<a class='nav-link' href='{% url "login" %}'>Eventos</a>
+					<a class='nav-link' href='{% url "eventlist" %}'>Eventos</a>
 				</li>
 				<li class='nav-item'>
 					<a class='nav-link' href='{% url "gamelist" %}'>Jogos</a>
@@ -39,12 +39,12 @@
 				<li class='nav-item dropdown'>
 					<a href='#' class='nav-link dropdown-toggle' id='opcoes' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Opções</a>
 					<div class='dropdown-menu' aria-labelledby='opcoes'>
-						<a class='dropdown-item' href='{% url "login" %}'>Alterar senha</a>
+						<a class='dropdown-item' href='{% url "changepassword" %}'>Alterar senha</a>
 						<a class='dropdown-item' href='{% url "logout" %}'>Sair</a>
 					</div>
 				</li>
 				<li class='nav-item'>
-					<a class='nav-link' href='{% url "login" %}'>Vagas</a>
+					<a class='nav-link' href='{% url "joblist" %}'>Vagas</a>
 				</li>
 				<li class='nav-item'>
 					<a class='nav-link' href='{% url "videolessonlist" %}'>Videoaulas</a>

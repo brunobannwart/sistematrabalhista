@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.db import connection
+from empresa.utils import render_to_pdf
 
 # Create your views here.
 @login_required(login_url='login')
@@ -36,7 +37,7 @@ def associatedlist_view(request):
 		'associados': associados,
 	}
 
-	return render(request, 'core/associated/list.html', contexto)
+	return render(request, 'associated/list.html', contexto)
 
 
 @login_required(login_url='login')
@@ -49,6 +50,11 @@ def associatedread_view(request, id=0):
 		resultado = cursor.fetchone()
 
 		if resultado != None:
+			if resultado[11] != '':
+				curriculo = settings.MEDIA_URL + resultado[11]
+			else:
+				curriculo = None
+
 			formulario = {
 				'id': resultado[0],
 				'foto': settings.MEDIA_URL + resultado[1],
@@ -60,13 +66,14 @@ def associatedread_view(request, id=0):
 				'cep': resultado[8],
 				'numero': resultado[9],
 				'outras_informacoes': resultado[10],
+				'curriculo': curriculo
 			}
 
 			contexto = {
 				'form': formulario,
 			}
 
-			return render(request, 'core/associated/read.html', contexto)
+			return render(request, 'associated/read.html', contexto)
 
 		else:
 			return redirect('associatedlist')
@@ -83,7 +90,7 @@ def associatedpdf_view(request, id=0):
 		if resultado != None:
 			formulario = {
 				'id': resultado[0],
-				'foto': settings.MEDIA_URL + resultado[1],
+				'foto': settings.MEDIA_ROOT + '/' + resultado[1],
 				'nome': resultado[2],
 				'data_nascimento': resultado[3],
 				'cpf': resultado[4],
@@ -98,7 +105,16 @@ def associatedpdf_view(request, id=0):
 				'form': formulario,
 			}
 
-			return render(request, 'core/associated/pdf.html', contexto)
+			pdf = render_to_pdf('associated/pdf.html', contexto)
 
+			if pdf:
+				resposta = HttpResponse(pdf, content_type='application/pdf')
+				nomearquivo = resultado[2].replace(' ', '_').lower() + '.pdf'
+				conteudo = 'inline; filename=%s' % (nomearquivo)
+				resposta['Content-Disposition'] = conteudo
+				return resposta
+
+			else:
+				return redirect('associatedread', id=id)
 		else:
 			return redirect('associatedlist')

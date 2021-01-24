@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from django.views.static import serve
 
 from administrador.views import login_view, camera_view, forgot_view, reset_view, changepassword_view, logout_view
+from administrador.views import joblist_view, jobread_view, jobpdf_view
 from administradores.views import adminlist_view, admincreate_view, adminedit_view, admindelete_view
 from associados.views import associatedlist_view, associatedcreate_view, associatededit_view, associateddelete_view
 from cursos.views import courselist_view, coursecreate_view, courseedit_view, coursedelete_view
@@ -67,6 +68,10 @@ urlpatterns = [
 	path('jogos/formulario/', gamecreate_view, name='gamecreate'),
 	path('jogos/formulario/<int:id>/', gameedit_view, name='gameedit'),
 	path('jogos/excluir/<int:id>/', gamedelete_view, name='gamedelete'),
+
+	path('vagas/', joblist_view, name='joblist'),
+	path('vagas/<int:id>/', jobread_view, name='jobread'),
+	path('vagas/pdf/<int:id>/', jobpdf_view, name='jobpdf'),
 
 	path('videoaulas/', videolessonlist_view, name='videolessonlist'),
 	path('videoaulas/formulario/', videolessoncreate_view, name='videolessoncreate'),

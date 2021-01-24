@@ -8,7 +8,7 @@ from .forms import FormCadastro, FormEditar
 # Create your views here.
 @login_required(login_url='login')
 def joblist_view(request):
-	vagas = Vaga.objects.all(empresa_id=request.user.id)
+	vagas = Vaga.objects.filter(empresa_id=request.user.id)
 
 	contexto = {
 		'vagas': vagas,
@@ -82,6 +82,8 @@ def jobedit_view(request, id=0):
 				editar_vaga.descricao = campos['descricao']
 				editar_vaga.save()
 
+				return redirect('joblist')
+
 			except:
 				formulario = request.POST
 				erro = 'Não foi possível atualizar este vaga'
@@ -103,7 +105,7 @@ def jobedit_view(request, id=0):
 	}
 
 	contexto.update(csrf(request))
-	return redirect(request, 'job/form.html', contexto)
+	return render(request, 'job/form.html', contexto)
 
 @login_required(login_url='login')
 @csrf_protect

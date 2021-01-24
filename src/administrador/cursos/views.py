@@ -103,7 +103,7 @@ def courseedit_view(request, id=0):
 	}
 
 	contexto.update(csrf(request))
-	return redirect(request, 'course/form.html', contexto)
+	return render(request, 'course/form.html', contexto)
 
 @login_required(login_url='login')
 @csrf_protect

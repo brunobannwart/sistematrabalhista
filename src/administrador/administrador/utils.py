@@ -6,6 +6,7 @@ from django.core.mail import EmailMultiAlternatives
 from regex import subf
 from pybase64 import urlsafe_b64decode
 from PIL import Image
+from xhtml2pdf import pisa
 
 import random
 import hashlib
@@ -47,9 +48,9 @@ def rebuild_image(url):
 def render_to_pdf(pagina, contexto={}):
 	fragmento = get_template(pagina)
 	folha = fragmento.render(contexto)
-	resultado = BytesIO()
+	resultado = io.BytesIO()
 
-	pdf = pisa.pisaDocument(BytesIO(folha.encode('utf-8')), resultado)
+	pdf = pisa.pisaDocument(io.BytesIO(folha.encode('utf-8')), resultado)
 
 	if not pdf.err:
 		return HttpResponse(resultado.getvalue(), content_type='application/pdf')
