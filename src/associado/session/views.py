@@ -5,8 +5,6 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import connection
-
-from .forms import FormCadastro
 import os
 
 # Create your views here.
@@ -17,22 +15,22 @@ def home_view(request):
 @login_required(login_url='login')
 def resumecreate_view(request):
 	if request.method == 'POST':
-		formulario = FormCadastro(request.FILES or None)
+		curriculo = request.FILES['curriculo']
 
-		if formulario.is_valid():
-			campos = formulario.clean_form()
+		if curriculo:
 			diretorio = settings.MEDIA_ROOT
-			caminho = diretorio + '/curriculo/{0}/{1}'.format(request.user.id, campos['curriculo'].name)
+			arquivo = 'curriculo/{0}/{1}'.format(request.user.id, curriculo.name)
+			caminho = diretorio + '/' + arquivo
+			os.makedirs(os.path.dirname(caminho), exist_ok=True)
 
-			# with open(caminho, 'wb+') as destino:
-			# 	for fragmento in campos['curriculo'].chunks():
-			# 		destino.write(fragmento)
+			with open(caminho, 'wb+') as destino:
+			 	for fragmento in curriculo.chunks():
+			 		destino.write(fragmento)
 
-			# with connection.cursor() as cursor:
-			# 	curso.execute("UPDATE associado SET curriculo=%s WHERE id=%s", [caminho, request.user.id])
+			with connection.cursor() as cursor:
+			 	cursor.execute("UPDATE associado SET curriculo=%s WHERE id=%s", [arquivo, request.user.id])
 
 			return redirect('home')
-
 		else:
 			formulario = {
 				'curriculo': None
