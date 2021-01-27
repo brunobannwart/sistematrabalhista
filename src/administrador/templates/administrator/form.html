@@ -71,18 +71,47 @@
 						</div>
 					</header>
 
-					<div class='form-group'>
-						<label for='nome'>Nome</label>
-						<input
-							type='text'
-							id='nome'
-							name='nome'
-							value='{{ form.nome }}'
-							class='form-control'
-							required
-							placeholder='Preencha com o nome do administrador'
-							maxlength='45'
-						/>
+					<div class='form-row'>
+						<div class='col'>
+							<label for='nome'>Nome</label>
+							<input
+								type='text'
+								id='nome'
+								name='nome'
+								value='{{ form.nome }}'
+								class='form-control'
+								required
+								placeholder='Preencha com o nome do administrador'
+								maxlength='45'
+							/>
+						</div>
+						<div class='col'>
+							<label for='rf'>RF</label>
+							{% if editar is True %}
+								<input 
+									type='text'
+									id='rf'
+									name='rf'
+									class='form-control'
+									value='{{ form.rf }}'
+									required
+									readonly
+									placeholder='Preencha com o registro de funcionário'
+									maxlength='8' 
+								/>
+							{% else %}
+								<input 
+									type='text'
+									id='rf'
+									name='rf'
+									class='form-control'
+									value='{{ form.rf }}'
+									required
+									placeholder='Preencha com o registro de funcionário'
+									maxlength='8' 
+								/>
+							{% endif %}
+						</div>
 					</div>
 
 					<div class='form-row'>

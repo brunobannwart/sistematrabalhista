@@ -21,6 +21,7 @@ class Associado(models.Model):
 	outras_informacoes = models.TextField(verbose_name='Outras informações', blank=True, null=False, max_length=100)
 	curriculo = models.FileField(verbose_name='Curriculo', upload_to=uploadfolder, blank=True, null=False)
 
+	acessibilidade = models.CharField(verbose_name='Acessibilidade', max_length=6)
 	treino = models.IntegerField(verbose_name='Treino facial', null=True)
 	created_at = models.DateTimeField(verbose_name='Criado em', auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name='Atualizado em', auto_now=True)

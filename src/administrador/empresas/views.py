@@ -45,7 +45,8 @@ def companycreate_view(request):
 
 						nova_empresa = Empresa.objects.create(foto=campos['foto'], logo=campos['logo'], razao_social=campos['razao_social'],
 											nome_contato=campos['nome_contato'], cnpj=campos['cnpj'], telefone=campos['telefone'], cep=campos['cep'], 
-											numero=campos['numero'], email=campos['email'], senha_hash=campos['senha_hash'], treino=resposta['treino'])
+											numero=campos['numero'], email=campos['email'], senha_hash=campos['senha_hash'], treino=resposta['treino'],
+											acessibilidade=campos['acessibilidade'])
 
 						nova_empresa.save()
 						return redirect('companylist')
@@ -71,6 +72,7 @@ def companycreate_view(request):
 			'telefone': '',
 			'cep': '',  
 			'numero': '',
+			'acessibilidade': '',
 		}
 
 		erro = None
@@ -116,6 +118,7 @@ def companyedit_view(request, id=0):
 				editar_empresa.cep = campos['cep']
 				editar_empresa.cnpj = campos['cnpj']
 				editar_empresa.numero = campos['numero']
+				editar_empresa.acessibilidade = campos['acessibilidade']
 
 				if request.POST.get('senha') != '':
 					editar_empresa.senha_hash = campos['senha_hash']

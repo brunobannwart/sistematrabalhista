@@ -40,8 +40,9 @@ def admincreate_view(request):
 					if resposta.status_code == 200:
 						resposta = resposta.json()
 
-						novo_administrador = Administrador.objects.create(foto=campos['foto'], nome=campos['nome'], 
-												email=campos['email'], senha_hash=campos['senha_hash'], treino=resposta['treino'])
+						novo_administrador = Administrador.objects.create(foto=campos['foto'], nome=campos['nome'], rf=campos['rf'],
+												email=campos['email'], senha_hash=campos['senha_hash'], treino=resposta['treino'],
+												acessibilidade=campos['acessibilidade'])
 
 						novo_administrador.save()
 						return redirect('adminlist')
@@ -59,8 +60,10 @@ def admincreate_view(request):
 		formulario = {
 			'foto': None,
 			'nome': '',
+			'rf': '',
 			'email': '',
 			'senha': '',
+			'acessibilidade': '',
 		}
 
 		erro = None
@@ -96,7 +99,9 @@ def adminedit_view(request, id=0):
 					editar_administrador.foto = campos['foto']
 
 				editar_administrador.nome = campos['nome']
+				editar_administrador.rf = campos['rf']
 				editar_administrador.email = campos['email']
+				editar_administrador.acessibilidade = campos['acessibilidade']
 
 				if request.POST.get('senha') != '':
 					editar_administrador.senha_hash = campos['senha_hash']
