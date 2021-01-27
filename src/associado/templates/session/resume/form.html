@@ -42,25 +42,31 @@
 						<label class='custom-file-label' for='curriculo'>Escolher arquivo</label>
 					</div>
 
-					<div class='form-row'>
-						<div class='col'>
-							<button
-								type='button'
-								class='btn btn-danger btn-lg btn-block'
-								onclick='window.location.href=`{% url "home" %}`'
-							>
-								Cancelar
-							</button>
-						</div>
-						<div class='col'>
-							<button 
-								type='submit' 
-								class='btn btn-success btn-lg btn-block'
-							>
-								Salvar
-							</button>
-						</div>
-					</div>
+					{% if atual != '' %}
+						<a 
+							class='btn btn-link pt-4'
+							href='{{ atual }}' 
+							download
+						>
+							Baixar currículo atual
+						</a>
+					{% endif %}
+
+					<footer>
+						<button
+							type='button'
+							class='btn btn-danger btn-lg'
+							onclick='window.location.href=`{% url "home" %}`'
+						>
+							Cancelar
+						</button>
+						<button 
+							type='submit' 
+							class='btn btn-success btn-lg ml-4'
+						>
+							Salvar
+						</button>
+					</footer>
 				</form>
 			</div>
 		</div>

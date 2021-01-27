@@ -29,124 +29,122 @@
 {% endif %}
 
 <div class='form'>
-	<div class='card'>
-		<div class='card-body'>
-			<form method='post' action='.' autocomplete='off' enctype='multipart/form-data'>
-				{% csrf_token %}
+	<div class='container'>
+		<div class='card'>
+			<div class='card-body'>
+				<form method='post' action='.' autocomplete='off' enctype='multipart/form-data'>
+					{% csrf_token %}
 
-				<header class='row'>
-					<div class='col'>
-						{% if editar is True %}
-							<img 
-								src='{{ form.foto.url }}'
-								class='img-fluid' 
-								alt='Prévia'
-								id='previa'
-							/>
-						{% else %}
-							<img
-								src='{% static "assets/empty-img.png" %}'
-								class='img-fluid'
-								id='previa'
-							/>
-						{% endif %}
-					</div>
-					<div class='col'>
-						<div class='input-group mb-3'>
-							<div class='input-group-prepend'>
-								<label class='input-group-text'>Foto do administrador</label>
-							</div>
-							<div class='custom-file'>
-								<input 
-									type='file'
-									class='custom-file-input'
-									accept='image/*'
-									id='foto' 
-									name='foto'
+					<header class='row'>
+						<div class='col'>
+							{% if editar is True %}
+								<img 
+									src='{{ form.foto.url }}'
+									class='img-fluid' 
+									alt='Prévia'
+									id='previa'
 								/>
-								<label class='custom-file-label'>Escolher foto</label>
+							{% else %}
+								<img
+									src='{% static "assets/empty-img.png" %}'
+									class='img-fluid'
+									id='previa'
+								/>
+							{% endif %}
+						</div>
+						<div class='col'>
+							<div class='input-group mb-3'>
+								<div class='input-group-prepend'>
+									<label class='input-group-text'>Foto do administrador</label>
+								</div>
+								<div class='custom-file'>
+									<input 
+										type='file'
+										class='custom-file-input'
+										accept='image/*'
+										id='foto' 
+										name='foto'
+									/>
+									<label class='custom-file-label'>Escolher foto</label>
+								</div>
 							</div>
 						</div>
-					</div>
-				</header>
+					</header>
 
-				<div class='form-group'>
-					<label for='nome'>Nome</label>
-					<input
-						type='text'
-						id='nome'
-						name='nome'
-						value='{{ form.nome }}'
-						class='form-control'
-						required
-						placeholder='Preencha com o nome do administrador'
-						maxlength='45'
-					/>
-				</div>
-
-				<div class='form-row'>
-					<div class='col'>
-						<label for='email'>Email</label>
-						{% if editar is True %}
-							<input
-								type='email'
-								id='email'
-								name='email'
-								placeholder='Preencha campo com o email do administrador'
-								required
-								maxlenth='45'
-								class='form-control'
-								value='{{ form.email }}'
-								readonly
-							/>
-						{% else %}
-							<input
-								type='email'
-								id='email'
-								name='email'
-								placeholder='Preencha campo com o email do administrador'
-								required
-								maxlenth='45'
-								class='form-control'
-								value='{{ form.email }}'
-							/>
-						{% endif %}
-					</div>
-					<div class='col'>
-						<label for='senha'>Senha</label>
+					<div class='form-group'>
+						<label for='nome'>Nome</label>
 						<input
-							type='password'
-							id='senha'
-							name='senha'
-							placeholder='Preencha campo com a senha do administrador'
-							required
-							maxlenth='100'
+							type='text'
+							id='nome'
+							name='nome'
+							value='{{ form.nome }}'
 							class='form-control'
-							value='{{ form.senha }}'
+							required
+							placeholder='Preencha com o nome do administrador'
+							maxlength='45'
 						/>
 					</div>
-				</div>
 
-				<div class='form-row'>
-					<div class='col'>
+					<div class='form-row'>
+						<div class='col'>
+							<label for='email'>Email</label>
+							{% if editar is True %}
+								<input
+									type='email'
+									id='email'
+									name='email'
+									placeholder='Preencha campo com o email do administrador'
+									required
+									maxlenth='45'
+									class='form-control'
+									value='{{ form.email }}'
+									readonly
+								/>
+							{% else %}
+								<input
+									type='email'
+									id='email'
+									name='email'
+									placeholder='Preencha campo com o email do administrador'
+									required
+									maxlenth='45'
+									class='form-control'
+									value='{{ form.email }}'
+								/>
+							{% endif %}
+						</div>
+						<div class='col'>
+							<label for='senha'>Senha</label>
+							<input
+								type='password'
+								id='senha'
+								name='senha'
+								placeholder='Preencha campo com a senha do administrador'
+								required
+								maxlenth='100'
+								class='form-control'
+								value='{{ form.senha }}'
+							/>
+						</div>
+					</div>
+
+					<footer>
 						<button
 							type='button'
-							class='btn btn-danger btn-lg btn-block'
+							class='btn btn-danger btn-lg'
 							onclick='window.location.href=`{% url "adminlist" %}`'
 						>
 							Cancelar
 						</button>
-					</div>
-					<div class='col'>
 						<button 
 							type='submit' 
-							class='btn btn-success btn-lg btn-block'
+							class='btn btn-success btn-lg ml-4'
 						>
 							Salvar
 						</button>
-					</div>
-				</div>
-			</form>
+					</footer>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>

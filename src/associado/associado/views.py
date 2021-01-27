@@ -42,8 +42,7 @@ def login_view(request):
 			else:
 				formulario = request.POST
 				erro = 'Preencher campos corretamente'
-		except Exception as e:
-			print(e)
+		except:
 			formulario = request.POST
 			erro = 'Não foi possível realizar o login. Tente novamente'
 	else:

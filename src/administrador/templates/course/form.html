@@ -29,106 +29,104 @@
 {% endif %}
 
 <div class='form'>
-	<div class='card'>
-		<div class='card-body'>
-			<form method='post' action='.' autocomplete='off' enctype='multipart/form-data'>
-				{% csrf_token %}
+	<div class='container'>
+		<div class='card'>
+			<div class='card-body'>
+				<form method='post' action='.' autocomplete='off' enctype='multipart/form-data'>
+					{% csrf_token %}
 
-				<header class='row'>
-					<div class='col'>
-						{% if editar is True %}
-							<img 
-								src='{{ form.logo.url }}'
-								class='img-fluid' 
-								alt='Prévia'
-								id='previa'
-							/>
-						{% else %}
-							<img
-								src='{% static "assets/empty-img.png" %}'
-								class='img-fluid'
-								id='previa'
-							/>
-						{% endif %}
-					</div>
-					<div class='col'>
-						<div class='input-group mb-3'>
-							<div class='input-group-prepend'>
-								<label class='input-group-text'>Logo do curso</label>
-							</div>
-							<div class='custom-file'>
-								<input 
-									type='file'
-									class='custom-file-input'
-									accept='image/*'
-									id='logo' 
-									name='logo'
+					<header class='row'>
+						<div class='col'>
+							{% if editar is True %}
+								<img 
+									src='{{ form.logo.url }}'
+									class='img-fluid' 
+									alt='Prévia'
+									id='previa'
 								/>
-								<label class='custom-file-label'>Escolher logo</label>
+							{% else %}
+								<img
+									src='{% static "assets/empty-img.png" %}'
+									class='img-fluid'
+									id='previa'
+								/>
+							{% endif %}
+						</div>
+						<div class='col'>
+							<div class='input-group mb-3'>
+								<div class='input-group-prepend'>
+									<label class='input-group-text'>Logo do curso</label>
+								</div>
+								<div class='custom-file'>
+									<input 
+										type='file'
+										class='custom-file-input'
+										accept='image/*'
+										id='logo' 
+										name='logo'
+									/>
+									<label class='custom-file-label'>Escolher logo</label>
+								</div>
 							</div>
 						</div>
-					</div>
-				</header>
+					</header>
 
-				<div class='form-row'>
-					<div class='col'>
-						<label for='titulo'>Título</label>
-						<input
-							type='text'
-							id='titulo'
-							name='titulo'
-							value='{{ form.titulo }}'
+					<div class='form-row'>
+						<div class='col'>
+							<label for='titulo'>Título</label>
+							<input
+								type='text'
+								id='titulo'
+								name='titulo'
+								value='{{ form.titulo }}'
+								class='form-control'
+								required
+								placeholder='Preencha com o título do curso'
+								maxlength='50'
+							/>
+						</div>
+						<div class='col'>
+							<label for='data_exp'>Data de expiração</label>
+							<input
+								type='date'
+								id='data_exp'
+								name='data_exp'
+								value='{{ form.data_exp }}'
+								class='form-control'
+								required
+							>
+						</div>
+					</div>
+
+					<div class='form-group' style='margin-top: 1.5em;'>
+						<label for='descricao'>Descrição</label>
+						<textarea
+							id='descricao'
+							name='descricao'
 							class='form-control'
+							placeholder='Preencha com a descrição do curso'
 							required
-							placeholder='Preencha com o título do curso'
-							maxlength='50'
-						/>
+							maxlenth='150'
+						>{{ form.descricao }}</textarea>
 					</div>
-					<div class='col'>
-						<label for='data_exp'>Data de expiração</label>
-						<input
-							type='date'
-							id='data_exp'
-							name='data_exp'
-							value='{{ form.data_exp }}'
-							class='form-control'
-							required
-						>
-					</div>
-				</div>
 
-				<div class='form-group' style='margin-top: 1.5em;'>
-					<label for='descricao'>Descrição</label>
-					<textarea
-						id='descricao'
-						name='descricao'
-						class='form-control'
-						placeholder='Preencha com a descrição do curso'
-						required
-						maxlenth='150'
-					>{{ form.descricao }}</textarea>
-				</div>
-
-				<div class='form-row'>
-					<div class='col'>
+					<footer>
 						<button
 							type='button'
-							class='btn btn-danger btn-lg btn-block'
+							class='btn btn-danger btn-lg'
 							onclick='window.location.href=`{% url "courselist" %}`'
 						>
 							Cancelar
 						</button>
-					</div>
-					<div class='col'>
 						<button 
 							type='submit' 
-							class='btn btn-success btn-lg btn-block'
+							class='btn btn-success btn-lg ml-4'
 						>
 							Salvar
 						</button>
-					</div>
-				</div>
-			</form>
+					</footer>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>

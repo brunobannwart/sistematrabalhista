@@ -53,8 +53,7 @@ def associatedcreate_view(request):
 					else:
 						formulario = request.POST
 						erro = 'Foto inválida'
-				except Exception as e:
-					print(e)
+				except:
 					formulario = request.POST
 					erro = 'Não foi possível cadastrar novo associado'
 		else:
@@ -72,6 +71,7 @@ def associatedcreate_view(request):
 			'cep': '',  
 			'numero': '',
 			'outras_informacoes': '',
+			'curriculo': '',
 		}
 
 		erro = None

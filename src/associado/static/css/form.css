@@ -6,7 +6,7 @@
 	right: 0;
 	background: rgba(0, 0, 0, 0.7);
 	transition: opacity 500ms;
-	z-index: 1;
+	z-index: 5;
 }
 
 .error-overlay .container .card {
@@ -45,6 +45,13 @@
 
 .form form textarea {
   resize: none;
+}
+
+.form form footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: flex-end;
 }
 
 .form form button[type='submit'] {

@@ -42,9 +42,15 @@ def resumecreate_view(request):
 		}
 		erro = None
 
+	with connection.cursor() as cursor:
+		cursor.execute("SELECT curriculo FROM associado WHERE id=%s", [request.user.id])
+		curriculo = settings.MEDIA_URL + cursor.fetchone()[0]
+		print(curriculo)
+
 	contexto = {
 		'form': formulario,
-		'erro': erro
+		'erro': erro,
+		'atual': curriculo,
 	}
 
 	return render(request, 'session/resume/form.html', contexto)
