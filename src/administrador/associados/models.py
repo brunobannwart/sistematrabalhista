@@ -26,7 +26,7 @@ class Associado(models.Model):
 	updated_at = models.DateTimeField(verbose_name='Atualizado em', auto_now=True)
 
 	def __str__(self):
-		return self.razao_social
+		return self.nome
 
 	def delete(self, *args, **kwargs):
 		self.removePhoto()
