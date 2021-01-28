@@ -7,6 +7,7 @@ class LoginAssociado(models.Model):
 	nome = models.CharField(verbose_name='Razão social', max_length=45)
 	email = models.EmailField(verbose_name='E-mail', unique=True, max_length=45)
 	senha_hash = models.CharField(verbose_name='Senha', max_length=64)
+	pcd = models.BooleanField(verbose_name='PCD', default=False)
 	
 	is_authenticated	=	models.BooleanField(verbose_name='Autenticado', default=False)
 	last_login			=	models.DateTimeField(verbose_name='Último login', blank=True, null=True)

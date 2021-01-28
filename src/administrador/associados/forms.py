@@ -10,8 +10,8 @@ class FormCadastro(forms.Form):
 	celular = forms.CharField(label='Telefone', max_length=15)
 	cep = forms.CharField(label='CEP', max_length=10)
 	numero = forms.CharField(label='Número', max_length=5)
+	pcd = forms.CharField(label='PCD', max_length=3)
 	outras_informacoes = forms.CharField(label='Outras informações', widget=forms.Textarea, required=False, max_length=100)
-	acessibilidade = forms.CharField(label='Acessibilidade', max_length=6)
 	foto = forms.ImageField(label='Foto')
 
 	def clean_form(self):
@@ -24,10 +24,15 @@ class FormCadastro(forms.Form):
 		celular = self.cleaned_data.get('celular')
 		cep = self.cleaned_data.get('cep')
 		numero = self.cleaned_data.get('numero')
+		pcd = self.cleaned_data.get('pcd')
 		outras_informacoes = self.cleaned_data.get('outras_informacoes')
-		acessibilidade = self.cleaned_data.get('acessibilidade')
 
 		senha_hash = hashlib.sha256(senha.encode()).hexdigest()
+
+		if pcd == 'sim':
+			pcd = True
+		else:
+			pcd = False
 
 		return { 
 			'foto': foto,
@@ -39,8 +44,8 @@ class FormCadastro(forms.Form):
 			'celular': celular,
 			'cep': cep,  
 			'numero': numero,
+			'pcd': pcd,
 			'outras_informacoes': outras_informacoes,
-			'acessibilidade': acessibilidade,
 		}
 
 class FormEditar(forms.Form):
@@ -52,8 +57,8 @@ class FormEditar(forms.Form):
 	celular = forms.CharField(label='Telefone', max_length=15)
 	cep = forms.CharField(label='CEP', max_length=10)
 	numero = forms.CharField(label='Número', max_length=5)
+	pcd = forms.CharField(label='PCD', max_length=3)
 	outras_informacoes = forms.CharField(label='Outras informações', widget=forms.Textarea, required=False, max_length=100)
-	acessibilidade = forms.CharField(label='Acessibilidade', max_length=6)
 	foto = forms.ImageField(label='Foto', required=False)
 
 	def clean_form(self):
@@ -66,10 +71,15 @@ class FormEditar(forms.Form):
 		celular = self.cleaned_data.get('celular')
 		cep = self.cleaned_data.get('cep')
 		numero = self.cleaned_data.get('numero')
+		pcd = self.cleaned_data.get('pcd')
 		outras_informacoes = self.cleaned_data.get('outras_informacoes')
-		acessibilidade = self.cleaned_data.get('acessibilidade')
 
 		senha_hash = hashlib.sha256(senha.encode()).hexdigest()
+
+		if pcd == 'sim':
+			pcd = True
+		else:
+			pcd = False
 
 		return { 
 			'foto': foto,
@@ -81,6 +91,6 @@ class FormEditar(forms.Form):
 			'celular': celular,
 			'cep': cep,  
 			'numero': numero,
+			'pcd': pcd,
 			'outras_informacoes': outras_informacoes,
-			'acessibilidade': acessibilidade,
 		}

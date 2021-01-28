@@ -19,8 +19,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
 
-from administrador.views import login_view, camera_view, forgot_view, reset_view, changepassword_view, logout_view
-from administrador.views import joblist_view, jobread_view, jobpdf_view
+from administrador.views import login_view, camera_view, forgot_view, readmore_view, logout_view
+from administrador.views import changepassword_view, joblist_view, jobread_view, jobpdf_view
 from administradores.views import adminlist_view, admincreate_view, adminedit_view, admindelete_view
 from associados.views import associatedlist_view, associatedcreate_view, associatededit_view, associateddelete_view
 from cursos.views import courselist_view, coursecreate_view, courseedit_view, coursedelete_view
@@ -30,12 +30,12 @@ from jogos.views import gamelist_view, gamecreate_view, gameedit_view, gamedelet
 from videoaulas.views import videolessonlist_view, videolessoncreate_view, videolessonedit_view, videolessondelete_view
 
 urlpatterns = [
-	path('extcomp/', admin.site.urls),
+	path('vitalita/', admin.site.urls),
 
 	path('', login_view, name='login'),
 	path('camera/', camera_view, name='camera'),
 	path('esquecidados/', forgot_view, name='forgot'),
-	path('redefinir/', reset_view, name='reset'),
+	path('saibamais/', readmore_view, name='readmore'),
 	path('trocarsenha/', changepassword_view, name='changepassword'),
 	path('sair/', logout_view, name='logout'),
 

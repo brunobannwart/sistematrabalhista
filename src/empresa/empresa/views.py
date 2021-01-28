@@ -7,8 +7,8 @@ from django.db import connection
 
 from core.models import LoginEmpresa
 from .backend import BackendLogin
-from .forms import FormLogin, FormRedefinir, FormTrocar
-from .utils import rebuild_image, send_mail, hash_password, random_password
+from .forms import FormLogin
+from .utils import rebuild_image
 
 import os, requests
 
@@ -105,54 +105,8 @@ def camera_view(request):
 def forgot_view(request):
 	return render(request, 'login/forgot.html', {})
 
-@csrf_protect
-def reset_view(request):
-	if request.method == 'POST':
-		formulario = FormRedefinir(request.POST)
-
-		if formulario.is_valid():
-			campos = formulario.clean_form()
-
-			try:
-				with connection.cursor() as cursor:
-					cursor.execute("SELECT razao_social FROM empresa WHERE email=%s", [campos['email']])
-					resultado = cursor.fetchone()
-				
-					contexto = {
-						'nome': resultado[0],
-						'senha': random_password('0123456789', 6)
-					}
-
-					send_mail('Esqueci minha senha', 'option/email.html', 
-						contexto, [campos['email']], settings.DEFAULT_FROM_EMAIL
-					)
-
-					cursor.execute("UPDATE empresa SET senha_hash=%s WHERE email=%s", 
-						[hash_password(contexto['senha']), campos['email']]
-					)
-
-					return redirect('login')
-
-			except:
-				formulario = request.POST
-				erro = 'Alguma falha ocorreu'
-		else:
-			formulario = request.POST
-			erro = 'Preencher campos corretamente'
-	else:
-		formulario = {
-			'email': '',
-		}
-
-		erro = None
-
-	contexto = {
-		'form': formulario,
-		'erro': erro,
-	}
-
-	contexto.update(csrf(request))
-	return render(request, 'login/reset.html', contexto)
+def readmore_view(request):
+	return render(request, 'login/readmore.html', {})
 
 @login_required(login_url='login')
 @csrf_protect

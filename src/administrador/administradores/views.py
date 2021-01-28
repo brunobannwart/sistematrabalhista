@@ -29,10 +29,13 @@ def admincreate_view(request):
 		if formulario.is_valid():
 			campos = formulario.clean_form()
 
-			if Administrador.objects.filter(email=campos['email']):
-				formulario = request.POST
-				erro = 'Já existe administrador com esse email cadastrado'
-
+			if Administrador.objects.filter(email=campos['email']) | Administrador.objects.filter(rf=campos['rf']):
+				if Administrador.objects.filter(email=campos['email']):
+					formulario = request.POST
+					erro = 'Já existe administrador com esse email cadastrado'
+				else:
+					formulario = request.POST
+					erro = 'Já existe administrador com esse RF cadastrado'
 			else:
 				try:
 					resposta = requests.post('http://127.0.0.1:5000/api/treino', data={'grupo': 'administrador'}, files={ 'file': campos['foto'] })
@@ -41,8 +44,7 @@ def admincreate_view(request):
 						resposta = resposta.json()
 
 						novo_administrador = Administrador.objects.create(foto=campos['foto'], nome=campos['nome'], rf=campos['rf'],
-												email=campos['email'], senha_hash=campos['senha_hash'], treino=resposta['treino'],
-												acessibilidade=campos['acessibilidade'])
+												email=campos['email'], senha_hash=campos['senha_hash'], treino=resposta['treino'])
 
 						novo_administrador.save()
 						return redirect('adminlist')
@@ -63,7 +65,6 @@ def admincreate_view(request):
 			'rf': '',
 			'email': '',
 			'senha': '',
-			'acessibilidade': '',
 		}
 
 		erro = None
@@ -101,7 +102,6 @@ def adminedit_view(request, id=0):
 				editar_administrador.nome = campos['nome']
 				editar_administrador.rf = campos['rf']
 				editar_administrador.email = campos['email']
-				editar_administrador.acessibilidade = campos['acessibilidade']
 
 				if request.POST.get('senha') != '':
 					editar_administrador.senha_hash = campos['senha_hash']

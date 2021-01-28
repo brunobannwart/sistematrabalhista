@@ -10,8 +10,8 @@ from django.db import connection
 from administradores.models import Administrador
 from empresas.models import Empresa
 from .backend import BackendLogin
-from .forms import FormLogin, FormRedefinir, FormTrocar
-from .utils import rebuild_image, send_mail, hash_password, random_password, render_to_pdf
+from .forms import FormLogin, FormTrocar
+from .utils import rebuild_image, render_to_pdf
 
 import os, requests
 
@@ -93,53 +93,18 @@ def camera_view(request):
 def forgot_view(request):
 	return render(request, 'login/forgot.html', {})
 
-@csrf_protect
-def reset_view(request):
-	if request.method == 'POST':
-		formulario = FormRedefinir(request.POST)
+def readmore_view(request):
+	return render(request, 'login/readmore.html', {})
 
-		if formulario.is_valid():
-			campos = formulario.clean_form()
-
-			try:
-				administrador = Administrador.objects.get(email=campos['email'])
-				
-				contexto = {
-					'nome':	administrador.nome.upper(),
-					'senha': random_password('0123456789', 6)
-				}
-
-				send_mail('Esqueci minha senha', 'option/email.html', 
-					contexto, [administrador.email], settings.DEFAULT_FROM_EMAIL
-				)
-
-				administrador.senha_hash = hash_password(contexto['senha'])
-				administrador.save()
-
-				return redirect('login')
-
-			except:
-				formulario = request.POST
-				erro = 'Alguma falha ocorreu'
-
-		else:
-			formulario = request.POST
-			erro = 'Preencher campos corretamente'
-
-	else:
-		formulario = {
-			'email': '',
-		}
-
-		erro = None
-
-	contexto = {
-		'form': formulario,
-		'erro': erro,
-	}
-
-	contexto.update(csrf(request))
-	return render(request, 'login/reset.html', contexto)
+def logout_view(request):
+	try:
+		email = request.user.email
+		logout(request)
+		administrador = Administrador.objects.get(email=email)
+		administrador.is_authenticated = False
+		administrador.save()
+	finally:
+		return redirect('login')
 
 @login_required(login_url='login')
 @csrf_protect
@@ -184,16 +149,6 @@ def changepassword_view(request):
 
 	contexto.update(csrf(request))
 	return render(request, 'option/changepassword.html', contexto)
-
-def logout_view(request):
-	try:
-		email = request.user.email
-		logout(request)
-		administrador = Administrador.objects.get(email=email)
-		administrador.is_authenticated = False
-		administrador.save()
-	finally:
-		return redirect('login')
 
 @login_required(login_url='login')
 def joblist_view(request):

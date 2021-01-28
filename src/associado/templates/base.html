@@ -12,7 +12,7 @@
 	<script type='text/javascript' src='{% static "bootstrap/js/bootstrap.min.js" %}' />
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
 	<script src='https://kit.fontawesome.com/50797efa34.js'></script>
-	<title>Associação - Associado</title>
+	<title>Vitalitá - Aluno</title>
 </head>
 <body>
 	<nav class='navbar navbar-expand-lg navbar-dark static-top'>
@@ -24,25 +24,26 @@
 		</button>
 		<div class='collapse navbar-collapse flex-row-reverse' id='menu'>
 			<ul class='navbar-nav'>
-				<li class='nav-item dropdown'>
-					<a href='#' class='nav-link dropdown-toggle' id='conteudo' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Contéudo</a>
-					<div class='dropdown-menu' aria-labelledby='conteudo'>
-						<a class='dropdown-item' href='{% url "courselist" %}'>Cursos</a>
-						<a class='dropdown-item' href='{% url "eventlist" %}'>Eventos</a>
-						<a class='dropdown-item' href='{% url "gamelist" %}'>Jogos</a>
-						<a class='dropdown-item' href='{% url "joblist" %}'>Vagas</a>
-						<a class='dropdown-item' href='{% url "videolessonlist" %}'>Videoaulas</a>
-					</div>
-				</li>
 				<li class='nav-item'>
 					<a class='nav-link' href='{% url "resumecreate" %}'>Currículo</a>
 				</li>
-				<li class='nav-item dropdown dropleft'>
-					<a href='#' class='nav-link dropdown-toggle' id='opcoes' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Opções</a>
-					<div class='dropdown-menu' aria-labelledby='opcoes'>
-						<a class='dropdown-item' href='{% url "changepassword" %}'>Alterar senha</a>
-						<a class='dropdown-item' href='{% url "logout" %}'>Sair</a>
-					</div>
+				<li class='nav-item'>
+					<a class='nav-link' href='{% url "courselist" %}'>Cursos</a>
+				</li>
+				<li class='nav-item'>
+					<a class='nav-link' href='{% url "eventlist" %}'>Eventos</a>
+				</li>
+				<li class='nav-item'>
+					<a class='nav-link' href='{% url "gamelist" %}'>Jogos</a>
+				</li>
+				<li class='nav-item'>
+					<a class='nav-link' href='{% url "joblist" %}'>Vagas</a>
+				</li>
+				<li class='nav-item'>
+					<a class='nav-link' href='{% url "videolessonlist" %}'>Videoaulas</a>
+				</li>
+				<li class='nav-item'>
+					<a class='nav-link' href='{% url "logout" %}'>Sair</a>
 				</li>
 			</ul>
 		</div>

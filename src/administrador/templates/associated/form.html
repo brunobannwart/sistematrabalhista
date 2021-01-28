@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block titulo %}
-	<h3>Formulário de Associado</h3>
+	<h3>Formulário de Aluno</h3>
 {% endblock %}
 
 {% block pagina %}
@@ -270,28 +270,56 @@
 						</div>
 					</div>
 
-					<div class='form-group pt-4'>
-						<label for='outras_informacoes'>Outras informações</label>
-						<textarea
-							id='outras_informacoes'
-							name='outras_informacoes'
-							class='form-control'
-							placeholder='Preencha com alguma informação adicional do associado'
-						>{{ form.outras_informacoes }}</textarea>
-
-					</div>
-
-					{% if form.curriculo != '' %}
-						<div class='form-group'>
-							<a
-								class='btn btn-link'
-								href='/media/{{ form.curriculo }}'
-								download
-							>
-								Visualizar currículo
-							</a>
+					<div class='form-row pt-4'>
+						<div class='col'>
+							<label>Portador de Deficiência?</label> 
+							<div class='form-check'>
+								{% if form.pcd is True %}
+									<input
+										type='checkbox'
+										id='pcd'
+										name='pcd'
+										class='form-check-input'
+										value='sim'
+										checked
+										onclick='marcarPCD()'
+									/>
+									<input 
+										id='pcd_oculto'
+										name='pcd' 
+										type='hidden' 
+										value='nao'  
+										disabled
+									/>
+								{% else %}
+									<input
+										type='checkbox'
+										id='pcd'
+										name='pcd'
+										class='form-check-input'
+										value='sim'
+										onclick='marcarPCD()'
+									/>
+									<input 
+										id='pcd_oculto'
+										name='pcd' 
+										type='hidden' 
+										value='nao' 
+									/>
+								{% endif %}
+								<label for='pcd'>Sim</label>
+							</div>
 						</div>
-					{% endif %}
+						<div class='col'>
+							<label for='outras_informacoes'>Outras informações</label>
+							<textarea
+								id='outras_informacoes'
+								name='outras_informacoes'
+								class='form-control'
+								placeholder='Preencha com alguma informação adicional do associado'
+							>{{ form.outras_informacoes }}</textarea>
+						</div>
+					</div>
 
 					<footer>
 						<button
@@ -330,5 +358,13 @@
 			leitor.readAsDataURL(arquivo);
 		}
 	});
+
+	function marcarPCD() {
+		if (document.getElementById('pcd').checked) {
+			document.getElementById('pcd_oculto').disabled = true;
+		} else {
+			document.getElementById('pcd_oculto').disabled = false;
+		}
+	}
 </script>
 {% endblock %}

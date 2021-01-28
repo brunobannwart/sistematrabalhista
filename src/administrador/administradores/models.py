@@ -4,11 +4,10 @@ from django.db import models
 class Administrador(models.Model):
 	foto = models.ImageField(verbose_name='Foto', upload_to='foto/admin', null=False, blank=False)
 	nome = models.CharField(verbose_name='Nome', max_length=45)
-	rf = models.CharField(verbose_name='RF', max_length=8)
+	rf = models.CharField(verbose_name='RF', max_length=8, unique=True)
 	email = models.EmailField(verbose_name='Email', unique=True, max_length=45)
 	senha_hash = models.CharField(verbose_name='Hash senha', max_length=64)
 
-	acessibilidade = models.CharField(verbose_name='Acessibilidade', max_length=6)
 	treino = models.IntegerField(verbose_name='Treino facial', null=True)
 
 	is_authenticated = models.BooleanField(verbose_name='Autenticado', default=False)

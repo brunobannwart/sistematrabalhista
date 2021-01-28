@@ -119,19 +119,49 @@
 						</div>
 					</div>
 
+					<div class='form-row pt-4'>
+						<div class='col'>
+							<label for='instituicao_ensino'>Instituições de ensino</label>
+							<textarea
+							id='instituicao_ensino'
+							name='instituicao_ensino'
+							readonly
+							class='form-control'
+						>{{ form.instituicao_ensino }}</textarea>
+						</div>
+						<div class='col'>
+							<label for='curso_extra'>Cursos extras</label>
+							<textarea
+							id='curso_extra'
+							name='curso_extra'
+							readonly
+							class='form-control'
+						>{{ form.curso_extra }}</textarea>
+						</div>
+					</div>
+
+					<div class='form-row pt-4'>
+						<div class='col'>
+							<label for='empresa_trabalhada'>Empresas trabalhadas</label>
+							<textarea
+							id='empresa_trabalhada'
+							name='empresa_trabalhada'
+							readonly
+							class='form-control'
+						>{{ form.empresa_trabalhada }}</textarea>
+						</div>
+						<div class='col'>
+							<label for='cargo_ocupado'>Cargos ocupados</label>
+							<textarea
+							id='cargo_ocupado'
+							name='cargo_ocupado'
+							readonly
+							class='form-control'
+						>{{ form.cargo_ocupado }}</textarea>
+						</div>
+					</div>
+
 					<div class='form-row pt-4 flex-row-reverse'>
-						{% if form.curriculo is not None %}
-							<a
-								role='button'
-								class='btn btn-secondary btn-lg'
-								href='{{ form.curriculo }}' 
-								download
-							>
-								Baixar currículo
-							</a>
-						{% else %}
-							<p class='text-muted pt-2'>Nenhum curriculo anexado</p>
-						{% endif %}
 						<a
 							role='button'
 							class='btn btn-link'

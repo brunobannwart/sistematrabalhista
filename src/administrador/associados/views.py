@@ -45,7 +45,7 @@ def associatedcreate_view(request):
 
 						novo_associado = Associado.objects.create(foto=campos['foto'], nome=campos['nome'], cpf=campos['cpf'], celular=campos['celular'], cep=campos['cep'], 
 											data_nascimento=campos['data_nascimento'], numero=campos['numero'], email=campos['email'], senha_hash=campos['senha_hash'], treino=resposta['treino'],
-											outras_informacoes=campos['outras_informacoes'], acessibilidade=campos['acessibilidade'])
+											pcd=campos['pcd'], outras_informacoes=campos['outras_informacoes'])
 
 						novo_associado.save()
 						return redirect('associatedlist')
@@ -70,9 +70,8 @@ def associatedcreate_view(request):
 			'celular': '',
 			'cep': '',  
 			'numero': '',
+			'pcd': '',
 			'outras_informacoes': '',
-			'acessibilidade': '',
-			'curriculo': '',
 		}
 
 		erro = None
@@ -114,8 +113,8 @@ def associatededit_view(request, id=0):
 				editar_associado.cep = campos['cep']
 				editar_associado.cpf = campos['cpf']
 				editar_associado.numero = campos['numero']
+				editar_associado.pcd = campos['pcd']
 				editar_associado.outras_informacoes = campos['outras_informacoes']
-				editar_associado.acessibilidade = campos['acessibilidade']
 
 				if request.POST.get('senha') != '':
 					editar_associado.senha_hash = campos['senha_hash']

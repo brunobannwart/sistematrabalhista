@@ -2,7 +2,7 @@ import mysql.connector as mysql
 
 class Database:
 	def __init__(self):
-		self.conexao = mysql.connect(host='localhost', user='tr_reconhecedor', password='reconhecedor$trabalhista', database='db_trabalhista', auth_plugin='mysql_native_password')
+		self.conexao = mysql.connect(host='localhost', user='vit_reconhecedor', password='reconhecedor$vitalita', database='db_vitalita', auth_plugin='mysql_native_password')
 		
 		self.cursor = self.conexao.cursor()
 		self.__criarTabela()

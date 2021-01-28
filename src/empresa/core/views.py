@@ -27,7 +27,12 @@ def associatedlist_view(request):
 				'email': resultado[6],
 				'cep': resultado[8],
 				'numero': resultado[9],
-				'outras_informacoes': resultado[10],
+				'pcd': resultado[10],
+				'outras_informacoes': resultado[11],
+				'instituicao_ensino': resultado[12],
+				'cursos_extra': resultado[13],
+				'empresa_trabalhada': resultado[14],
+				'laudo_medico': resultado[15],
 			}
 
 			associados.append(associado)
@@ -50,11 +55,6 @@ def associatedread_view(request, id=0):
 		resultado = cursor.fetchone()
 
 		if resultado != None:
-			if resultado[11] != '':
-				curriculo = settings.MEDIA_URL + resultado[11]
-			else:
-				curriculo = None
-
 			formulario = {
 				'id': resultado[0],
 				'foto': settings.MEDIA_URL + resultado[1],
@@ -65,8 +65,12 @@ def associatedread_view(request, id=0):
 				'email': resultado[6],
 				'cep': resultado[8],
 				'numero': resultado[9],
-				'outras_informacoes': resultado[10],
-				'curriculo': curriculo
+				'pcd': resultado[10],
+				'outras_informacoes': resultado[11],
+				'instituicao_ensino': resultado[12],
+				'cursos_extra': resultado[13],
+				'empresa_trabalhada': resultado[14],
+				'laudo_medico': settings.MEDIA_URL + resultado[15],
 			}
 
 			contexto = {
@@ -98,7 +102,11 @@ def associatedpdf_view(request, id=0):
 				'email': resultado[6],
 				'cep': resultado[8],
 				'numero': resultado[9],
-				'outras_informacoes': resultado[10],
+				'pcd': resultado[10],
+				'outras_informacoes': resultado[11],
+				'instituicao_ensino': resultado[12],
+				'cursos_extra': resultado[13],
+				'empresa_trabalhada': resultado[14],
 			}
 
 			contexto = {

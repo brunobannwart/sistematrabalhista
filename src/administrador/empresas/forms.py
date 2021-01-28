@@ -10,7 +10,6 @@ class FormCadastro(forms.Form):
 	telefone = forms.CharField(label='Telefone', max_length=14)
 	cep = forms.CharField(label='CEP', max_length=10)
 	numero = forms.CharField(label='Número', max_length=5)
-	acessibilidade = forms.CharField(label='Acessibilidade', max_length=6)
 	foto = forms.ImageField(label='Foto')
 	logo = forms.ImageField(label='Logo')
 
@@ -25,7 +24,6 @@ class FormCadastro(forms.Form):
 		telefone = self.cleaned_data.get('telefone')
 		cep = self.cleaned_data.get('cep')
 		numero = self.cleaned_data.get('numero')
-		acessibilidade = self.cleaned_data.get('acessibilidade')
 
 		senha_hash = hashlib.sha256(senha.encode()).hexdigest()
 
@@ -40,7 +38,6 @@ class FormCadastro(forms.Form):
 			'telefone': telefone,
 			'cep': cep,  
 			'numero': numero,
-			'acessibilidade': acessibilidade,
 		}
 
 class FormEditar(forms.Form):
@@ -52,7 +49,6 @@ class FormEditar(forms.Form):
 	telefone 		=	forms.CharField(label='Telefone', max_length=14)
 	cep				=	forms.CharField(label='CEP', max_length=10)
 	numero			=	forms.CharField(label='Número', max_length=5)
-	acessibilidade = forms.CharField(label='Acessibilidade', max_length=6)
 	foto 			=	forms.ImageField(label='Foto', required=False)
 	logo			=	forms.ImageField(label='Logo', required=False)
 
@@ -67,7 +63,6 @@ class FormEditar(forms.Form):
 		telefone = self.cleaned_data.get('telefone')
 		cep = self.cleaned_data.get('cep')
 		numero = self.cleaned_data.get('numero')
-		acessibilidade = self.cleaned_data.get('acessibilidade')
 
 		senha_hash = hashlib.sha256(senha.encode()).hexdigest()
 
@@ -82,5 +77,4 @@ class FormEditar(forms.Form):
 			'telefone': telefone,
 			'cep': cep,  
 			'numero': numero,
-			'acessibilidade': acessibilidade,
 		}

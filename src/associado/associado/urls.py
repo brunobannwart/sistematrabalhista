@@ -18,8 +18,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
 
-from associado.views import login_view, camera_view, forgot_view, reset_view, changepassword_view, logout_view
-from session.views import home_view, resumecreate_view
+from associado.views import login_view, camera_view, forgot_view, readmore_view, logout_view
+from curriculo.views import resumecreate_view
+from session.views import home_view
 from session.views import courselist_view, courseread_view
 from session.views import eventlist_view, eventread_view
 from session.views import gamelist_view, gameread_view
@@ -30,8 +31,7 @@ urlpatterns = [
 	path('', login_view, name='login'),
 	path('camera/', camera_view, name='camera'),
 	path('esquecidados/', forgot_view, name='forgot'),
-	path('redefinir/', reset_view, name='reset'),
-	path('trocarsenha/', changepassword_view, name='changepassword'),
+	path('saibamais/', readmore_view, name='readmore'),
 	path('sair/', logout_view, name='logout'),
 
 	path('inicio/', home_view, name='home'),

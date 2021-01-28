@@ -13,49 +13,6 @@ def home_view(request):
 	return render(request, 'session/home/index.html', {})
 
 @login_required(login_url='login')
-def resumecreate_view(request):
-	if request.method == 'POST':
-		curriculo = request.FILES['curriculo']
-
-		if curriculo:
-			diretorio = settings.MEDIA_ROOT
-			arquivo = 'curriculo/{0}/{1}'.format(request.user.id, curriculo.name)
-			caminho = diretorio + '/' + arquivo
-			os.makedirs(os.path.dirname(caminho), exist_ok=True)
-
-			with open(caminho, 'wb+') as destino:
-			 	for fragmento in curriculo.chunks():
-			 		destino.write(fragmento)
-
-			with connection.cursor() as cursor:
-			 	cursor.execute("UPDATE associado SET curriculo=%s WHERE id=%s", [arquivo, request.user.id])
-
-			return redirect('home')
-		else:
-			formulario = {
-				'curriculo': None
-			}
-			erro = 'Currículo inválido'
-	else:
-		formulario = {
-			'curriculo': None
-		}
-		erro = None
-
-	with connection.cursor() as cursor:
-		cursor.execute("SELECT curriculo FROM associado WHERE id=%s", [request.user.id])
-		curriculo = settings.MEDIA_URL + cursor.fetchone()[0]
-		print(curriculo)
-
-	contexto = {
-		'form': formulario,
-		'erro': erro,
-		'atual': curriculo,
-	}
-
-	return render(request, 'session/resume/form.html', contexto)
-
-@login_required(login_url='login')
 def courselist_view(request):
 	cursos = []
 
@@ -317,7 +274,7 @@ def videolessonread_view(request, id=0):
 				'id': resultado[0],
 				'logo': settings.MEDIA_URL + resultado[1],
 				'titulo': resultado[2],
-				'url': 'https://www.youtube.com/embed/' + resultado[3].split('=')[1],
+				'url': 'https://www.youtube.com/embed/' + resultado[3].split('=')[1].split('&ab_channel')[0],
 				'descricao': resultado[4],
 			}
 
