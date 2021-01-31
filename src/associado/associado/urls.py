@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.views.static import serve
 
 from associado.views import login_view, camera_view, forgot_view, readmore_view, logout_view
-from curriculo.views import resumecreate_view
+from curriculos.views import resumecreate_view
 from session.views import home_view
 from session.views import courselist_view, courseread_view
 from session.views import eventlist_view, eventread_view

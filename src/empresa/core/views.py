@@ -30,9 +30,10 @@ def associatedlist_view(request):
 				'pcd': resultado[10],
 				'outras_informacoes': resultado[11],
 				'instituicao_ensino': resultado[12],
-				'cursos_extra': resultado[13],
+				'curso_extra': resultado[13],
 				'empresa_trabalhada': resultado[14],
-				'laudo_medico': resultado[15],
+				'cargo_ocupado': resultado[15],
+				'laudo_medico': resultado[16],
 			}
 
 			associados.append(associado)
@@ -55,6 +56,11 @@ def associatedread_view(request, id=0):
 		resultado = cursor.fetchone()
 
 		if resultado != None:
+			if resultado[16] != '':
+				laudo = settings.MEDIA_URL + resultado[16]
+			else:
+				laudo = None
+
 			formulario = {
 				'id': resultado[0],
 				'foto': settings.MEDIA_URL + resultado[1],
@@ -70,7 +76,8 @@ def associatedread_view(request, id=0):
 				'instituicao_ensino': resultado[12],
 				'cursos_extra': resultado[13],
 				'empresa_trabalhada': resultado[14],
-				'laudo_medico': settings.MEDIA_URL + resultado[15],
+				'cargo_ocupado': resultado[15],
+				'laudo_medico': laudo,
 			}
 
 			contexto = {
@@ -105,8 +112,9 @@ def associatedpdf_view(request, id=0):
 				'pcd': resultado[10],
 				'outras_informacoes': resultado[11],
 				'instituicao_ensino': resultado[12],
-				'cursos_extra': resultado[13],
+				'curso_extra': resultado[13],
 				'empresa_trabalhada': resultado[14],
+				'cargo_ocupado': resultado[15],
 			}
 
 			contexto = {

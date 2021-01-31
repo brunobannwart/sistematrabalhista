@@ -73,6 +73,62 @@
 			font-size: 16px;
 			padding-left: 30px;
 		}
+		section.educational {
+			justify-content: left;
+            align-items: left;
+            text-align: left;
+		}
+		.educational h5 {
+			font-size: 18px;
+            font-weight: bold;
+            padding-left: 20px;
+		}
+		.educational p {
+			font-size: 16px;
+			padding-left: 30px;
+		}
+		section.courses {
+			justify-content: left;
+            align-items: left;
+            text-align: left;
+		}
+		.courses h5 {
+			font-size: 18px;
+            font-weight: bold;
+            padding-left: 20px;
+		}
+		.courses p {
+			font-size: 16px;
+			padding-left: 30px;
+		}
+		section.companies {
+			justify-content: left;
+            align-items: left;
+            text-align: left;
+		}
+		.companies h5 {
+			font-size: 18px;
+            font-weight: bold;
+            padding-left: 20px;
+		}
+		.companies p {
+			font-size: 16px;
+			padding-left: 30px;
+		}
+		section.works {
+			justify-content: left;
+            align-items: left;
+            text-align: left;
+		}
+		.works h5 {
+			font-size: 18px;
+            font-weight: bold;
+            padding-left: 20px;
+		}
+		.works p {
+			font-size: 16px;
+			padding-left: 30px;
+		}
     </style>
 </head>
 <body>
@@ -84,6 +140,7 @@
 			<h1>{{ form.nome }}</h1>
 			<hr>
 		</header>
+
 		<section class='contact'>
 			<h5>Dados básicos</h5>
 
@@ -95,14 +152,37 @@
 				<li>Celular: {{ form.celular }}</li>
 				<li>CEP: {{ form.cep }}</li>
 				<li>Numero da residência: {{ form.numero }}</li>
+				<li>Portador de deficiência: {% if form.pcd is True %} Sim {% else %} Não {%endif %}</li>
 			</ul>
 		</section>
+
 		{% if form.outras_informacoes != '' %}
 			<section class='about'>
 				<h5>Outras informações</h5>
 				<p>{{ form.outras_informacoes }}</p>
 			</section>
 		{% endif %}
+
+		<section class='educational'>
+			<h5>Instituições de ensino</h5>
+			<p>{{ form.instituicao_ensino }}</p>
+		</section>
+
+		<section class='courses'>
+			<h5>Cursos extras</h5>
+			<p>{{ form.curso_extra }}</p>
+		</section>
+
+		<section class='companies'>
+			<h5>Empresas trabalhadas</h5>
+			<p>{{ form.empresa_trabalhada }}</p>
+		</section>
+
+		<section class='works'>
+			<h5>Cargos ocupados</h5>
+			<p>{{ form.cargo_ocupado }}</p>
+		</section>
+
 		<div id='footer'>
             Página <pdf:pagenumber> de <pdf:pagecount>
         </div>

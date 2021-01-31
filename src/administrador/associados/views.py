@@ -43,9 +43,10 @@ def associatedcreate_view(request):
 					if resposta.status_code == 200:
 						resposta = resposta.json()
 
-						novo_associado = Associado.objects.create(foto=campos['foto'], nome=campos['nome'], cpf=campos['cpf'], celular=campos['celular'], cep=campos['cep'], 
-											data_nascimento=campos['data_nascimento'], numero=campos['numero'], email=campos['email'], senha_hash=campos['senha_hash'], treino=resposta['treino'],
-											pcd=campos['pcd'], outras_informacoes=campos['outras_informacoes'])
+						novo_associado = Associado.objects.create(foto=campos['foto'], nome=campos['nome'], cpf=campos['cpf'], 
+											celular=campos['celular'], cep=campos['cep'], data_nascimento=campos['data_nascimento'], 
+											numero=campos['numero'], email=campos['email'], senha_hash=campos['senha_hash'], treino=resposta['treino'],
+											pcd=campos['pcd'], outras_informacoes=campos['outras_informacoes'], acessibilidade=campos['acessibilidade'])
 
 						novo_associado.save()
 						return redirect('associatedlist')
@@ -72,6 +73,7 @@ def associatedcreate_view(request):
 			'numero': '',
 			'pcd': '',
 			'outras_informacoes': '',
+			'acessibilidade': '',
 		}
 
 		erro = None
@@ -115,6 +117,7 @@ def associatededit_view(request, id=0):
 				editar_associado.numero = campos['numero']
 				editar_associado.pcd = campos['pcd']
 				editar_associado.outras_informacoes = campos['outras_informacoes']
+				editar_associado.acessibilidade = campos['acessibilidade']
 
 				if request.POST.get('senha') != '':
 					editar_associado.senha_hash = campos['senha_hash']

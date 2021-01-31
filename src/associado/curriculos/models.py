@@ -11,7 +11,6 @@ class Curriculo(models.Model):
 	empresa_trabalhada = models.CharField(verbose_name='Empresas trabalhadas', max_length=255, blank=True, null=False)
 	cargo_ocupado = models.CharField(verbose_name='Cargos ocupados', max_length=255, blank=True, null=False)
 	laudo_medico = models.FileField(verbose_name='Laudo médico', upload_to=uploadfolder, blank=True, null=False)
-	liberado = models.BooleanField(verbose_name='Curriculo liberado', default=False, null=False, blank=False)
 	created_at = models.DateTimeField(verbose_name='Criado em', auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name='Atualizado em', auto_now=True)
 

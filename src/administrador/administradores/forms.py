@@ -6,6 +6,7 @@ class FormCadastro(forms.Form):
 	rf = forms.CharField(label='RF', max_length=8)
 	email =	forms.EmailField(label='Email')
 	senha =	forms.CharField(label='Senha', max_length=100, widget=forms.PasswordInput)
+	acessibilidade = forms.CharField(label='Acessibilidade', max_length=6)
 	foto = forms.ImageField(label='Foto')
 
 	def clean_form(self):
@@ -14,6 +15,7 @@ class FormCadastro(forms.Form):
 		rf = self.cleaned_data.get('rf')
 		email =	self.cleaned_data.get('email')
 		senha =	self.cleaned_data.get('senha')
+		acessibilidade = self.cleaned_data.get('acessibilidade')
 
 		senha_hash = hashlib.sha256(senha.encode()).hexdigest()
 
@@ -23,12 +25,14 @@ class FormCadastro(forms.Form):
 			'rf': rf, 
 			'email': email, 
 			'senha_hash': senha_hash,
+			'acessibilidade': acessibilidade,
 		}
 
 class FormEditar(forms.Form):
 	nome = forms.CharField(label='Nome', max_length=45)
 	email =	forms.EmailField(label='Email')
 	senha =	forms.CharField(label='Senha', max_length=100, widget=forms.PasswordInput)
+	acessibilidade = forms.CharField(label='Acessibilidade', max_length=6)
 	foto = forms.ImageField(label='Foto', required=False)
 
 	def clean_form(self):
@@ -37,6 +41,7 @@ class FormEditar(forms.Form):
 		rf = self.cleaned_data.get('rf')
 		email =	self.cleaned_data.get('email')
 		senha =	self.cleaned_data.get('senha')
+		acessibilidade = self.cleaned_data.get('acessibilidade')
 
 		senha_hash = hashlib.sha256(senha.encode()).hexdigest()
 
@@ -46,4 +51,5 @@ class FormEditar(forms.Form):
 			'rf': rf, 
 			'email': email, 
 			'senha_hash': senha_hash,
+			'acessibilidade': acessibilidade,
 		}

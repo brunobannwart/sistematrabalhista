@@ -9,6 +9,12 @@
 	<link rel='stylesheet' type='text/css' href='{% static "css/list.css" %}' />
 	<link rel='stylesheet' type='text/css' href='{% static "css/form.css" %}' />
 	<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+	{% if request.user.acessibilidade == 'leitor' %}
+		<script type='text/javascript' src='{% static "js/reader.js" %}' />
+	{% endif %}
+	{% if request.user.acessibilidade == 'ajuda' %}
+		<script type='text/javascript' src='{% static "js/voice.js" %}' />
+	{% endif %}
 	<script type='text/javascript' src='{% static "bootstrap/js/bootstrap.min.js" %}' />
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
 	<script src='https://kit.fontawesome.com/50797efa34.js'></script>

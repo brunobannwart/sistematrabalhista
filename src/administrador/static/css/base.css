@@ -17,6 +17,11 @@ body, input, button {
   	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
+.screen-reader-effect {
+	border: 3px solid rgb(0, 191, 255, 0.7);
+	z-index: 3;
+}
+
 header.navbar {
 	color: #FFF;
 	background-color: #3F51B5;

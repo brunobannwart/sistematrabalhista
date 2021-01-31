@@ -12,6 +12,7 @@ class FormCadastro(forms.Form):
 	numero = forms.CharField(label='Número', max_length=5)
 	pcd = forms.CharField(label='PCD', max_length=3)
 	outras_informacoes = forms.CharField(label='Outras informações', widget=forms.Textarea, required=False, max_length=100)
+	acessibilidade = forms.CharField(label='Acessibilidade', max_length=6)
 	foto = forms.ImageField(label='Foto')
 
 	def clean_form(self):
@@ -26,6 +27,7 @@ class FormCadastro(forms.Form):
 		numero = self.cleaned_data.get('numero')
 		pcd = self.cleaned_data.get('pcd')
 		outras_informacoes = self.cleaned_data.get('outras_informacoes')
+		acessibilidade = self.cleaned_data.get('acessibilidade')
 
 		senha_hash = hashlib.sha256(senha.encode()).hexdigest()
 
@@ -46,6 +48,7 @@ class FormCadastro(forms.Form):
 			'numero': numero,
 			'pcd': pcd,
 			'outras_informacoes': outras_informacoes,
+			'acessibilidade': acessibilidade,
 		}
 
 class FormEditar(forms.Form):
@@ -59,6 +62,7 @@ class FormEditar(forms.Form):
 	numero = forms.CharField(label='Número', max_length=5)
 	pcd = forms.CharField(label='PCD', max_length=3)
 	outras_informacoes = forms.CharField(label='Outras informações', widget=forms.Textarea, required=False, max_length=100)
+	acessibilidade = forms.CharField(label='Acessibilidade', max_length=6)
 	foto = forms.ImageField(label='Foto', required=False)
 
 	def clean_form(self):
@@ -73,6 +77,7 @@ class FormEditar(forms.Form):
 		numero = self.cleaned_data.get('numero')
 		pcd = self.cleaned_data.get('pcd')
 		outras_informacoes = self.cleaned_data.get('outras_informacoes')
+		acessibilidade = self.cleaned_data.get('acessibilidade')
 
 		senha_hash = hashlib.sha256(senha.encode()).hexdigest()
 
@@ -93,4 +98,5 @@ class FormEditar(forms.Form):
 			'numero': numero,
 			'pcd': pcd,
 			'outras_informacoes': outras_informacoes,
+			'acessibilidade': acessibilidade,
 		}

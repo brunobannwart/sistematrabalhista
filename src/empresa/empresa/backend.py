@@ -7,7 +7,7 @@ class BackendLogin(BaseBackend):
 	def authenticate(request, email=None, senha=None):
 		try:
 			with connection.cursor() as cursor:
-				cursor.execute("SELECT id, foto, logo, razao_social, email, senha_hash FROM empresa WHERE email=%s", [email])
+				cursor.execute("SELECT id, foto, logo, razao_social, email, senha_hash, acessibilidade FROM empresa WHERE email=%s", [email])
 				resultado = cursor.fetchone()
 
 				if resultado != None:
@@ -18,6 +18,7 @@ class BackendLogin(BaseBackend):
 						'razao_social': resultado[3],
 						'email': resultado[4],
 						'senha_hash': resultado[5],
+						'acessibilidade': resultado[6]
 					}
 
 					if senha == campos['senha_hash']:
@@ -26,7 +27,7 @@ class BackendLogin(BaseBackend):
 							sessao.delete()
 
 						empresa = LoginEmpresa.objects.create(id=campos['id'], foto=campos['foto'], logo=campos['logo'],
-									razao_social=campos['razao_social'], senha_hash=campos['senha_hash'])
+									razao_social=campos['razao_social'], senha_hash=campos['senha_hash'], acessibilidade=campos['acessibilidade'])
 						return empresa
 
 					else:

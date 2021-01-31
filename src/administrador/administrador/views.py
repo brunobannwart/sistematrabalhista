@@ -8,7 +8,9 @@ from django.contrib.auth.decorators import login_required
 from django.db import connection
 
 from administradores.models import Administrador
+from associados.models import Associado 
 from empresas.models import Empresa
+
 from .backend import BackendLogin
 from .forms import FormLogin, FormTrocar
 from .utils import rebuild_image, render_to_pdf
@@ -81,7 +83,8 @@ def camera_view(request):
 					login(request, administrador, backend='administrador.backend.BackendLogin')
 					return redirect('adminlist')
 
-				except:
+				except Exception as e:
+					print(e)
 					return redirect('login')
 			else:
 				return redirect('login')
@@ -260,3 +263,104 @@ def jobpdf_view(request, id=0):
 				return redirect('joblist')
 		else:
 			return redirect('joblist')
+
+@login_required(login_url='login')
+def resumelist_view(request):
+	curriculos = []
+
+	with connection.cursor() as cursor:
+		cursor.execute("SELECT * FROM curriculo ORDER BY created_at DESC")
+		resultados = cursor.fetchall()
+
+		for resultado in resultados:
+			try:
+				associado = Associado.objects.get(id=resultado[1])
+			except:
+				associado = None
+
+			if associado:
+				curriculo = {
+					'id': resultado[0],
+					'nome': associado.nome,
+					'email': associado.email,
+					'instituicao_ensino': resultado[2],
+					'curso_extra': resultado[3],
+					'empresa_trabalhada': resultado[4],
+					'cargo_ocupado': resultado[5],
+					'laudo_medico': resultado[6],
+				}
+
+				curriculos.append(curriculo)
+
+	contexto = {
+		'curriculos': curriculos,
+	}
+
+	return render(request, 'resume/list.html', contexto)
+
+@login_required(login_url='login')
+def resumeread_view(request, id=0):
+	if id == 0:
+		return redirect('resumelist')
+
+	if request.method == 'POST':
+		with connection.cursor() as cursor:
+			cursor.execute("UPDATE associado SET instituicao_ensino=%s, curso_extra=%s, empresa_trabalhada=%s, cargo_ocupado=%s, laudo_medico=%s WHERE id=%s",
+				[
+					request.POST.get('instituicao_ensino'), 
+					request.POST.get('curso_extra'), 
+					request.POST.get('empresa_trabalhada'), 
+					request.POST.get('cargo_ocupado'),
+					request.POST.get('laudo_medico'),
+					request.POST.get('associado_id')
+				]
+			)
+
+			return redirect('resumedelete', id=id)
+	else:
+		with connection.cursor() as cursor:
+			cursor.execute("SELECT * FROM curriculo WHERE id=%s", [id])
+			resultado = cursor.fetchone()
+
+			if resultado:
+				try:
+					associado = Associado.objects.get(id=resultado[1])
+
+					if resultado[6] != '':
+						laudo_medico = settings.MEDIA_URL + resultado[6]
+					else:
+						laudo_medico = None
+
+					formulario = {
+						'id': resultado[0],
+						'associado_id': resultado[1],
+						'nome': associado.nome,
+						'email': associado.email,
+						'instituicao_ensino': resultado[2],
+						'curso_extra': resultado[3],
+						'empresa_trabalhada': resultado[4],
+						'cargo_ocupado': resultado[5],
+						'laudo_medico': resultado[6],
+						'download': laudo_medico,
+					}
+
+					contexto = {
+						'form': formulario,
+					}
+
+					return render(request, 'resume/read.html', contexto)
+
+				except:
+					return redirect('resumelist')
+			else:
+				return redirect('resumelist')
+
+@login_required(login_url='login')
+def resumedelete_view(request, id=0):
+	if id == 0:
+		return redirect('resumelist')
+
+	with connection.cursor() as cursor:
+		cursor.execute("DELETE FROM curriculo WHERE id=%s", [id])
+
+	return redirect('resumelist')

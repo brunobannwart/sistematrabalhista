@@ -9,6 +9,7 @@ class Administrador(models.Model):
 	senha_hash = models.CharField(verbose_name='Hash senha', max_length=64)
 
 	treino = models.IntegerField(verbose_name='Treino facial', null=True)
+	acessibilidade = models.CharField(verbose_name='Acessibilidade', max_length=6, blank=True, null=False)
 
 	is_authenticated = models.BooleanField(verbose_name='Autenticado', default=False)
 	last_login = models.DateTimeField(verbose_name='Último login', blank=True, null=True)
