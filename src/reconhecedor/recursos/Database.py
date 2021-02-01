@@ -36,7 +36,7 @@ class Database:
 		self.cursor.execute("INSERT INTO `treinamento`(`foto`, `codificações`, `grupo`) VALUES (%s, %s, %s)",
 				[arquivo, codigos, grupo])
 		self.conexao.commit()
-
+		return self.cursor.lastrowid
 
 	def deletarFace(self, id_):
 		try:
