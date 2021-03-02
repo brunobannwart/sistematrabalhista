@@ -12,9 +12,6 @@
 	{% if request.user.acessibilidade == 'leitor' %}
 		<script type='text/javascript' src='{% static "js/reader.js" %}' />
 	{% endif %}
-	{% if request.user.acessibilidade == 'ajuda' %}
-		<script type='text/javascript' src='{% static "js/voice.js" %}' />
-	{% endif %}
 	<script type='text/javascript' src='{% static "bootstrap/js/bootstrap.min.js" %}' />
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
 	<script src='https://kit.fontawesome.com/50797efa34.js'></script>
@@ -31,7 +28,7 @@
 			</span>
 			{% block titulo %}
 			{% endblock %}
-			<button type='button' class='navbar-toggler collapsed' data-toggle='collapse' data-target='#lateral' aria-controls='lateral' aria-expanded='false'>
+			<button type='button' class='navbar-toggler collapsed' data-toggle='collapse' data-target='#lateral' aria-controls='lateral' aria-hidden='true' aria-expanded='false'>
 				<span class='navbar-toggler-icon'></span>
 			</button>
 		</div>

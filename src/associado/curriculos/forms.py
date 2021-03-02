@@ -2,10 +2,10 @@ from django import forms
 
 # Create your form here.
 class FormCadastro(forms.Form):
-	instituicao_ensino = forms.CharField(label='Instituições de ensino', max_length=255)
-	curso_extra = forms.CharField(label='Cursos extras', max_length=255)
-	empresa_trabalhada = forms.CharField(label='Empresas trabalhadas', max_length=255)
-	cargo_ocupado = forms.CharField(label='Cargos ocupados', max_length=255)
+	instituicao_ensino = forms.CharField(label='Instituições de ensino', max_length=255, required=False)
+	curso_extra = forms.CharField(label='Cursos extras', max_length=255, required=False)
+	empresa_trabalhada = forms.CharField(label='Empresas trabalhadas', max_length=255, required=False)
+	cargo_ocupado = forms.CharField(label='Cargos ocupados', max_length=255, required=False)
 	laudo_medico = forms.FileField(label='Laudo médico', required=False)
 
 	def clean_form(self):

@@ -162,27 +162,6 @@
 							<label for='acessibilidade'>Acessibilidade</label>
 							<div class='row'>
 								<div class='form-check ml-4'>
-									{% if form.acessibilidade == 'ajuda' %}
-										<input
-											type='radio'
-											id='ajuda'
-											name='acessibilidade'
-											class='form-check-input'
-											checked
-											value='ajuda'
-										/>
-									{% else %}
-										<input
-											type='radio'
-											id='ajuda'
-											name='acessibilidade'
-											value='ajuda'
-											class='form-check-input'
-										/>
-									{% endif %}
-									<label class='form-check-label' for='ajuda'>Ajuda por voz</label>
-								</div>
-								<div class='form-check ml-4'>
 									{% if form.acessibilidade == 'leitor' %}
 										<input
 											type='radio'

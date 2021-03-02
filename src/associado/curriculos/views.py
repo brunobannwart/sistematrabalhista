@@ -26,11 +26,12 @@ def resumecreate_view(request):
 							[campos['instituicao_ensino'], campos['curso_extra'], campos['empresa_trabalhada'], campos['cargo_ocupado']])
 
 				else:
-					novo_curriculo = Curriculo.objects.create(associado_id=request.user.id, instituicao_ensino=campos['instituicao_ensino'],
-										curso_extra=campos['curso_extra'], empresa_trabalhada=campos['empresa_trabalhada'], cargo_ocupado=campos['cargo_ocupado'],
-										laudo_medico=campos['laudo_medico'])
+					if campos['instituicao_ensino'] != '' or campos['curso_extra'] != '' or campos['empresa_trabalhada'] != '' or campos['cargo_ocupado'] != '' or campos['laudo_medico']:
+						novo_curriculo = Curriculo.objects.create(associado_id=request.user.id, instituicao_ensino=campos['instituicao_ensino'],
+											curso_extra=campos['curso_extra'], empresa_trabalhada=campos['empresa_trabalhada'], cargo_ocupado=campos['cargo_ocupado'],
+											laudo_medico=campos['laudo_medico'])
 
-					novo_curriculo.save()
+						novo_curriculo.save()
 
 				return redirect('home')
 			except:

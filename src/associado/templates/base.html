@@ -12,9 +12,6 @@
 	{% if request.user.acessibilidade == 'leitor' %}
 		<script type='text/javascript' src='{% static "js/reader.js" %}' />
 	{% endif %}
-	{% if request.user.acessibilidade == 'ajuda' %}
-		<script type='text/javascript' src='{% static "js/voice.js" %}' />
-	{% endif %}
 	<script type='text/javascript' src='{% static "bootstrap/js/bootstrap.min.js" %}' />
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
 	<script src='https://kit.fontawesome.com/50797efa34.js'></script>
@@ -25,7 +22,7 @@
 		<a class='navbar-brand' href='{% url "home" %}'>
 			<img src='{{ request.user.foto }}' alt='{{ request.user.nome }}' class='d-inline-block align-top' />
 		</a>
-		<button type='button' class='navbar-toggler' data-toggle='collapse' data-target='#menu' aria-controls='menu' aria-expanded='false'>
+		<button type='button' class='navbar-toggler' data-toggle='collapse' data-target='#menu' aria-controls='menu' aria-hidden='true' aria-expanded='false'>
 			<span class='navbar-toggler-icon'></span>
 		</button>
 		<div class='collapse navbar-collapse flex-row-reverse' id='menu'>

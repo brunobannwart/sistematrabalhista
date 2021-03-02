@@ -18,14 +18,20 @@
 				>
 					Voltar
 				</a>
-				<a 
+				<button 
 					class='btn btn-primary btn-lg btn-block'
-					href='{{ form.url }}'
+					type='button'
+					onclick='jogar(`{{ form.url }}`)' 
 				>
 					Acessar jogo
-				</a>
+				</button>
 			</div>
 		</div>
 	</div>
 </div>
+<script type='text/javascript'>
+	function jogar(url) {
+		window.open(url + '?password=ciapd', '_blank');
+	}
+</script>
 {% endblock %}

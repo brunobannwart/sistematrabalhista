@@ -28,13 +28,23 @@
 							<td class='text-center align-middle'>{{ curriculo.nome }}</td>
 							<td class='text-center align-middle'>{{ curriculo.email }}</td>
 							<td class='text-center align-middle'>
-								<button 
-									type='button' 
-									class='btn btn-secondary btn-md btn-block'
-									onclick='window.location.href=`{% url "resumeread" curriculo.id %}`'
-								>
-									Ver detalhes
-								</button>
+								<div class='form-row'>
+									<div class='col'>
+										<button 
+											type='button' 
+											class='btn btn-secondary btn-md btn-block'
+											onclick='window.location.href=`{% url "resumeread" curriculo.id %}`'
+										>
+											Ver detalhes
+										</button>
+									</div>
+									<div class='col'>
+										<form method='post' action='{% url "resumedelete" curriculo.id %}'>
+											{% csrf_token %}
+											<button type='submit' class='btn btn-danger btn-md btn-block'>Remover</button>
+										</form>
+									</div>
+								</div>
 							</td>
 						</tr>
 					{% endfor %}

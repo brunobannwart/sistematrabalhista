@@ -45,10 +45,10 @@ urlpatterns = [
 	path('administradores/formulario/<int:id>/', adminedit_view, name='adminedit'),
 	path('administradores/excluir/<int:id>/', admindelete_view, name='admindelete'),
 
-	path('associados/', associatedlist_view, name='associatedlist'),
-	path('associados/formulario/', associatedcreate_view, name='associatedcreate'),
-	path('associados/formulario/<int:id>/', associatededit_view, name='associatededit'),
-	path('associados/excluir/<int:id>/', associateddelete_view, name='associateddelete'),
+	path('alunos/', associatedlist_view, name='associatedlist'),
+	path('alunos/formulario/', associatedcreate_view, name='associatedcreate'),
+	path('alunos/formulario/<int:id>/', associatededit_view, name='associatededit'),
+	path('alunos/excluir/<int:id>/', associateddelete_view, name='associateddelete'),
 
 	path('curriculos/', resumelist_view, name='resumelist'),
 	path('curriculos/<int:id>/', resumeread_view, name='resumeread'),

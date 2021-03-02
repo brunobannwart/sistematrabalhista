@@ -74,7 +74,7 @@ def associatedread_view(request, id=0):
 				'pcd': resultado[10],
 				'outras_informacoes': resultado[11],
 				'instituicao_ensino': resultado[12],
-				'cursos_extra': resultado[13],
+				'curso_extra': resultado[13],
 				'empresa_trabalhada': resultado[14],
 				'cargo_ocupado': resultado[15],
 				'laudo_medico': laudo,

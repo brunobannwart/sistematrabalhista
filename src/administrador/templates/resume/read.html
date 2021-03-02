@@ -15,7 +15,7 @@
 				>
 					Voltar
 				</a>
-				<form method='post' action='.' autocomplete='off'>
+				<form method='post' action='.' autocomplete='off' enctype='multipart/form-data'>
 					{% csrf_token %}
 					<input 
 						type='hidden' 
@@ -64,7 +64,6 @@
 								id='instituicao_ensino'
 								name='instituicao_ensino'
 								class='form-control'
-								readonly
 							>{{ form.instituicao_ensino }}</textarea>
 						</div>
 						<div class='col'>
@@ -73,7 +72,6 @@
 								id='curso_extra'
 								name='curso_extra'
 								class='form-control'
-								readonly
 							>{{ form.curso_extra }}</textarea>
 						</div>
 					</div>
@@ -85,7 +83,6 @@
 								id='empresa_trabalhada'
 								name='empresa_trabalhada'
 								class='form-control'
-								readonly
 							>{{ form.empresa_trabalhada }}</textarea>
 						</div>
 						<div class='col'>
@@ -94,7 +91,6 @@
 								id='cargo_ocupado'
 								name='cargo_ocupado'
 								class='form-control'
-								readonly
 							>{{ form.cargo_ocupado }}</textarea>
 						</div>
 					</div>
@@ -115,9 +111,9 @@
 						<button
 							type='button'
 							class='btn btn-danger btn-lg'
-							onclick='window.location.href=`{% url "resumedelete" form.id %}`'
+							onclick='window.location.href=`{% url "resumelist" %}`'
 						>
-							Reprovar
+							Cancelar
 						</button>
 						<button 
 							type='submit' 

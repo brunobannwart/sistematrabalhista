@@ -12,7 +12,7 @@ from associados.models import Associado
 from empresas.models import Empresa
 
 from .backend import BackendLogin
-from .forms import FormLogin, FormTrocar
+from .forms import FormLogin, FormTrocar, FormCurriculo
 from .utils import rebuild_image, render_to_pdf
 
 import os, requests
@@ -66,7 +66,7 @@ def camera_view(request):
 	os.environ['NO_PROXY'] = '127.0.0.1'
 
 	if request.method == 'POST':
-		endereco = request.POST.get('url')
+		endereco = campos['url')
 		foto = rebuild_image(endereco)
 
 		try:
@@ -304,19 +304,42 @@ def resumeread_view(request, id=0):
 		return redirect('resumelist')
 
 	if request.method == 'POST':
-		with connection.cursor() as cursor:
-			cursor.execute("UPDATE associado SET instituicao_ensino=%s, curso_extra=%s, empresa_trabalhada=%s, cargo_ocupado=%s, laudo_medico=%s WHERE id=%s",
+		formulario = FormCurriculo(request.POST, request.FILES or None)
+
+		if formulario.is_valid():
+			campos = formulario.clean_form()
+
+			if 'novo_laudo_medico' in request.FILES:
+				arquivo = request.FILES['novo_laudo_medico']
+				caminho = 'curriculo/' + str(campos['associado_id']) + '/' + arquivo.name
+
+				with open(settings.MEDIA_ROOT + '/' + caminho, 'wb+') as destino:
+					for fatia in arquivo.chunks():
+						destino.write(fatia)
+
+				if campos['laudo_medico'] != '':
+					if os.path.exists(settings.MEDIA_ROOT + '/' + campos['laudo_medico']):
+						os.remove(settings.MEDIA_ROOT + '/' + campos['laudo_medico'])
+
+			else:
+				caminho = campos['laudo_medico']
+
+			with connection.cursor() as cursor:
+				cursor.execute("UPDATE associado SET instituicao_ensino=%s, curso_extra=%s, empresa_trabalhada=%s, cargo_ocupado=%s, laudo_medico=%s WHERE id=%s",
 				[
-					request.POST.get('instituicao_ensino'), 
-					request.POST.get('curso_extra'), 
-					request.POST.get('empresa_trabalhada'), 
-					request.POST.get('cargo_ocupado'),
-					request.POST.get('laudo_medico'),
-					request.POST.get('associado_id')
+					campos['instituicao_ensino'], 
+					campos['curso_extra'], 
+					campos['empresa_trabalhada'], 
+					campos['cargo_ocupado'],
+					caminho,
+					campos['associado_id']
 				]
 			)
 
 			return redirect('resumedelete', id=id)
+
+		else:
+			return redirect('resumelist')
 	else:
 		with connection.cursor() as cursor:
 			cursor.execute("SELECT * FROM curriculo WHERE id=%s", [id])
