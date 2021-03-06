@@ -44,9 +44,6 @@
 								value='{{ form.data_nascimento|date:"Y-m-d" }}'
 							/>
 						</div>
-					</div>
-
-					<div class='form-row pt-4'>
 						<div class='col'>
 							<label for='cpf'>CPF</label>
 							<input
@@ -59,6 +56,31 @@
 							/>
 						</div>
 						<div class='col'>
+							<label for='pcd'>Portador de deficiência</label>
+							{% if form.pcd == 1 %}
+								<input
+									type='text'
+									id='pcd'
+									name='pcd'
+									class='form-control'
+									value='Sim'
+									readonly
+								/>
+							{% else %}
+								<input
+									type='text'
+									id='pcd'
+									name='pcd'
+									class='form-control'
+									value='Não'
+									readonly
+								/>
+							{% endif %}
+						</div>
+					</div>
+
+					<div class='form-row pt-4'>
+						<div class='col'>
 							<label for='celular'>Celular</label>
 							<input
 								type='text'
@@ -69,9 +91,6 @@
 								value='{{ form.celular }}'
 							/>
 						</div>
-					</div>
-
-					<div class='form-row pt-4'>
 						<div class='col'>
 							<label for='email'>Email</label>
 							<input
@@ -94,9 +113,6 @@
 								value='{{ form.cep }}'
 							/>
 						</div>
-					</div>
-
-					<div class='form-row pt-4'>
 						<div class='col'>
 							<label for='numero'>Numero</label>
 							<input
@@ -107,15 +123,6 @@
 								class='form-control'
 								value='{{ form.numero }}'
 							/>
-						</div>
-						<div class='col'>
-							<label for='outras_informacoes'>Outras informações</label>
-							<textarea
-							id='outras_informacoes'
-							name='outras_informacoes'
-							readonly
-							class='form-control'
-						>{{ form.outras_informacoes }}</textarea>
 						</div>
 					</div>
 
@@ -138,9 +145,6 @@
 							class='form-control'
 						>{{ form.curso_extra }}</textarea>
 						</div>
-					</div>
-
-					<div class='form-row pt-4'>
 						<div class='col'>
 							<label for='empresa_trabalhada'>Empresas trabalhadas</label>
 							<textarea
@@ -163,26 +167,13 @@
 
 					<div class='form-row pt-4'>
 						<div class='col'>
-							<label for='pcd'>Portador de deficiência</label>
-							{% if form.pcd is True %}
-								<input
-									type='text'
-									id='pcd'
-									name='pcd'
-									class='form-control'
-									value='Sim'
-									readonly
-								/>
-							{% else %}
-								<input
-									type='text'
-									id='pcd'
-									name='pcd'
-									class='form-control'
-									value='Não'
-									readonly
-								/>
-							{% endif %}
+							<label for='outras_informacoes'>Outras informações</label>
+							<textarea
+							id='outras_informacoes'
+							name='outras_informacoes'
+							readonly
+							class='form-control'
+						>{{ form.outras_informacoes }}</textarea>
 						</div>
 						<div class='col'>
 							<a

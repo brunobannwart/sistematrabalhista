@@ -28,6 +28,7 @@
 </div>
 {% endif %}
 
+{% if request.user.acessibilidade !=  'leitor' %}
 <div id='erro_endereco' class='error-overlay' style='display: none;' onclick='this.style.display="none"'>
 	<div class='container'>
 		<div class='card'>
@@ -61,6 +62,15 @@
 		</div>
 	</div>
 </div>
+{% else %}
+<span 
+	id='erro_leitor'
+	style='
+		visibility: none;
+		display: none;
+	'
+></span>
+{% endif %}
 
 <div class='form'>
 	<div class='container'>
@@ -262,16 +272,28 @@
 						</div>
 						<div class='col'>
 							<label for='senha'>Senha</label>
-							<input
-								type='password'
-								id='senha'
-								name='senha'
-								value='{{ form.senha }}'
-								class='form-control'
-								required
-								placeholder='Preencha com a senha da empresa'
-								maxlength='100'
-							/>
+							{% if editar is True %}
+								<input
+									type='password'
+									id='senha'
+									name='senha'
+									value='{{ form.senha }}'
+									class='form-control'
+									placeholder='Preencha com a senha da empresa'
+									maxlength='100'
+								/>
+							{% else %}
+								<input
+									type='password'
+									id='senha'
+									name='senha'
+									value='{{ form.senha }}'
+									class='form-control'
+									required
+									placeholder='Preencha com a senha da empresa'
+									maxlength='100'
+								/>
+							{% endif %}
 						</div>
 					</div>
 
@@ -367,7 +389,8 @@
 							Cancelar
 						</button>
 						<button 
-							type='submit' 
+							type='submit'
+							id='salvar' 
 							class='btn btn-success btn-lg ml-4'
 						>
 							Salvar

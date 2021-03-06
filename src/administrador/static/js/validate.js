@@ -9,6 +9,8 @@ async function validarCEP(entrada) {
 	const cidade = document.getElementById('cidade');
 	const estado = document.getElementById('estado');
 	const mensagem = document.getElementById('erro');
+	const leitor = document.getElementById('erro_leitor');
+
 	valido = document.getElementById('endereco_valido');
 
 	bloco.style.display = 'none';
@@ -32,35 +34,48 @@ async function validarCEP(entrada) {
 			.then(resposta => {
 				resposta.json().then(dados => {
 					if (dados.erro != true) {
-						bloco.style.display = 'block';
-						titulo.style.display = 'block';
-						rua.style.display = 'block';
-						bairro.style.display = 'block';
-						cidade.style.display = 'block';
-						estado.style.display = 'block';
-						titulo.innerHTML = 'CEP';
-			  			rua.innerHTML = dados.logradouro;
-			  			bairro.innerHTML = dados.bairro;
-			  			cidade.innerHTML = dados.localidade;
-			  			estado.innerHTML = dados.uf;
+						if (!leitor) {
+							bloco.style.display = 'block';
+							titulo.style.display = 'block';
+							rua.style.display = 'block';
+							bairro.style.display = 'block';
+							cidade.style.display = 'block';
+							estado.style.display = 'block';
+							titulo.innerHTML = 'CEP';
+				  			rua.innerHTML = dados.logradouro;
+				  			bairro.innerHTML = dados.bairro;
+				  			cidade.innerHTML = dados.localidade;
+				  			estado.innerHTML = dados.uf;
+				  		}
+
 			  			valido.value = 'sim';
 
 					} else {
-						bloco.style.display = 'block';
-						titulo.style.display = 'block';
-						mensagem.style.display = 'block';
-						titulo.innerHTML = 'Aviso';
-						mensagem.innerHTML = 'Informe um CEP válido';
+						if (!leitor) {
+							bloco.style.display = 'block';
+							titulo.style.display = 'block';
+							mensagem.style.display = 'block';
+							titulo.innerHTML = 'Aviso';
+							mensagem.innerHTML = 'Informe um CEP válido';
+						} else {
+							audio('Informe um CEP válido');
+						}
+
 						valido.value = 'nao';
 					}
 				});
 			})
 			.catch(erro => {
-				bloco.style.display = 'block';
-				titulo.style.display = 'block';
-				mensagem.style.display = 'block';
-				titulo.innerHTML = 'Aviso';
-				mensagem.innerHTML = 'Informe um CEP válido';
+				if (!leitor) {
+					bloco.style.display = 'block';
+					titulo.style.display = 'block';
+					mensagem.style.display = 'block';
+					titulo.innerHTML = 'Aviso';
+					mensagem.innerHTML = 'Informe um CEP válido';
+				} else {
+					audio('Informe um CEP válido');
+				}
+
 				valido.value = 'nao';
 			});
 	}
@@ -73,6 +88,8 @@ function validarCPF(entrada) {
 	const bloco = document.getElementById('erro_documento');
 	const titulo = document.getElementById('titulo_documento');
 	const mensagem = document.getElementById('mensagem_documento');
+	const leitor = document.getElementById('erro_leitor');
+
 	valido = document.getElementById('documento_valido');
 
 	bloco.style.display = 'none';
@@ -127,11 +144,16 @@ function validarCPF(entrada) {
 		}
 
 		if (!controle) {
-			bloco.style.display = 'block';
-			titulo.style.display = 'block';
-			mensagem.style.display = 'block';
-			titulo.innerHTML = 'Aviso';
-			mensagem.innerHTML = 'Informe um documento válido';
+			if (!leitor) {
+				bloco.style.display = 'block';
+				titulo.style.display = 'block';
+				mensagem.style.display = 'block';
+				titulo.innerHTML = 'Aviso';
+				mensagem.innerHTML = 'Informe um documento válido';
+			} else {
+				audio('Informe um documento válido');
+			}
+
 			valido.value = 'nao';
 		} else {
 			valido.value = 'sim';
@@ -146,6 +168,8 @@ function validarCNPJ(entrada) {
 	const bloco = document.getElementById('erro_documento');
 	const titulo = document.getElementById('titulo_documento');
 	const mensagem = document.getElementById('mensagem_documento');
+	const leitor = document.getElementById('erro_leitor');
+
 	valido = document.getElementById('documento_valido');
 
 	bloco.style.display = 'none';
@@ -212,11 +236,16 @@ function validarCNPJ(entrada) {
 		}
 
 		if (!controle) {
-			bloco.style.display = 'block';
-			titulo.style.display = 'block';
-			mensagem.style.display = 'block';
-			titulo.innerHTML = 'Aviso';
-			mensagem.innerHTML = 'Informe um documento válido';
+			if (!leitor) {
+				bloco.style.display = 'block';
+				titulo.style.display = 'block';
+				mensagem.style.display = 'block';
+				titulo.innerHTML = 'Aviso';
+				mensagem.innerHTML = 'Informe um documento válido';
+			} else {
+				audio('Informe um documento válido');
+			}
+
 			valido.value = 'nao';
 		} else {
 			valido.value = 'sim';
@@ -227,42 +256,58 @@ function validarCNPJ(entrada) {
 function validarDados() {
 	const documento = document.getElementById('documento_valido').value;
 	const endereco = document.getElementById('endereco_valido').value;
+	const botao = documento.getElementById('salvar');
 
 	const bloco = document.getElementById('erro_documento');
 	const titulo = document.getElementById('titulo_documento');
 	const mensagem = document.getElementById('mensagem_documento');
+	const leitor = document.getElementById('erro_leitor');
 
 	bloco.style.display = 'none';
 	titulo.style.display = 'none';
 	mensagem.style.display = 'none';
 
 	if (documento == 'sim' && endereco == 'sim') {
+		botao.disabled = true;
 		return true;
 	} 
 
 	if (documento == 'sim' && endereco == 'nao') {
-		bloco.style.display = 'block';
-		titulo.style.display = 'block';
-		mensagem.style.display = 'block';
-		titulo.innerHTML = 'Aviso';
-		mensagem.innerHTML = 'CEP continua inválido';
+		if (!leitor) {
+			bloco.style.display = 'block';
+			titulo.style.display = 'block';
+			mensagem.style.display = 'block';
+			titulo.innerHTML = 'Aviso';
+			mensagem.innerHTML = 'CEP continua inválido';
+		} else {
+			audio('CEP continua inválido');
+		}
 	}
 
 	if (documento == 'nao' && endereco == 'sim') {
-		bloco.style.display = 'block';
-		titulo.style.display = 'block';
-		mensagem.style.display = 'block';
-		titulo.innerHTML = 'Aviso';
-		mensagem.innerHTML = 'Documento continua inválido';
+		if (!leitor) {
+			bloco.style.display = 'block';
+			titulo.style.display = 'block';
+			mensagem.style.display = 'block';
+			titulo.innerHTML = 'Aviso';
+			mensagem.innerHTML = 'Documento continua inválido';
+		} else {
+			audio('Documento continua inválido');
+		}
 	}
 
 	if (documento == 'nao' && endereco == 'nao') {
-		bloco.style.display = 'block';
-		titulo.style.display = 'block';
-		mensagem.style.display = 'block';
-		titulo.innerHTML = 'Aviso';
-		mensagem.innerHTML = 'Documento e CEP continuam inválidos';
+		if (!leitor) {
+			bloco.style.display = 'block';
+			titulo.style.display = 'block';
+			mensagem.style.display = 'block';
+			titulo.innerHTML = 'Aviso';
+			mensagem.innerHTML = 'Documento e CEP continuam inválidos';
+		} else {
+			audio('Documento e CEP continuam inválidos');
+		}
 	}
 
+	botao.disabled = false;
 	return false;
 }

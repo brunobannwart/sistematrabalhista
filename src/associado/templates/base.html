@@ -56,4 +56,15 @@
 		{% endblock %}
 	</div>
 </body>
+{% if request.user.acessibilidade == 'leitor' %}
+<script>
+	$("input, textarea").keydown(function(evento) {
+		let texto = evento.key;
+
+		if(/[a-zA-Z0-9\s\@\-\&\*\(\)\!]/.test(texto)) {
+			audio(`${texto}`);
+		}
+	});
+</script>
+{% endif %}
 </html>

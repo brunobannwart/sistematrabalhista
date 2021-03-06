@@ -41,7 +41,7 @@ class FormRedefinir(forms.Form):
 		return { 'email': email }
 
 class FormCurriculo(forms.Form):
-	associado_id = forms.IntegerField(verbose_name='ID do associado')
+	associado_id = forms.IntegerField(label='ID do associado')
 	email = forms.EmailField(label='Email do associado')
 	instituicao_ensino = forms.CharField(label='Instituições de ensino', max_length=255, required=False)
 	curso_extra = forms.CharField(label='Cursos extras', max_length=255, required=False)

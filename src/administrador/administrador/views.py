@@ -66,7 +66,7 @@ def camera_view(request):
 	os.environ['NO_PROXY'] = '127.0.0.1'
 
 	if request.method == 'POST':
-		endereco = campos['url')
+		endereco = request.POST.get('url')
 		foto = rebuild_image(endereco)
 
 		try:

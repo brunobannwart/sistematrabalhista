@@ -103,4 +103,23 @@
 		</div>
 	</div>
 </body>
+<script>
+	const leitor = document.getElementById('habilitar');
+
+	$("input").keydown(function(evento) {
+        let texto = evento.key;
+
+        if (leitor.checked) {
+            if(/[a-zA-Z0-9\s\@\-\&\*\(\)\!]/.test(texto)) {
+                audio(`${texto}`);
+            }
+        }
+    });
+
+    $('form').on('submit', function() {
+        $('button[type="submit"]').attr('disabled', true);
+        $('button[type="button"]').attr('disabled', true);
+        return true;
+    });
+</script>
 </html>

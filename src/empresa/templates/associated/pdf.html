@@ -152,7 +152,7 @@
 				<li>Celular: {{ form.celular }}</li>
 				<li>CEP: {{ form.cep }}</li>
 				<li>Numero da residência: {{ form.numero }}</li>
-				<li>Portador de deficiência: {% if form.pcd is True %} Sim {% else %} Não {%endif %}</li>
+				<li>Portador de deficiência: {% if form.pcd == 1 %} Sim {% else %} Não {%endif %}</li>
 			</ul>
 		</section>
 
@@ -163,25 +163,33 @@
 			</section>
 		{% endif %}
 
-		<section class='educational'>
-			<h5>Instituições de ensino</h5>
-			<p>{{ form.instituicao_ensino }}</p>
-		</section>
+		{% if form.instituicao_ensino != '' %}
+			<section class='educational'>
+				<h5>Instituições de ensino</h5>
+				<p>{{ form.instituicao_ensino }}</p>
+			</section>
+		{% endif %}
 
-		<section class='courses'>
-			<h5>Cursos extras</h5>
-			<p>{{ form.curso_extra }}</p>
-		</section>
+		{% if form.curso_extra != '' %}
+			<section class='courses'>
+				<h5>Cursos extras</h5>
+				<p>{{ form.curso_extra }}</p>
+			</section>
+		{% endif %}
 
-		<section class='companies'>
-			<h5>Empresas trabalhadas</h5>
-			<p>{{ form.empresa_trabalhada }}</p>
-		</section>
+		{% if form.empresa_trabalhada != '' %}
+			<section class='companies'>
+				<h5>Empresas trabalhadas</h5>
+				<p>{{ form.empresa_trabalhada }}</p>
+			</section>
+		{% endif %}
 
-		<section class='works'>
-			<h5>Cargos ocupados</h5>
-			<p>{{ form.cargo_ocupado }}</p>
-		</section>
+		{% if form.cargo_ocupado != '' %}
+			<section class='works'>
+				<h5>Cargos ocupados</h5>
+				<p>{{ form.cargo_ocupado }}</p>
+			</section>
+		{% endif %}
 
 		<div id='footer'>
             Página <pdf:pagenumber> de <pdf:pagecount>

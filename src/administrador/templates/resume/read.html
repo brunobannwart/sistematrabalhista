@@ -97,13 +97,27 @@
 
 					{% if form.download is not None %}
 						<div class='form-row pt-4'>
-							<a
-								class='btn btn-link'
-								href='{{ form.download }}'
-								download
-							>
-								Baixar laudo médico
-							</a>
+							<div class='col'>
+								<a
+									class='btn btn-link'
+									href='{{ form.download }}'
+									download
+								>
+									Baixar laudo médico
+								</a>
+							</div>
+							<div class='col'>
+								<div class='custom-file'>
+									<input
+										type='file'
+										accept='image/*, application/pdf'
+										id='novo_laudo_medico'
+										name='novo_laudo_medico'
+										class='custom-file-input'
+									/>
+									<label class='custom-file-label' for='novo_laudo_medico'>Escolher Novo Laudo Médico</label>
+								</div>
+							</div>
 						</div>
 					{% endif %}
 
@@ -127,4 +141,10 @@
 		</div>
 	</div>
 </div>
+<script>
+	$('form').on('submit', function() {
+        $('button[type="submit"]').attr('disabled', true);
+        return true;
+    });
+</script>
 {% endblock %}

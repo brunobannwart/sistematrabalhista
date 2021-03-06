@@ -30,8 +30,9 @@ class FormCadastro(forms.Form):
 
 class FormEditar(forms.Form):
 	nome = forms.CharField(label='Nome', max_length=45)
+	rf = forms.CharField(label='RF', max_length=8)
 	email =	forms.EmailField(label='Email')
-	senha =	forms.CharField(label='Senha', max_length=100, widget=forms.PasswordInput)
+	senha =	forms.CharField(label='Senha', max_length=100, widget=forms.PasswordInput, required=False)
 	acessibilidade = forms.CharField(label='Acessibilidade', max_length=6)
 	foto = forms.ImageField(label='Foto', required=False)
 
