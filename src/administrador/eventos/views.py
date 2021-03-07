@@ -27,7 +27,7 @@ def eventcreate_view(request):
 			campos = formulario.clean_form()
 
 			try:
-				novo_evento = Evento.objects.create(logo=campos['logo'], titulo=campos['titulo'], data_exp=campos['data_exp'], descricao=campos['descricao'])
+				novo_evento = Evento.objects.create(logo=campos['logo'], titulo=campos['titulo'], data_exp=campos['data_exp'], descricao=campos['descricao'], url=campos['url'])
 				novo_evento.save()
 				return redirect('eventlist')
 
@@ -43,6 +43,7 @@ def eventcreate_view(request):
 			'titulo': '',
 			'data_exp': '',
 			'descricao': '',
+			'url': '',
 		}
 
 		erro = None
@@ -80,6 +81,7 @@ def eventedit_view(request, id=0):
 				editar_evento.titulo = campos['titulo']
 				editar_evento.data_exp = campos['data_exp']
 				editar_evento.descricao = campos['descricao']
+				editar_evento.url = campos['url']
 				editar_evento.save()
 
 			except:

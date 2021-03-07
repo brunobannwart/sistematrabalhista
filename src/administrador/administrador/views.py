@@ -219,6 +219,7 @@ def joblist_view(request):
 					'titulo': resultado[3],
 					'data_exp': resultado[4],
 					'descricao': resultado[5],
+					'url': resultado[6],
 				}
 
 				vagas.append(vaga)
@@ -250,6 +251,7 @@ def jobread_view(request, id=0):
 					'titulo': resultado[3],
 					'data_exp': resultado[4],
 					'descricao': resultado[5],
+					'url': resultado[6],
 				}
 
 				contexto = {
@@ -284,6 +286,7 @@ def jobpdf_view(request, id=0):
 					'titulo': resultado[3],
 					'data_exp': resultado[4],
 					'descricao': resultado[5],
+					'url': resultado[6],
 				}
 
 				contexto = {

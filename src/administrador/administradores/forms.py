@@ -25,7 +25,7 @@ class FormCadastro(forms.Form):
 class FormEditar(forms.Form):
 	nome = forms.CharField(label='Nome', max_length=45)
 	email =	forms.EmailField(label='Email')
-	senha =	forms.CharField(label='Senha', max_length=100, widget=forms.PasswordInput)
+	senha =	forms.CharField(label='Senha', max_length=100, widget=forms.PasswordInput, required=False)
 	foto = forms.ImageField(label='Foto', required=False)
 
 	def clean_form(self):

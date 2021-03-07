@@ -98,16 +98,30 @@
 						</div>
 					</div>
 
-					<div class='form-group' style='margin-top: 1.5em;'>
-						<label for='descricao'>Descrição</label>
-						<textarea
-							id='descricao'
-							name='descricao'
-							class='form-control'
-							placeholder='Preencha com a descrição do curso'
-							required
-							maxlenth='150'
-						>{{ form.descricao }}</textarea>
+					<div class='form-row pt-4'>
+						<div class='col'>
+							<label for='descricao'>Descrição</label>
+							<textarea
+								id='descricao'
+								name='descricao'
+								class='form-control'
+								placeholder='Preencha com a descrição do curso'
+								required
+								maxlenth='150'
+							>{{ form.descricao }}</textarea>
+						</div>
+						<div class='col'>
+							<label for='url'>URL</label>
+							<input
+								type='url'
+								id='url'
+								name='url'
+								value='{{ form.url }}'
+								class='form-control'
+								maxlength='100'
+								placeholder='Preencha com a URL do curso'
+							/>
+						</div>
 					</div>
 
 					<footer>
@@ -147,5 +161,10 @@
 			leitor.readAsDataURL(arquivo);
 		}
 	});
+
+	$('form').on('submit', function() {
+        $('button[type="submit"]').attr('disabled', true);
+        return true;
+    });
 </script>
 {% endblock %}

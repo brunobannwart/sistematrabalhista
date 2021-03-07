@@ -224,16 +224,28 @@
 						</div>
 						<div class='col'>
 							<label for='senha'>Senha</label>
-							<input
-								type='password'
-								id='senha'
-								name='senha'
-								value='{{ form.senha }}'
-								class='form-control'
-								required
-								placeholder='Preencha com a senha do associado'
-								maxlength='100'
-							/>
+							{% if editar is True %}
+								<input
+									type='password'
+									id='senha'
+									name='senha'
+									value='{{ form.senha }}'
+									class='form-control'
+									placeholder='Preencha com a senha do associado'
+									maxlength='100'
+								/>
+							{% else %}
+								<input
+									type='password'
+									id='senha'
+									name='senha'
+									value='{{ form.senha }}'
+									class='form-control'
+									required
+									placeholder='Preencha com a senha do associado'
+									maxlength='100'
+								/>
+							{% endif %}
 						</div>
 					</div>
 
@@ -302,7 +314,8 @@
 							Cancelar
 						</button>
 						<button 
-							type='submit' 
+							type='submit'
+							id='salvar' 
 							class='btn btn-success btn-lg ml-4'
 						>
 							Salvar

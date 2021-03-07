@@ -45,7 +45,7 @@ class FormEditar(forms.Form):
 	cpf = forms.CharField(label='CPF', max_length=14)
 	data_nascimento = forms.DateField(label='Data de nascimento')
 	email = forms.EmailField(label='E-mail', max_length=45)
-	senha =	forms.CharField(label='Senha', max_length=20, widget=forms.PasswordInput)
+	senha =	forms.CharField(label='Senha', max_length=20, widget=forms.PasswordInput, required=False)
 	celular = forms.CharField(label='Telefone', max_length=15)
 	cep = forms.CharField(label='CEP', max_length=10)
 	numero = forms.CharField(label='Número', max_length=5)

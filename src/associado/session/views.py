@@ -70,6 +70,7 @@ def courselist_view(request):
 				'titulo': resultado[2],
 				'data_exp': resultado[3],
 				'descricao': resultado[4],
+				'url': resultado[5],
 			}
 
 			cursos.append(curso)
@@ -96,6 +97,7 @@ def courseread_view(request, id=0):
 				'titulo': resultado[2],
 				'data_exp': resultado[3],
 				'descricao': resultado[4],
+				'url': resultado[5],
 			}
 
 			contexto = {
@@ -121,6 +123,7 @@ def eventlist_view(request):
 				'titulo': resultado[2],
 				'data_exp': resultado[3],
 				'descricao': resultado[4],
+				'url': resultado[5],
 			}
 
 			eventos.append(evento)
@@ -147,6 +150,7 @@ def eventread_view(request, id=0):
 				'titulo': resultado[2],
 				'data_exp': resultado[3],
 				'descricao': resultado[4],
+				'url': resultado[5],
 			}
 
 			contexto = {
@@ -229,6 +233,7 @@ def joblist_view(request):
 					'titulo': resultado[3],
 					'data_exp': resultado[4],
 					'descricao': resultado[5],
+					'url': resultado[6],
 				}
 
 				vagas.append(vaga)
@@ -263,6 +268,7 @@ def jobread_view(request, id=0):
 						'titulo': resultado[3],
 						'data_exp': resultado[4],
 						'descricao': resultado[5],
+						'url': resultado[6],
 					}
 
 					contexto = {

@@ -227,6 +227,7 @@ function validarCNPJ(entrada) {
 function validarDados() {
 	const documento = document.getElementById('documento_valido').value;
 	const endereco = document.getElementById('endereco_valido').value;
+	const botao = documento.getElementById('salvar');
 
 	const bloco = document.getElementById('erro_documento');
 	const titulo = document.getElementById('titulo_documento');
@@ -237,6 +238,7 @@ function validarDados() {
 	mensagem.style.display = 'none';
 
 	if (documento == 'sim' && endereco == 'sim') {
+		botao.disabled = true;
 		return true;
 	} 
 
@@ -264,5 +266,6 @@ function validarDados() {
 		mensagem.innerHTML = 'Documento e CEP continuam inválidos';
 	}
 
+	botao.disabled = false;
 	return false;
 }

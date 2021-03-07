@@ -7,6 +7,7 @@ class Vaga(models.Model):
 	titulo = models.CharField(verbose_name='Titulo', max_length=50)
 	data_exp = models.DateField(verbose_name='Data de expiração')
 	descricao = models.TextField(verbose_name='Descrição', blank=False, null=False, max_length=150)
+	url	= models.URLField(verbose_name='URL', max_length=100, blank=True, null=False)
 	created_at = models.DateTimeField(verbose_name='Criado em', auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name='Atualizado em', auto_now=True)
 

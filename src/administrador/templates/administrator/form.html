@@ -115,16 +115,28 @@
 						</div>
 						<div class='col'>
 							<label for='senha'>Senha</label>
-							<input
-								type='password'
-								id='senha'
-								name='senha'
-								placeholder='Preencha campo com a senha do administrador'
-								required
-								maxlenth='100'
-								class='form-control'
-								value='{{ form.senha }}'
-							/>
+							{% if editar is True %}
+								<input
+									type='password'
+									id='senha'
+									name='senha'
+									placeholder='Preencha campo com a senha do administrador'
+									maxlenth='100'
+									class='form-control'
+									value='{{ form.senha }}'
+								/>
+							{% else %}
+								<input
+									type='password'
+									id='senha'
+									name='senha'
+									placeholder='Preencha campo com a senha do administrador'
+									required
+									maxlenth='100'
+									class='form-control'
+									value='{{ form.senha }}'
+								/>
+							{% endif %}
 						</div>
 					</div>
 
@@ -165,5 +177,10 @@
 			leitor.readAsDataURL(arquivo);
 		}
 	});
+
+	$('form').on('submit', function() {
+        $('button[type="submit"]').attr('disabled', true);
+        return true;
+    });
 </script>
 {% endblock %}
