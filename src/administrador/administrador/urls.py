@@ -30,7 +30,7 @@ from eventos.views import eventlist_view, eventcreate_view, eventedit_view, even
 from jogos.views import gamelist_view, gamecreate_view, gameedit_view, gamedelete_view
 from videoaulas.views import videolessonlist_view, videolessoncreate_view, videolessonedit_view, videolessondelete_view
 
-baseUrl = "vitalita/administrador/"
+base = "vitalita/administrador/"
 urlpatterns = [
 	path(base + 'superadmin/', admin.site.urls),
 
