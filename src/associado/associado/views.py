@@ -38,7 +38,7 @@ def login_view(request):
 						erro = 'Senha não confere'
 
 					else:
-						erro = 'Não existe associado com esse email'
+						erro = 'Não existe aluno com esse email'
 			else:
 				formulario = request.POST
 				erro = 'Preencher campos corretamente'

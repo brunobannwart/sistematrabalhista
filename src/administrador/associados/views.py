@@ -73,7 +73,7 @@ def associatedcreate_view(request):
 			'numero': '',
 			'pcd': '',
 			'outras_informacoes': '',
-			'acessibilidade': '',
+			'acessibilidade': 'nenhum',
 		}
 
 		erro = None

@@ -439,5 +439,26 @@
 			document.getElementById('pcd_oculto').disabled = false;
 		}
 	}
+
+	$('#cpf').inputmask({
+		mask: '999.999.999-99',
+		showMaskOnHover: false,
+    	showMaskOnFocus: false,
+    	oncomplete: function(){ },
+	});
+
+	$('#celular').inputmask({
+		mask: '(99) 99999-9999',
+		showMaskOnHover: false,
+    	showMaskOnFocus: false,
+    	oncomplete: function(){ },
+	});
+
+	$('#cep').inputmask({
+		mask: '99.999-999',
+		showMaskOnHover: false,
+    	showMaskOnFocus: false,
+    	oncomplete: function(){ },
+	});
 </script>
 {% endblock %}

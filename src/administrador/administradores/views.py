@@ -66,7 +66,7 @@ def admincreate_view(request):
 			'rf': '',
 			'email': '',
 			'senha': '',
-			'acessibilidade': '',
+			'acessibilidade': 'nenhum',
 		}
 
 		erro = None

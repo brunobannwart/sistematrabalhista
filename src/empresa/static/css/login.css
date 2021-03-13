@@ -24,8 +24,8 @@ body, input, button {
 .background {
 	background-image: url('../assets/login.jpg');
 	background-size: cover;
-	height: 100%;
 	width: 100%;
+	min-height: 100vh;
 	-webkit-font-smoothing: antialiased;
 }
 

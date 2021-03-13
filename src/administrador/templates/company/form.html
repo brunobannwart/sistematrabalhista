@@ -434,5 +434,26 @@
 			leitor.readAsDataURL(arquivo);
 		}
 	});
+
+	$('#cnpj').inputmask({
+		mask: '99.999.999/9999-99',
+		showMaskOnHover: false,
+    	showMaskOnFocus: false,
+    	oncomplete: function(){ },
+	});
+
+	$('#telefone').inputmask({
+		mask: '(99) 9999-9999',
+		showMaskOnHover: false,
+    	showMaskOnFocus: false,
+    	oncomplete: function(){ },
+	});
+
+	$('#cep').inputmask({
+		mask: '99.999-999',
+		showMaskOnHover: false,
+    	showMaskOnFocus: false,
+    	oncomplete: function(){ },
+	});
 </script>
 {% endblock %}

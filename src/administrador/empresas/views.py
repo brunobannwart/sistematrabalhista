@@ -72,7 +72,7 @@ def companycreate_view(request):
 			'telefone': '',
 			'cep': '',  
 			'numero': '',
-			'acessibilidade': '',
+			'acessibilidade': 'nenhum',
 		}
 
 		erro = None
