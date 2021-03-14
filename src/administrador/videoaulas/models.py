@@ -5,7 +5,7 @@ class Videoaula(models.Model):
 	logo = models.ImageField(verbose_name='Logo', upload_to='logo/videoaula', null=False, blank=False)
 	titulo = models.CharField(verbose_name='Titulo', max_length=50)
 	url	= models.URLField(verbose_name='URL', max_length=100)
-	descricao = models.TextField(verbose_name='Descrição', blank=False, null=False, max_length=150)
+	descricao = models.TextField(verbose_name='Descrição', blank=False, null=False, max_length=255)
 	created_at = models.DateTimeField(verbose_name='Criado em', auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name='Atualizado em', auto_now=True)
 

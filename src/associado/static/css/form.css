@@ -43,6 +43,17 @@
   padding-top: 5em;
 }
 
+.form header {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.form header img {
+	max-width: 20em;
+}
+
 .form form textarea {
   resize: none;
 }

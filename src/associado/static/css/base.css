@@ -34,7 +34,8 @@ nav.navbar li a.nav-link {
 
 nav.navbar .navbar-brand img {
   width: 3em;
-  height: 3me;
+  height: 3em;
   border-radius: 50%;
   border: 2px solid #FFF;
+  background-color: #FFF;
 }

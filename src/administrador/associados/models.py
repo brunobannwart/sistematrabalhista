@@ -16,7 +16,7 @@ class Associado(models.Model):
 	numero = models.CharField(verbose_name='Número', max_length=5)
 
 	pcd = models.BooleanField(verbose_name='PCD', default=False)
-	outras_informacoes = models.TextField(verbose_name='Outras informações', blank=True, null=False, max_length=100)
+	outras_informacoes = models.TextField(verbose_name='Outras informações', blank=True, null=False, max_length=255)
 
 	instituicao_ensino = models.TextField(verbose_name='Instituições de ensino', max_length=255, blank=True, null=False)
 	curso_extra = models.TextField(verbose_name='Cursos extras', max_length=255, blank=True, null=False)

@@ -81,6 +81,7 @@ def eventedit_view(request, id=0):
 				editar_evento.data_exp = campos['data_exp']
 				editar_evento.descricao = campos['descricao']
 				editar_evento.save()
+				return redirect('eventlist')
 
 			except:
 				formulario = request.POST

@@ -4,7 +4,7 @@ from django import forms
 class FormCadastro(forms.Form):
 	titulo = forms.CharField(label='Titulo', max_length=50)
 	data_exp = forms.DateField(label='Data de expiração')
-	descricao =	forms.CharField(label='Descrição', widget=forms.Textarea, max_length=150)
+	descricao =	forms.CharField(label='Descrição', widget=forms.Textarea, max_length=255)
 	logo = forms.ImageField(label='logo')
 
 	def clean_form(self):
@@ -18,7 +18,7 @@ class FormCadastro(forms.Form):
 class FormEditar(forms.Form):
 	titulo = forms.CharField(label='Titulo', max_length=50)
 	data_exp = forms.DateField(label='Data de expiração')
-	descricao = forms.CharField(label='Descrição', widget=forms.Textarea, max_length=150)
+	descricao = forms.CharField(label='Descrição', widget=forms.Textarea, max_length=255)
 	logo = forms.ImageField(label='logo', required=False)
 
 	def clean_form(self):

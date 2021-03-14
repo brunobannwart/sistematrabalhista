@@ -81,6 +81,7 @@ def gameedit_view(request, id=0):
 				editar_jogo.url = campos['url']
 				editar_jogo.descricao = campos['descricao']
 				editar_jogo.save()
+				return redirect('gamelist')
 
 			except:
 				formulario = request.POST

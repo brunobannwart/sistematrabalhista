@@ -32,6 +32,7 @@ header.navbar .navbar-brand img {
     height: 3em;
     border-radius: 50%;
     border: 2px solid #FFF;
+    background-color: #FFF;
 }
 
 .container-fluid .row aside {

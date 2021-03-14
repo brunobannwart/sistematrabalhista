@@ -81,6 +81,7 @@ def courseedit_view(request, id=0):
 				editar_curso.data_exp = campos['data_exp']
 				editar_curso.descricao = campos['descricao']
 				editar_curso.save()
+				return redirect('courselist')
 
 			except:
 				formulario = request.POST

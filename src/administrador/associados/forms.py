@@ -11,7 +11,7 @@ class FormCadastro(forms.Form):
 	cep = forms.CharField(label='CEP', max_length=10)
 	numero = forms.CharField(label='Número', max_length=5)
 	pcd = forms.CharField(label='PCD', max_length=3)
-	outras_informacoes = forms.CharField(label='Outras informações', widget=forms.Textarea, required=False, max_length=100)
+	outras_informacoes = forms.CharField(label='Outras informações', widget=forms.Textarea, required=False, max_length=255)
 	acessibilidade = forms.CharField(label='Acessibilidade', max_length=6)
 	foto = forms.ImageField(label='Foto')
 
@@ -61,7 +61,7 @@ class FormEditar(forms.Form):
 	cep = forms.CharField(label='CEP', max_length=10)
 	numero = forms.CharField(label='Número', max_length=5)
 	pcd = forms.CharField(label='PCD', max_length=3)
-	outras_informacoes = forms.CharField(label='Outras informações', widget=forms.Textarea, required=False, max_length=100)
+	outras_informacoes = forms.CharField(label='Outras informações', widget=forms.Textarea, required=False, max_length=255)
 	acessibilidade = forms.CharField(label='Acessibilidade', max_length=6)
 	foto = forms.ImageField(label='Foto', required=False)
 
