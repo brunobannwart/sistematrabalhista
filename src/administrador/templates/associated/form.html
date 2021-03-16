@@ -142,14 +142,25 @@
 						</div>
 						<div class='col'>
 							<label for='data_nascimento'>Data de nascimento</label>
-							<input
-								type='date'
-								id='data_nascimento'
-								name='data_nascimento'
-								required
-								class='form-control'
-								value='{{ form.data_nascimento|date:"Y-m-d" }}'
-							/>
+							{% if erro is not None %}
+								<input
+									type='date'
+									id='data_nascimento'
+									name='data_nascimento'
+									required
+									class='form-control'
+									value='{{ form.data_nascimento }}'
+								/>
+							{% else %}
+								<input
+									type='date'
+									id='data_nascimento'
+									name='data_nascimento'
+									required
+									class='form-control'
+									value='{{ form.data_nascimento|date:"Y-m-d" }}'
+								/>
+							{% endif %}
 						</div>
 					</div>
 

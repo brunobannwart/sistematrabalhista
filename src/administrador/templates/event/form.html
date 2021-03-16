@@ -87,14 +87,25 @@
 						</div>
 						<div class='col'>
 							<label for='data_exp'>Data de expiração</label>
-							<input
-								type='date'
-								id='data_exp'
-								name='data_exp'
-								value='{{ form.data_exp|date:"Y-m-d" }}'
-								class='form-control'
-								required
-							>
+							{% if erro is not None %}
+								<input
+									type='date'
+									id='data_exp'
+									name='data_exp'
+									value='{{ form.data_exp }}'
+									class='form-control'
+									required
+								/>
+							{% else %}
+								<input
+									type='date'
+									id='data_exp'
+									name='data_exp'
+									value='{{ form.data_exp|date:"Y-m-d" }}'
+									class='form-control'
+									required
+								/>
+							{% endif %}
 						</div>
 					</div>
 
