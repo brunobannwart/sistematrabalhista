@@ -100,6 +100,17 @@
 
 					<div class='form-group' style='margin-top: 1.5em;'>
 						<label for='descricao'>Descrição</label>
+						<button 
+							type='button' 
+							id='tooltip' 
+							class='btn btn-link'
+							data-toggle='tooltip'
+							data-placement='right'
+							title='Limite de 255 caracteres'
+							style='margin-top: -0.25em; color: #000' 
+						>
+							<i class='fa fa-info-circle'></i>
+						</button>
 						<textarea
 							id='descricao'
 							name='descricao'
@@ -132,7 +143,11 @@
 </div>
 <script type='text/javascript'>
 	const botao = document.getElementById('logo');
-	const imagem = document.getElementById('previa')
+	const imagem = document.getElementById('previa');
+
+	$(document).ready(function () {
+		$('[data-toggle="tooltip"]').tooltip();
+	});
 
 	botao.addEventListener('change', function() {
 		const arquivo = this.files[0];

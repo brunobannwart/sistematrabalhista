@@ -33,50 +33,138 @@
 					<div class='form-row'>
 						<div class='col'>
 							<label for='instituicao_ensino'>Instituições de ensino</label>
-							<textarea
-								id='instituicao_ensino'
-								name='instituicao_ensino'
-								class='form-control'
-								maxlength='255'
-								placeholder='Preencha com as instituições de ensino'
-							>{{ form.instituicao_ensino }}</textarea>
+							{% if editar is True %}
+								<textarea
+									id='instituicao_ensino'
+									name='instituicao_ensino'
+									class='form-control'
+									maxlength='255'
+									readonly
+									placeholder='Nenhuma informação fornecida'
+								>{{ form.instituicao_ensino }}</textarea>
+							{% else %}
+								<button 
+									type='button' 
+									id='tooltip' 
+									class='btn btn-link'
+									data-toggle='tooltip'
+									data-placement='right'
+									title='Limite de 255 caracteres'
+									style='margin-top: -0.25em; color: #000' 
+								>
+									<i class='fa fa-info-circle'></i>
+								</button>
+								<textarea
+									id='instituicao_ensino'
+									name='instituicao_ensino'
+									class='form-control'
+									maxlength='255'
+									placeholder='Preencha com as instituições de ensino'
+								>{{ form.instituicao_ensino }}</textarea>
+							{% endif %}
 						</div>
 						<div class='col'>
 							<label for='curso_extra'>Cursos extras</label>
-							<textarea 
-								id='curso_extra'
-								name='curso_extra'
-								class='form-control'
-								maxlength='255'
-								placeholder='Preencha com os cursos extras'
-							>{{ form.curso_extra }}</textarea>
+							{% if editar is True %}
+								<textarea 
+									id='curso_extra'
+									name='curso_extra'
+									class='form-control'
+									maxlength='255'
+									readonly
+									placeholder='Nenhuma informação fornecida' 
+								>{{ form.curso_extra }}</textarea>
+							{% else %}
+								<button 
+									type='button' 
+									id='tooltip' 
+									class='btn btn-link'
+									data-toggle='tooltip'
+									data-placement='right'
+									title='Limite de 255 caracteres'
+									style='margin-top: -0.25em; color: #000' 
+								>
+									<i class='fa fa-info-circle'></i>
+								</button>
+								<textarea 
+									id='curso_extra'
+									name='curso_extra'
+									class='form-control'
+									maxlength='255'
+									placeholder='Preencha com os cursos extras'
+								>{{ form.curso_extra }}</textarea>
+							{% endif %}
 						</div>
 					</div>
 
 					<div class='form-row pt-4'>
 						<div class='col'>
 							<label for='empresa_trabalhada'>Empresas trabalhadas</label>
-							<textarea 
-								id='empresa_trabalhada'
-								name='empresa_trabalhada'
-								class='form-control'
-								maxlength='255'
-								placeholder='Preencha com as empresas trabalhadas'
-							>{{ form.empresa_trabalhada }}</textarea>
+							{% if editar is True %}
+								<textarea 
+									id='empresa_trabalhada'
+									name='empresa_trabalhada'
+									class='form-control'
+									maxlength='255'
+									readonly
+									placeholder='Nenhuma informação fornecida'
+								>{{ form.empresa_trabalhada }}</textarea>
+							{% else %}
+								<button 
+									type='button' 
+									id='tooltip' 
+									class='btn btn-link'
+									data-toggle='tooltip'
+									data-placement='right'
+									title='Limite de 255 caracteres'
+									style='margin-top: -0.25em; color: #000' 
+								>
+									<i class='fa fa-info-circle'></i>
+								</button>
+								<textarea 
+									id='empresa_trabalhada'
+									name='empresa_trabalhada'
+									class='form-control'
+									maxlength='255'
+									placeholder='Preencha com as empresas trabalhadas'
+								>{{ form.empresa_trabalhada }}</textarea>
+							{% endif %}
 						</div>
 						<div class='col'>
 							<label for='cargo_ocupado'>Cargos ocupados</label>
-							<textarea 
-								id='cargo_ocupado'
-								name='cargo_ocupado'
-								class='form-control'
-								maxlength='255'
-								placeholder='Preencha com os cargos ocupados'
-							>{{ form.cargo_ocupado }}</textarea>
+							{% if editar is True %}
+								<textarea 
+									id='cargo_ocupado'
+									name='cargo_ocupado'
+									class='form-control'
+									maxlength='255'
+									readonly
+									placeholder='Nenhuma informação fornecida' 
+								>{{ form.cargo_ocupado }}</textarea>
+							{% else %}
+								<button 
+									type='button' 
+									id='tooltip' 
+									class='btn btn-link'
+									data-toggle='tooltip'
+									data-placement='right'
+									title='Limite de 255 caracteres'
+									style='margin-top: -0.25em; color: #000' 
+								>
+									<i class='fa fa-info-circle'></i>
+								</button>
+								<textarea 
+									id='cargo_ocupado'
+									name='cargo_ocupado'
+									class='form-control'
+									maxlength='255'
+									placeholder='Preencha com os cargos ocupados'
+								>{{ form.cargo_ocupado }}</textarea>
+							{% endif %}
 						</div>
 					</div>
 
-					{% if request.user.pcd is True %}
+					{% if request.user.pcd is True and editar is not True %}
 						<div class='form-row pt-4'>
 							<div class='col'>
 								<div class='custom-file'>
@@ -97,16 +185,18 @@
 						<button
 							type='button'
 							class='btn btn-danger btn-lg'
-							onclick='window.location.href=`{% url "home" %}`'
+							onclick='window.location.href=`{% url "resumelist" %}`'
 						>
 							Cancelar
 						</button>
-						<button 
-							type='submit' 
-							class='btn btn-success btn-lg ml-4'
-						>
-							Salvar
-						</button>
+						{% if editar is not True %}
+							<button 
+								type='submit' 
+								class='btn btn-success btn-lg ml-4'
+							>
+								Salvar
+							</button>
+						{% endif %}
 					</footer>
 				</form>
 			</div>
@@ -114,6 +204,10 @@
 	</div>
 </div>
 <script>
+	$(document).ready(function () {
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+
 	$('form').on('submit', function() {
         $('button[type="submit"]').attr('disabled', true);
         return true;

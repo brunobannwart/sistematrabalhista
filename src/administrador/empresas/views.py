@@ -112,7 +112,6 @@ def companyedit_view(request, id=0):
 					editar_empresa.logo = campos['logo']
 
 				editar_empresa.razao_social = campos['razao_social']
-				editar_empresa.email = campos['email']
 				editar_empresa.nome_contato = campos['nome_contato']
 				editar_empresa.telefone = campos['telefone']
 				editar_empresa.cep = campos['cep']
@@ -123,8 +122,19 @@ def companyedit_view(request, id=0):
 				if request.POST.get('senha') != '':
 					editar_empresa.senha_hash = campos['senha_hash']
 
-				editar_empresa.save()
-				return redirect('companylist')
+				if editar_empresa.email != campos['email']:
+					if not Empresa.objects.filter(email=campos['email']):
+						editar_empresa.email = campos['email']
+						editar_empresa.save()
+						return redirect('companylist')
+
+					else:
+						formulario = request.POST
+						erro = 'Já existe empresa com esse email cadastrado'
+				else:
+					editar_empresa.email = campos['email']
+					editar_empresa.save()
+					return redirect('companylist')
 
 			except:
 				formulario = request.POST

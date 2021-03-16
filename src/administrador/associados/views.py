@@ -33,9 +33,9 @@ def associatedcreate_view(request):
 				formulario = request.POST
 				
 				if Associado.objects.filter(email=campos['email']):
-					erro = 'Já existe associado com esse email cadastrado'
+					erro = 'Já existe aluno com esse email cadastrado'
 				else:
-					erro = 'Já existe associado com esse CPF'
+					erro = 'Já existe aluno com esse CPF'
 			else:
 				try:
 					resposta = requests.post('http://127.0.0.1:5000/api/treino', data={'grupo': 'associado'}, files={ 'file': campos['foto'] })
@@ -110,7 +110,6 @@ def associatededit_view(request, id=0):
 
 				editar_associado.nome = campos['nome']
 				editar_associado.data_nascimento = campos['data_nascimento']
-				editar_associado.email = campos['email']
 				editar_associado.celular = campos['celular']
 				editar_associado.cep = campos['cep']
 				editar_associado.cpf = campos['cpf']
@@ -122,8 +121,19 @@ def associatededit_view(request, id=0):
 				if request.POST.get('senha') != '':
 					editar_associado.senha_hash = campos['senha_hash']
 
-				editar_associado.save()
-				return redirect('associatedlist')
+				if editar_associado.email != campos['email']:
+					if not Associado.objects.filter(email=campos['email']):
+						editar_associado.email = campos['email']
+						editar_associado.save()
+						return redirect('associatedlist')
+
+					else:
+						formulario = request.POST
+						erro = 'Já existe aluno com esse email cadastrado'
+				else:
+					editar_associado.email = campos['email']
+					editar_associado.save()
+					return redirect('associatedlist')
 
 			except:
 				formulario = request.POST
