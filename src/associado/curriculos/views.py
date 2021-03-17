@@ -36,8 +36,8 @@ def resumecreate_view(request):
 			try:
 				if not request.user.pcd:
 					with connection.cursor() as cursor:
-						cursor.execute("UPDATE associado SET instituicao_ensino=%s, curso_extra=%s, empresa_trabalhada=%s, cargo_ocupado=%s", 
-							[campos['instituicao_ensino'], campos['curso_extra'], campos['empresa_trabalhada'], campos['cargo_ocupado']])
+						cursor.execute("UPDATE associado SET instituicao_ensino=%s, curso_extra=%s, empresa_trabalhada=%s, cargo_ocupado=%s WHERE id=%s", 
+							[campos['instituicao_ensino'], campos['curso_extra'], campos['empresa_trabalhada'], campos['cargo_ocupado'], request.user.id])
 
 				else:
 					if campos['instituicao_ensino'] != '' or campos['curso_extra'] != '' or campos['empresa_trabalhada'] != '' or campos['cargo_ocupado'] != '' or campos['laudo_medico']:
