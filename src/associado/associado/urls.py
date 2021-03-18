@@ -37,7 +37,6 @@ urlpatterns = [
 
 	path(base + 'inicio/', home_view, name='home'),
 
-	path(base + 'curriculos/', resumecreate_view, name='resumecreate'),
 	path(base + 'curriculos/', resumelist_view, name='resumelist'),
 	path(base + 'curriculos/formulario/', resumecreate_view, name='resumecreate'),
 	path(base + 'curriculos/formulario/<int:id>/', resumeedit_view, name='resumeedit'),
