@@ -57,8 +57,8 @@ urlpatterns = [
 	path(base + 'videoaulas/', videolessonlist_view, name='videolessonlist'),
 	path(base + 'videoaulas/<int:id>/', videolessonread_view, name='videolessonread'),
 
-	re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT }),
-	re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT }),
+	re_path(r'^vitalita/associado/media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT }),
+	re_path(r'^vitalita/associado/static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT }),
 ]
 
 if settings.DEBUG:

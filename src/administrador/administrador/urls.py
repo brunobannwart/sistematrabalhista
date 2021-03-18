@@ -84,8 +84,8 @@ urlpatterns = [
 	path(base + 'videoaulas/formulario/<int:id>/', videolessonedit_view, name='videolessonedit'),
 	path(base + 'videoaulas/excluir/<int:id>/', videolessondelete_view, name='videolessondelete'),
 
-	re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT }),
-	re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT }),
+	re_path(r'^vitalita/administrador/media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT }),
+	re_path(r'^vitalita/administrador/static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT }),
 ]
 
 if settings.DEBUG:
