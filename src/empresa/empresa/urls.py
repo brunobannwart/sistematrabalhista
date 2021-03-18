@@ -22,7 +22,7 @@ from empresa.views import login_view, camera_view, forgot_view, readmore_view, c
 from core.views import associatedlist_view, associatedread_view, associatedpdf_view
 from vagas.views import joblist_view, jobcreate_view, jobedit_view, jobdelete_view
 
-base = '/vitalita/empresa'
+base = 'vitalita/empresa/'
 urlpatterns = [
 	path(base, login_view, name='login'),
 	path(base + 'camera/', camera_view, name='camera'),

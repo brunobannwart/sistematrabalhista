@@ -142,14 +142,25 @@
 						</div>
 						<div class='col'>
 							<label for='data_nascimento'>Data de nascimento</label>
-							<input
-								type='date'
-								id='data_nascimento'
-								name='data_nascimento'
-								required
-								class='form-control'
-								value='{{ form.data_nascimento|date:"Y-m-d" }}'
-							/>
+							{% if erro is not None %}
+								<input
+									type='date'
+									id='data_nascimento'
+									name='data_nascimento'
+									required
+									class='form-control'
+									value='{{ form.data_nascimento }}'
+								/>
+							{% else %}
+								<input
+									type='date'
+									id='data_nascimento'
+									name='data_nascimento'
+									required
+									class='form-control'
+									value='{{ form.data_nascimento|date:"Y-m-d" }}'
+								/>
+							{% endif %}
 						</div>
 					</div>
 
@@ -207,55 +218,53 @@
 					<div class='form-row pt-4'>
 						<div class='col'>
 							<label for='email'>Email</label>
-							{% if editar is True %}
-								<input
-									type='email'
-									id='email'
-									name='email'
-									value='{{ form.email }}'
-									class='form-control'
-									required
-									placeholder='Preencha com a email do aluno'
-									maxlength='45'
-									readonly
-								/>
-							{% else %}
-								<input
-									type='email'
-									id='email'
-									name='email'
-									value='{{ form.email }}'
-									class='form-control'
-									required
-									placeholder='Preencha com a email do aluno'
-									maxlength='45'
-								/>
-							{% endif %}
+							<input
+								type='email'
+								id='email'
+								name='email'
+								value='{{ form.email }}'
+								class='form-control'
+								required
+								placeholder='Preencha com a email do aluno'
+								maxlength='45'
+							/>
 						</div>
 						<div class='col'>
 							<label for='senha'>Senha</label>
-							{% if editar is True %}
-								<input
-									type='password'
-									id='senha'
-									name='senha'
-									value='{{ form.senha }}'
-									class='form-control'
-									placeholder='Preencha com a senha do aluno'
-									maxlength='100'
-								/>
-							{% else %}
-								<input
-									type='password'
-									id='senha'
-									name='senha'
-									value='{{ form.senha }}'
-									class='form-control'
-									required
-									placeholder='Preencha com a senha do aluno'
-									maxlength='100'
-								/>
-							{% endif %}
+							<div class='input-group'>
+								{% if editar is True %}
+									<input
+										type='password'
+										id='senha'
+										name='senha'
+										value='{{ form.senha }}'
+										class='form-control'
+										placeholder='Preencha com a senha do aluno'
+										maxlength='100'
+									/>
+								{% else %}
+									<input
+										type='password'
+										id='senha'
+										name='senha'
+										value='{{ form.senha }}'
+										class='form-control'
+										required
+										placeholder='Preencha com a senha do aluno'
+										maxlength='100'
+									/>
+								{% endif %}
+								<div class='input-group-append'>
+									<div class='input-group-text'>
+										<i 
+											class='fas fa-eye' 
+											id='visualizar' 
+											onclick='exibirSenha()'
+											style='cursor: pointer;'
+										></i>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -334,6 +343,17 @@
 						</div>
 						<div class='col'>
 							<label for='outras_informacoes'>Outras informações</label>
+							<button 
+								type='button' 
+								id='tooltip' 
+								class='btn btn-link'
+								data-toggle='tooltip'
+								data-placement='right'
+								title='Limite de 255 caracteres'
+								style='margin-top: -0.25em; color: #000' 
+							>
+								<i class='fa fa-info-circle'></i>
+							</button>
 							<textarea
 								id='outras_informacoes'
 								name='outras_informacoes'
@@ -418,6 +438,22 @@
 <script type='text/javascript'>
 	const botao = document.getElementById('foto');
 	const imagem = document.getElementById('previa-foto');
+	const senha = document.getElementById('senha');
+	const visualizador = document.getElementById('visualizar');
+
+	$(document).ready(function () {
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+
+	function exibirSenha() {
+		if (senha.type === 'password') {
+    		senha.type = 'text';
+    		visualizador.className = 'fas fa-eye-slash';
+		} else {
+			senha.type = 'password';
+			visualizador.className = 'fas fa-eye';
+		}
+	}
 
 	botao.addEventListener('change', function() {
 		const arquivo = this.files[0];

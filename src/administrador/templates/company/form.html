@@ -245,55 +245,53 @@
 					<div class='form-row pt-4'>
 						<div class='col'>
 							<label for='email'>Email</label>
-							{% if editar is True %}
-								<input
-									type='email'
-									id='email'
-									name='email'
-									value='{{ form.email }}'
-									class='form-control'
-									required
-									placeholder='Preencha com a email da empresa'
-									maxlength='45'
-									readonly
-								/>
-							{% else %}
-								<input
-									type='email'
-									id='email'
-									name='email'
-									value='{{ form.email }}'
-									class='form-control'
-									required
-									placeholder='Preencha com a email da empresa'
-									maxlength='45'
-								/>
-							{% endif %}
+							<input
+								type='email'
+								id='email'
+								name='email'
+								value='{{ form.email }}'
+								class='form-control'
+								required
+								placeholder='Preencha com a email da empresa'
+								maxlength='45'
+							/>
 						</div>
 						<div class='col'>
 							<label for='senha'>Senha</label>
-							{% if editar is True %}
-								<input
-									type='password'
-									id='senha'
-									name='senha'
-									value='{{ form.senha }}'
-									class='form-control'
-									placeholder='Preencha com a senha da empresa'
-									maxlength='100'
-								/>
-							{% else %}
-								<input
-									type='password'
-									id='senha'
-									name='senha'
-									value='{{ form.senha }}'
-									class='form-control'
-									required
-									placeholder='Preencha com a senha da empresa'
-									maxlength='100'
-								/>
-							{% endif %}
+							<div class='input-group'>
+								{% if editar is True %}
+									<input
+										type='password'
+										id='senha'
+										name='senha'
+										value='{{ form.senha }}'
+										class='form-control'
+										placeholder='Preencha com a senha da empresa'
+										maxlength='100'
+									/>
+								{% else %}
+									<input
+										type='password'
+										id='senha'
+										name='senha'
+										value='{{ form.senha }}'
+										class='form-control'
+										required
+										placeholder='Preencha com a senha da empresa'
+										maxlength='100'
+									/>
+								{% endif %}
+								<div class='input-group-append'>
+									<div class='input-group-text'>
+										<i 
+											class='fas fa-eye' 
+											id='visualizar' 
+											onclick='exibirSenha()'
+											style='cursor: pointer;'
+											></i>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -406,6 +404,18 @@
 	const botaoFoto = document.getElementById('foto');
 	const logo = document.getElementById('previa-logo');
 	const imagem = document.getElementById('previa-foto');
+	const senha = document.getElementById('senha');
+	const visualizador = document.getElementById('visualizar');
+
+	function exibirSenha() {
+		if (senha.type === 'password') {
+    		senha.type = 'text';
+    		visualizador.className = 'fas fa-eye-slash';
+		} else {
+			senha.type = 'password';
+			visualizador.className = 'fas fa-eye';
+		}
+	}
 
 	botaoLogo.addEventListener('change', function() {
 		const arquivo = this.files[0];

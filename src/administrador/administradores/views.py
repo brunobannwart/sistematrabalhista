@@ -103,14 +103,24 @@ def adminedit_view(request, id=0):
 
 				editar_administrador.nome = campos['nome']
 				editar_administrador.rf = campos['rf']
-				editar_administrador.email = campos['email']
 				editar_administrador.acessibilidade = campos['acessibilidade']
 
 				if request.POST.get('senha') != '':
 					editar_administrador.senha_hash = campos['senha_hash']
+				
+				if editar_administrador.email != campos['email']:
+					if not Administrador.objects.filter(email=campos['email']):
+						editar_administrador.email = campos['email']
+						editar_administrador.save()
+						return redirect('adminlist')
 
-				editar_administrador.save()
-				return redirect('adminlist')
+					else:
+						formulario = request.POST
+						erro = 'Já existe administrador com esse email cadastrado'
+				else:
+					editar_administrador.email = campos['email']
+					editar_administrador.save()
+					return redirect('adminlist')
 
 			except:
 				formulario = request.POST

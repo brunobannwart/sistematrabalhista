@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.views.static import serve
 
 from associado.views import login_view, camera_view, forgot_view, readmore_view, logout_view
-from curriculos.views import resumecreate_view
+from curriculos.views import resumecreate_view, resumelist_view, resumeedit_view
 from session.views import home_view
 from session.views import courselist_view, courseread_view
 from session.views import eventlist_view, eventread_view
@@ -27,7 +27,7 @@ from session.views import gamelist_view, gameread_view
 from session.views import joblist_view, jobread_view
 from session.views import videolessonlist_view, videolessonread_view
 
-base = 'vitalita/associado'
+base = 'vitalita/associado/'
 urlpatterns = [
 	path(base, login_view, name='login'),
 	path(base + 'camera/', camera_view, name='camera'),
@@ -38,6 +38,9 @@ urlpatterns = [
 	path(base + 'inicio/', home_view, name='home'),
 
 	path(base + 'curriculos/', resumecreate_view, name='resumecreate'),
+	path(base + 'curriculos/', resumelist_view, name='resumelist'),
+	path(base + 'curriculos/formulario/', resumecreate_view, name='resumecreate'),
+	path(base + 'curriculos/formulario/<int:id>/', resumeedit_view, name='resumeedit'),
 
 	path(base + 'cursos/', courselist_view, name='courselist'),
 	path(base + 'cursos/<int:id>/', courseread_view, name='courseread'),

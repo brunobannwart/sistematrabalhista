@@ -117,55 +117,53 @@
 					<div class='form-row pt-4'>
 						<div class='col'>
 							<label for='email'>Email</label>
-							{% if editar is True %}
-								<input
-									type='email'
-									id='email'
-									name='email'
-									placeholder='Preencha campo com o email do administrador'
-									required
-									maxlenth='45'
-									class='form-control'
-									value='{{ form.email }}'
-									readonly
-								/>
-							{% else %}
-								<input
-									type='email'
-									id='email'
-									name='email'
-									placeholder='Preencha campo com o email do administrador'
-									required
-									maxlenth='45'
-									class='form-control'
-									value='{{ form.email }}'
-								/>
-							{% endif %}
+							<input
+								type='email'
+								id='email'
+								name='email'
+								placeholder='Preencha campo com o email do administrador'
+								required
+								maxlenth='45'
+								class='form-control'
+								value='{{ form.email }}'
+							/>
 						</div>
 						<div class='col'>
 							<label for='senha'>Senha</label>
-							{% if editar is True %}
-								<input
-									type='password'
-									id='senha'
-									name='senha'
-									placeholder='Preencha campo com a senha do administrador'
-									maxlenth='100'
-									class='form-control'
-									value='{{ form.senha }}'
-								/>
-							{% else %}
-								<input
-									type='password'
-									id='senha'
-									name='senha'
-									placeholder='Preencha campo com a senha do administrador'
-									required
-									maxlenth='100'
-									class='form-control'
-									value='{{ form.senha }}'
-								/>
-							{% endif %}
+							<div class='input-group'>
+								{% if editar is True %}
+									<input
+										type='password'
+										id='senha'
+										name='senha'
+										placeholder='Preencha campo com a senha do administrador'
+										maxlenth='100'
+										class='form-control'
+										value='{{ form.senha }}'
+									/>
+								{% else %}
+									<input
+										type='password'
+										id='senha'
+										name='senha'
+										placeholder='Preencha campo com a senha do administrador'
+										required
+										maxlenth='100'
+										class='form-control'
+										value='{{ form.senha }}'
+									/>
+								{% endif %}
+								<div class='input-group-append'>
+									<div class='input-group-text'>
+										<i 
+											class='fas fa-eye' 
+											id='visualizar' 
+											onclick='exibirSenha()'
+											style='cursor: pointer;'
+										></i>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -241,7 +239,19 @@
 </div>
 <script type='text/javascript'>
 	const botao = document.getElementById('foto');
-	const imagem = document.getElementById('previa')
+	const imagem = document.getElementById('previa');
+	const senha = document.getElementById('senha');
+	const visualizador = document.getElementById('visualizar');
+
+	function exibirSenha() {
+		if (senha.type === 'password') {
+    		senha.type = 'text';
+    		visualizador.className = 'fas fa-eye-slash';
+		} else {
+			senha.type = 'password';
+			visualizador.className = 'fas fa-eye';
+		}
+	}
 
 	botao.addEventListener('change', function() {
 		const arquivo = this.files[0];

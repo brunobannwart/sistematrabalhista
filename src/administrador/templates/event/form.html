@@ -87,19 +87,41 @@
 						</div>
 						<div class='col'>
 							<label for='data_exp'>Data de expiração</label>
-							<input
-								type='date'
-								id='data_exp'
-								name='data_exp'
-								value='{{ form.data_exp|date:"Y-m-d" }}'
-								class='form-control'
-								required
-							>
+							{% if erro is not None %}
+								<input
+									type='date'
+									id='data_exp'
+									name='data_exp'
+									value='{{ form.data_exp }}'
+									class='form-control'
+									required
+								/>
+							{% else %}
+								<input
+									type='date'
+									id='data_exp'
+									name='data_exp'
+									value='{{ form.data_exp|date:"Y-m-d" }}'
+									class='form-control'
+									required
+								/>
+							{% endif %}
 						</div>
 					</div>
 
 					<div class='form-group' style='margin-top: 1.5em;'>
 						<label for='descricao'>Descrição</label>
+						<button 
+							type='button' 
+							id='tooltip' 
+							class='btn btn-link'
+							data-toggle='tooltip'
+							data-placement='right'
+							title='Limite de 255 caracteres'
+							style='margin-top: -0.25em; color: #000' 
+						>
+							<i class='fa fa-info-circle'></i>
+						</button>
 						<textarea
 							id='descricao'
 							name='descricao'
@@ -132,7 +154,11 @@
 </div>
 <script type='text/javascript'>
 	const botao = document.getElementById('logo');
-	const imagem = document.getElementById('previa')
+	const imagem = document.getElementById('previa');
+
+	$(document).ready(function () {
+		$('[data-toggle="tooltip"]').tooltip();
+	});
 
 	botao.addEventListener('change', function() {
 		const arquivo = this.files[0];
