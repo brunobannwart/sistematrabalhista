@@ -22,25 +22,27 @@ from empresa.views import login_view, camera_view, forgot_view, readmore_view, c
 from core.views import associatedlist_view, associatedread_view, associatedpdf_view
 from vagas.views import joblist_view, jobcreate_view, jobedit_view, jobdelete_view
 
+base = 'vitalita/empresa/'
+
 urlpatterns = [
-	path('', login_view, name='login'),
-	path('camera/', camera_view, name='camera'),
-	path('esquecidados/', forgot_view, name='forgot'),
-	path('saibamais/', readmore_view, name='readmore'),
-	path('trocarsenha/', changepassword_view, name='changepassword'),
-	path('sair/', logout_view, name='logout'),
+	path(base, login_view, name='login'),
+	path(base + 'camera/', camera_view, name='camera'),
+	path(base + 'esquecidados/', forgot_view, name='forgot'),
+	path(base + 'saibamais/', readmore_view, name='readmore'),
+	path(base + 'trocarsenha/', changepassword_view, name='changepassword'),
+	path(base + 'sair/', logout_view, name='logout'),
 
-	path('candidatos/', associatedlist_view, name='associatedlist'),
-	path('candidatos/<int:id>/', associatedread_view, name='associatedread'),
-	path('candidatos/pdf/<int:id>/', associatedpdf_view, name='associatedpdf'),
+	path(base + 'candidatos/', associatedlist_view, name='associatedlist'),
+	path(base + 'candidatos/<int:id>/', associatedread_view, name='associatedread'),
+	path(base + 'candidatos/pdf/<int:id>/', associatedpdf_view, name='associatedpdf'),
 
-	path('vagas/', joblist_view, name='joblist'),
-	path('vagas/formulario/', jobcreate_view, name='jobcreate'),
-	path('vagas/formulario/<int:id>/', jobedit_view, name='jobedit'),
-	path('vagas/excluir/<int:id>/', jobdelete_view, name='jobdelete'),
+	path(base + 'vagas/', joblist_view, name='joblist'),
+	path(base + 'vagas/formulario/', jobcreate_view, name='jobcreate'),
+	path(base + 'vagas/formulario/<int:id>/', jobedit_view, name='jobedit'),
+	path(base + 'vagas/excluir/<int:id>/', jobdelete_view, name='jobdelete'),
 
-	re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT }),
-	re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT }),
+	re_path(r'^vitalita/empresa/media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT }),
+	re_path(r'^vitalita/empresa/static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT }),
 ]
 
 if settings.DEBUG:
