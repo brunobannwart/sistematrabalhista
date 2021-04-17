@@ -53,7 +53,8 @@ def admincreate_view(request):
 					else:
 						formulario = request.POST
 						erro = 'Foto inválida'
-				except:
+				except Exception as e:
+					print(e)
 					formulario = request.POST
 					erro = 'Não foi possível cadastrar novo administrador'
 		else:

@@ -29,7 +29,7 @@ body, input, button {
 	-webkit-font-smoothing: antialiased;
 }
 
-.background .error-overlay {
+.background .pop-overlay {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -40,19 +40,19 @@ body, input, button {
 	z-index: 5;
 }
 
-.background .error-overlay .container .card {
+.background .pop-overlay .container .card {
 	max-width: 35em;
 	margin: 5em auto;
 }
 
-.background .error-overlay .container .card .card-body h5 {
+.background .pop-overlay .container .card .card-body h5 {
 	color: #333;
   	font-family: Tahoma, Arial, sans-serif;
   	margin-bottom: 0.938em;
   	font-weight: bold;
 }
 
-.background .error-overlay .container .card .card-body button {
+.background .pop-overlay .container .card .card-body button {
 	position: absolute;
 	top: 15px;
 	right: 15px;
@@ -60,11 +60,11 @@ body, input, button {
   	font-size: 25px;
 }
 
-.background .error-overlay .container .card .card-body button:hover {
+.background .pop-overlay .container .card .card-body button:hover {
   	color: #06D85F;
 }
 
-.background .error-overlay .container .card .card-body p {
+.background .pop-overlay .container .card .card-body p {
 	font-size: 1em;
   	color: #666;
   	text-align: center;
