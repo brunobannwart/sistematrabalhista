@@ -120,11 +120,11 @@ def validate_cnpj(cnpj):
 def _calculate_cnpj_digit(cnpj, digito):
 	regressivos = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
 
-	if digit == 1:
+	if digito == 1:
 		regressivos = regressivos[1:]
 		base = cnpj[:-2]
 
-	elif digit == 2:
+	elif digito == 2:
 		regressivos = regressivos
 		base = cnpj
 
