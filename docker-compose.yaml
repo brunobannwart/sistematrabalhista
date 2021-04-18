@@ -1,0 +1,46 @@
+version: "3.7"
+
+services: 
+    associado:
+        build: "."
+        container_name: associado
+        restart: always
+        volumes:
+            - ./src/associado:/app
+        ports:
+            - "8000:80"
+        deploy:
+            resources:
+                limits:
+                    cpus: "1"
+                    memory: 512M
+    administrador:
+        build: "."
+        container_name: administrador
+        restart: always
+        volumes:
+            - ./src/administrador:/app
+        ports:
+            - "8001:80"
+        deploy:
+            resources:
+                limits:
+                    cpus: "0.5"
+                    memory: 256M
+    empresa:
+        build: "."
+        container_name: empresa
+        restart: always
+        volumes:
+            - ./src/empresa:/app
+        ports:
+            - "8002:80"
+        deploy:
+            resources:
+                limits:
+                    cpus: "0.5"
+                    memory: 256M
+
+
+
+
