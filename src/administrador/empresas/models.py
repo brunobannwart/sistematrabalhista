@@ -1,4 +1,7 @@
 from django.db import models
+from django.conf import settings
+from PIL import Image
+import os
 
 # Create your models here.
 class Empresa(models.Model):
@@ -35,6 +38,27 @@ class Empresa(models.Model):
 
 	def removeLogo(self):
 		self.logo.delete()
+
+	def save(self, *args, **kwargs):
+		super().save(*args, **kwargs)
+		self.resizeImage(self.foto.name, 800)
+		self.resizeImage(self.logo.name, 800)
+
+	@staticmethod
+	def resizeImage(nome, novalargura):
+		caminho = os.path.join(settings.MEDIA_ROOT, nome)
+		imagem = Image.open(caminho)
+
+		largura, altura = imagem.size
+		novaaltura = round((novalargura * altura) / largura)
+
+		if largura <= novalargura:
+			imagem.close()
+		
+		else:
+			novaimagem = imagem.resize((novalargura, novaaltura), Image.ANTIALIAS)
+			novaimagem.save(caminho, optimize=True, quality=60)
+			novaimagem.close()
 
 	class Meta:
 		db_table = 'empresa'

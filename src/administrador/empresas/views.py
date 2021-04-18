@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 import os, requests
 from .models import Empresa
 from .forms import FormCadastro, FormEditar
+from administrador.utils import validate_cnpj
 
 # Create your views here.
 @login_required(login_url='login')
@@ -37,26 +38,30 @@ def companycreate_view(request):
 				else:
 					erro = 'Já existe empresa com esse CNPJ'
 			else:
-				try:
-					resposta = requests.post('http://127.0.0.1:5000/api/treino', data={'grupo': 'empresa'}, files={ 'file': campos['foto'] })
+				if validate_cnpj(campos['cnpj']):
+					try:
+						resposta = requests.post('http://127.0.0.1:5000/api/treino', data={'grupo': 'empresa'}, files={ 'file': campos['foto'] })
 
-					if resposta.status_code == 200:
-						resposta = resposta.json()
+						if resposta.status_code == 200:
+							resposta = resposta.json()
 
-						nova_empresa = Empresa.objects.create(foto=campos['foto'], logo=campos['logo'], razao_social=campos['razao_social'],
-											nome_contato=campos['nome_contato'], cnpj=campos['cnpj'], telefone=campos['telefone'], cep=campos['cep'], 
-											numero=campos['numero'], email=campos['email'], senha_hash=campos['senha_hash'], treino=resposta['treino'],
-											acessibilidade=campos['acessibilidade'])
+							nova_empresa = Empresa.objects.create(foto=campos['foto'], logo=campos['logo'], razao_social=campos['razao_social'],
+												nome_contato=campos['nome_contato'], cnpj=campos['cnpj'], telefone=campos['telefone'], cep=campos['cep'], 
+												numero=campos['numero'], email=campos['email'], senha_hash=campos['senha_hash'], treino=resposta['treino'],
+												acessibilidade=campos['acessibilidade'])
 
-						nova_empresa.save()
-						return redirect('companylist')
+							nova_empresa.save()
+							return redirect('companylist')
 
-					else:
+						else:
+							formulario = request.POST
+							erro = 'Foto inválida'
+					except:
 						formulario = request.POST
-						erro = 'Foto inválida'
-				except:
+						erro = 'Não foi possível cadastrar nova empresa'
+				else:
 					formulario = request.POST
-					erro = 'Não foi possível cadastrar nova empresa'
+					erro = 'CNPJ inválido'
 		else:
 			formulario = request.POST
 			erro = 'Alguns campos não foram preenchidos corretamente'

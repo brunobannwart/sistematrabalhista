@@ -11,6 +11,7 @@ from xhtml2pdf import pisa
 import random
 import hashlib
 import io
+import re
 
 def send_mail(assunto, pagina, contexto, lista_destinatarios, 
 	origem, falha_silenciosa=True):
@@ -56,3 +57,87 @@ def render_to_pdf(pagina, contexto={}):
 		return HttpResponse(resultado.getvalue(), content_type='application/pdf')
 	
 	return None
+
+def validate_cpf(cpf):
+	cpf = str(cpf)
+	cpf = re.sub(r'[^0-9]', '', cpf)
+
+	if not cpf or len(cpf) != 11:
+		return False
+
+	base = cpf[:-2]
+	indice_reverso = 10
+	total = 0
+
+	for indice in range(19):
+		if indice > 8:
+			indice -= 9
+
+		total += int(base[indice]) * indice_reverso
+		indice_reverso -= 1
+
+		if indice_reverso < 2:
+			indice_reverso = 11
+
+			digito = 11 - (total % 11)
+
+			if digito > 9:
+				digito = 0
+
+			total = 0
+			base += str(digito)
+
+	sequencial = base == str(base[0]) * len(cpf)
+
+	if cpf == base and not sequencial:
+		return True
+	else:
+		return False
+
+def validate_cnpj(cnpj):
+	cnpj = str(cnpj)
+	cnpj = re.sub(r'[^0-9]', '', cnpj)
+
+	if not cnpj or len(cnpj) != 14:
+		return False
+
+	sequencial = cnpj == str(cnpj[0]) * len(cnpj)
+
+	if sequencial:
+		return False
+
+	try:
+		base = _calculate_cnpj_digit(cnpj, 1)
+		base = _calculate_cnpj_digit(base, 2)
+	except:
+		return False
+
+	if base == cnpj:
+		return True
+	else:
+		return False
+	
+def _calculate_cnpj_digit(cnpj, digito):
+	regressivos = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+
+	if digito == 1:
+		regressivos = regressivos[1:]
+		base = cnpj[:-2]
+
+	elif digito == 2:
+		regressivos = regressivos
+		base = cnpj
+
+	else:
+		return None
+
+	total = 0
+
+	for indice, regressivo in enumerate(regressivos):
+		total += int(cnpj[indice]) * regressivo
+
+	digito = 11 - (total % 11)
+	digito = digito if digito <= 9 else 0
+
+	base += str(digito)
+	return base
