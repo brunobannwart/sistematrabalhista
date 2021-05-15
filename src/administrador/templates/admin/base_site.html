@@ -1,8 +1,0 @@
-{% extends 'admin/base_site.html' %}
-{% load static %}
-
-{% block branding %}
-    <a href="{% url 'admin:index' %}" class='django-admin-logo'>
-        <img height='35' src='{% static "assets/logo.png" %}' alt='{{ site_header }}'>
-    </a>
-{% endblock branding %}
