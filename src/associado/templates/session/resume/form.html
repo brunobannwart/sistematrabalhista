@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block pagina %}
+{% if erro is not None %}
+<div class='error-overlay' onclick='this.style.display="none"'>
+	<div class='container'>
+		<div class='card'>
+			<div class='card-body'>
+				<h5 class='text-center'>Aviso</h5>
+				<button
+					type='button'
+					class='close'
+					aria-label='Fechar'
+				>
+					<span aria-hidden='true'>&times;</span>
+				</button>
+				<hr />
+				<p>{{ erro }}</p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+
+<div class='form'>
+	<div class='container'>
+		<div class='card'>
+			<div class='card-body'>
+				<form method='post' autocomplete='off' action='.' enctype='multipart/form-data'>
+					{% csrf_token %}
+					<h3 class='text-center mb-4'>Anexar Currículo</h3>
+					
+					<div class='custom-file'>
+						<input
+							type='file'
+							accept='application/pdf'
+							id='curriculo'
+							name='curriculo'
+							required
+							class='custom-file-input'
+						/>
+						<label class='custom-file-label' for='curriculo'>Escolher arquivo</label>
+					</div>
+
+					{% if atual != '' %}
+						<a 
+							class='btn btn-link pt-4'
+							href='{{ atual }}' 
+							download
+						>
+							Baixar currículo atual
+						</a>
+					{% endif %}
+
+					<footer>
+						<button
+							type='button'
+							class='btn btn-danger btn-lg'
+							onclick='window.location.href=`{% url "home" %}`'
+						>
+							Cancelar
+						</button>
+						<button 
+							type='submit' 
+							class='btn btn-success btn-lg ml-4'
+						>
+							Salvar
+						</button>
+					</footer>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$('form').on('submit', function() {
+        $('button[type="submit"]').attr('disabled', true);
+        return true;
+    });
+</script>
+{% endblock %}
