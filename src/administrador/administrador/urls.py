@@ -30,7 +30,7 @@ from eventos.views import eventlist_view, eventcreate_view, eventedit_view, even
 from jogos.views import gamelist_view, gamecreate_view, gameedit_view, gamedelete_view
 from videoaulas.views import videolessonlist_view, videolessoncreate_view, videolessonedit_view, videolessondelete_view
 
-base = 'vitalita/administrador/'
+base = 'extcomp/administrador/'
 
 urlpatterns = [
 	path(base + 'superadmin/', admin.site.urls),
@@ -85,8 +85,8 @@ urlpatterns = [
 	path(base + 'videoaulas/formulario/<int:id>/', videolessonedit_view, name='videolessonedit'),
 	path(base + 'videoaulas/excluir/<int:id>/', videolessondelete_view, name='videolessondelete'),
 
-	re_path(r'^vitalita/administrador/media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT }),
-	re_path(r'^vitalita/administrador/static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT }),
+	re_path(r'^extcomp/administrador/media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT }),
+	re_path(r'^extcomp/administrador/static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT }),
 ]
 
 if settings.DEBUG:
