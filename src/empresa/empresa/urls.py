@@ -22,7 +22,7 @@ from empresa.views import login_view, camera_view, forgot_view, readmore_view, c
 from core.views import associatedlist_view, associatedread_view, associatedpdf_view
 from vagas.views import joblist_view, jobcreate_view, jobedit_view, jobdelete_view
 
-base = 'vitalita/empresa/'
+base = 'extcomp/empresa/'
 
 urlpatterns = [
 	path(base, login_view, name='login'),
@@ -41,8 +41,8 @@ urlpatterns = [
 	path(base + 'vagas/formulario/<int:id>/', jobedit_view, name='jobedit'),
 	path(base + 'vagas/excluir/<int:id>/', jobdelete_view, name='jobdelete'),
 
-	re_path(r'^vitalita/empresa/media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT }),
-	re_path(r'^vitalita/empresa/static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT }),
+	re_path(r'^extcomp/empresa/media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT }),
+	re_path(r'^extcomp/empresa/static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT }),
 ]
 
 if settings.DEBUG:

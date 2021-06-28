@@ -27,7 +27,7 @@ from session.views import gamelist_view, gameread_view
 from session.views import joblist_view, jobread_view
 from session.views import videolessonlist_view, videolessonread_view
 
-base = 'vitalita/associado/'
+base = 'extcomp/associado/'
 
 urlpatterns = [
 	path(base, login_view, name='login'),
@@ -58,8 +58,8 @@ urlpatterns = [
 	path(base + 'videoaulas/', videolessonlist_view, name='videolessonlist'),
 	path(base + 'videoaulas/<int:id>/', videolessonread_view, name='videolessonread'),
 
-	re_path(r'^vitalita/associado/media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT }),
-	re_path(r'^vitalita/associado/static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT }),
+	re_path(r'^extcomp/associado/media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT }),
+	re_path(r'^extcomp/associado/static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT }),
 ]
 
 if settings.DEBUG:
