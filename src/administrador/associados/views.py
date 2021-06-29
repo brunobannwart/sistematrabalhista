@@ -34,9 +34,9 @@ def associatedcreate_view(request):
 				formulario = request.POST
 				
 				if Associado.objects.filter(email=campos['email']):
-					erro = 'Já existe aluno com esse email cadastrado'
+					erro = 'Já existe associado com esse email cadastrado'
 				else:
-					erro = 'Já existe aluno com esse CPF'
+					erro = 'Já existe associado com esse CPF'
 			else:
 				if validate_cpf(campos['cpf']):
 					try:
@@ -134,7 +134,7 @@ def associatededit_view(request, id=0):
 
 					else:
 						formulario = request.POST
-						erro = 'Já existe aluno com esse email cadastrado'
+						erro = 'Já existe associado com esse email cadastrado'
 				else:
 					editar_associado.email = campos['email']
 					editar_associado.save()

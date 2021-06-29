@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block titulo %}
-	<h3>Formulário de Aluno</h3>
+	<h3>Formulário de Associado</h3>
 {% endblock %}
 
 {% block pagina %}
@@ -110,7 +110,7 @@
 						<div class='col'>
 							<div class='input-group mb-3'>
 								<div class='input-group-prepend'>
-									<label class='input-group-text'>Foto do aluno</label>
+									<label class='input-group-text'>Foto do associado</label>
 								</div>
 								<div class='custom-file'>
 									<input 
@@ -136,7 +136,7 @@
 								value='{{ form.nome }}'
 								class='form-control'
 								required
-								placeholder='Preencha com o nome do aluno'
+								placeholder='Preencha com o nome do associado'
 								maxlength='45'
 							/>
 						</div>
@@ -175,7 +175,7 @@
 									value='{{ form.cpf }}'
 									class='form-control'
 									required
-									placeholder='Preencha com o CPF do aluno'
+									placeholder='Preencha com o CPF do associado'
 									maxlength='14'
 									onkeypress='mascaraCPF(this)'
 									readonly
@@ -190,7 +190,7 @@
 									value='{{ form.cpf }}'
 									class='form-control'
 									required
-									placeholder='Preencha com o CPF do aluno'
+									placeholder='Preencha com o CPF do associado'
 									maxlength='14'
 									onkeypress='mascaraCPF(this)'
 									pattern='[0-9]{3}[\.][0-9]{3}[\.][0-9]{3}[-][0-9]{2}'
@@ -207,7 +207,7 @@
 								value='{{ form.celular }}'
 								class='form-control'
 								required
-								placeholder='Preencha com o celular do aluno'
+								placeholder='Preencha com o celular do associado'
 								maxlength='15'
 								pattern='[\(][0-9]{2}[\)][\s]{1}[0-9]{5}[-][0-9]{4}' 
 								onkeypress='mascaraCelular(this)'
@@ -225,7 +225,7 @@
 								value='{{ form.email }}'
 								class='form-control'
 								required
-								placeholder='Preencha com a email do aluno'
+								placeholder='Preencha com a email do associado'
 								maxlength='45'
 							/>
 						</div>
@@ -239,7 +239,7 @@
 										name='senha'
 										value='{{ form.senha }}'
 										class='form-control'
-										placeholder='Preencha com a senha do aluno'
+										placeholder='Preencha com a senha do associado'
 										maxlength='100'
 									/>
 								{% else %}
@@ -250,7 +250,7 @@
 										value='{{ form.senha }}'
 										class='form-control'
 										required
-										placeholder='Preencha com a senha do aluno'
+										placeholder='Preencha com a senha do associado'
 										maxlength='100'
 									/>
 								{% endif %}
@@ -278,7 +278,7 @@
 								value='{{ form.cep }}'
 								class='form-control'
 								required
-								placeholder='Preencha com o CEP do aluno'
+								placeholder='Preencha com o CEP do associado'
 								maxlength='10'
 								pattern='[0-9]{2}[\.][0-9]{3}[-][0-9]{3}'
 								onkeypress='mascaraCEP(this)'
@@ -294,7 +294,7 @@
 								value='{{ form.numero }}'
 								class='form-control'
 								required
-								placeholder='Preencha com o número do aluno'
+								placeholder='Preencha com o número do associado'
 								maxlength='5'
 								pattern='[0-9]*' 
 							/>
@@ -358,7 +358,7 @@
 								id='outras_informacoes'
 								name='outras_informacoes'
 								class='form-control'
-								placeholder='Preencha com alguma informação adicional do aluno'
+								placeholder='Preencha com alguma informação adicional do associado'
 								maxlength='255'
 							>{{ form.outras_informacoes }}</textarea>
 						</div>
