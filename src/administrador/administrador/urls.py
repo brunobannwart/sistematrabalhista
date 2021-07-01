@@ -47,10 +47,10 @@ urlpatterns = [
 	path(base + 'administradores/formulario/<int:id>/', adminedit_view, name='adminedit'),
 	path(base + 'administradores/excluir/<int:id>/', admindelete_view, name='admindelete'),
 
-	path(base + 'alunos/', associatedlist_view, name='associatedlist'),
-	path(base + 'alunos/formulario/', associatedcreate_view, name='associatedcreate'),
-	path(base + 'alunos/formulario/<int:id>/', associatededit_view, name='associatededit'),
-	path(base + 'alunos/excluir/<int:id>/', associateddelete_view, name='associateddelete'),
+	path(base + 'associados/', associatedlist_view, name='associatedlist'),
+	path(base + 'associados/formulario/', associatedcreate_view, name='associatedcreate'),
+	path(base + 'associados/formulario/<int:id>/', associatededit_view, name='associatededit'),
+	path(base + 'associados/excluir/<int:id>/', associateddelete_view, name='associateddelete'),
 
 	path(base + 'curriculos/', resumelist_view, name='resumelist'),
 	path(base + 'curriculos/<int:id>/', resumeread_view, name='resumeread'),
