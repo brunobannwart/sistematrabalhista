@@ -27,7 +27,7 @@ def coursecreate_view(request):
 			campos = formulario.clean_form()
 
 			try:
-				novo_curso = Curso.objects.create(logo=campos['logo'], titulo=campos['titulo'], data_exp=campos['data_exp'], descricao=campos['descricao'])
+				novo_curso = Curso.objects.create(logo=campos['logo'], titulo=campos['titulo'],  url=campos['url'], data_exp=campos['data_exp'], descricao=campos['descricao'])
 				novo_curso.save()
 				return redirect('courselist')
 
@@ -41,6 +41,7 @@ def coursecreate_view(request):
 		formulario = {
 			'logo': None,
 			'titulo': '',
+			'url': '',
 			'data_exp': '',
 			'descricao': '',
 		}
@@ -78,6 +79,7 @@ def courseedit_view(request, id=0):
 					editar_curso.logo = campos['logo']
 
 				editar_curso.titulo = campos['titulo']
+				editar_curso.url = campos['url']
 				editar_curso.data_exp = campos['data_exp']
 				editar_curso.descricao = campos['descricao']
 				editar_curso.save()

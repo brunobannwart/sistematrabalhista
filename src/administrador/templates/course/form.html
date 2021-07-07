@@ -86,6 +86,19 @@
 							/>
 						</div>
 						<div class='col'>
+							<label for='url'>URL</label>
+							<input
+								type='url'
+								id='url'
+								name='url'
+								value='{{ form.url }}'
+								class='form-control'
+								maxlength='100'
+								placeholder='Preencha com a URL do curso'
+								required
+							>
+						</div>
+						<div class='col'>
 							<label for='data_exp'>Data de expiração</label>
 							{% if erro is not None %}
 								<input

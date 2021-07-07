@@ -27,7 +27,7 @@ def jobcreate_view(request):
 			campos = formulario.clean_form()
 
 			try:
-				nova_vaga = Vaga.objects.create(empresa_id=request.user.id, logo=campos['logo'], titulo=campos['titulo'], data_exp=campos['data_exp'], descricao=campos['descricao'])
+				nova_vaga = Vaga.objects.create(empresa_id=request.user.id, logo=campos['logo'], titulo=campos['titulo'],  url=campos['url'], data_exp=campos['data_exp'], descricao=campos['descricao'])
 				nova_vaga.save()
 				return redirect('joblist')
 
@@ -41,6 +41,7 @@ def jobcreate_view(request):
 		formulario = {
 			'logo': None,
 			'titulo': '',
+			'url': '',
 			'data_exp': '',
 			'descricao': '',
 		}
@@ -78,6 +79,7 @@ def jobedit_view(request, id=0):
 					editar_vaga.logo = campos['logo']
 
 				editar_vaga.titulo = campos['titulo']
+				editar_vaga.url = campos['url']
 				editar_vaga.data_exp = campos['data_exp']
 				editar_vaga.descricao = campos['descricao']
 				editar_vaga.save()

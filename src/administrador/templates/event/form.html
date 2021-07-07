@@ -55,7 +55,7 @@
 						<div class='col'>
 							<div class='input-group mb-3'>
 								<div class='input-group-prepend'>
-									<label class='input-group-text'>Logo do curso</label>
+									<label class='input-group-text'>Logo do evento</label>
 								</div>
 								<div class='custom-file'>
 									<input 
@@ -84,6 +84,19 @@
 								placeholder='Preencha com o título do evento'
 								maxlength='50'
 							/>
+						</div>
+						<div class='col'>
+							<label for='url'>URL</label>
+							<input
+								type='url'
+								id='url'
+								name='url'
+								value='{{ form.url }}'
+								class='form-control'
+								maxlength='100'
+								placeholder='Preencha com a URL do evento'
+								required
+							>
 						</div>
 						<div class='col'>
 							<label for='data_exp'>Data de expiração</label>
