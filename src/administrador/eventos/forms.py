@@ -3,7 +3,7 @@ from django import forms
 # Create your form here.
 class FormCadastro(forms.Form):
 	titulo = forms.CharField(label='Titulo', max_length=50)
-	url = forms.URLField(label='URL', max_length=100)
+	url = forms.URLField(label='URL', max_length=100, required=False)
 	data_exp = forms.DateField(label='Data de expiração')
 	descricao =	forms.CharField(label='Descrição', widget=forms.Textarea, max_length=255)
 	logo = forms.ImageField(label='logo')
@@ -19,7 +19,7 @@ class FormCadastro(forms.Form):
 
 class FormEditar(forms.Form):
 	titulo = forms.CharField(label='Titulo', max_length=50)
-	url = forms.URLField(label='URL', max_length=100)
+	url = forms.URLField(label='URL', max_length=100, required=False)
 	data_exp = forms.DateField(label='Data de expiração')
 	descricao = forms.CharField(label='Descrição', widget=forms.Textarea, max_length=255)
 	logo = forms.ImageField(label='logo', required=False)

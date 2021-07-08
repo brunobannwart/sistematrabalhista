@@ -16,18 +16,20 @@
 				<h6 class='card-subtitle mb-2 text-center'>{{ form.data_exp }}</h6>
 				<p class='card-text'>{{ form.descricao }}</p>
 				<a
-					class='btn btn-link'
+					class='btn btn-link text-info'
 					href='{% url "courselist" %}'
 				>
 					Voltar
 				</a>
+				{% if form.url %} 
 				<a
-					class='btn btn-primary btn-lg btn-block'
+					class='btn btn-info btn-lg btn-block w-50 mx-auto'
 					href='{{ form.url }}'
-					target="_blank"
+					target='_blank'
 				>
 					Acessar curso
 				</a>
+				{% endif %} 
 			</div>
 		</div>
 	</div>
