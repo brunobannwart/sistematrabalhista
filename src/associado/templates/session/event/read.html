@@ -16,11 +16,20 @@
 				<h6 class='card-subtitle mb-2 text-center'>{{ form.data_exp }}</h6>
 				<p class='card-text'>{{ form.descricao }}</p>
 				<a
-					class='btn btn-link'
+					class='btn btn-link text-info'
 					href='{% url "eventlist" %}'
 				>
 					Voltar
 				</a>
+				{% if form.url %} 
+				<a
+					class='btn btn-info btn-lg btn-block w-50 mx-auto'
+					href='{{ form.url }}'
+					target='_blank'
+				>
+					Acessar evento
+				</a>
+				{% endif %} 
 			</div>
 		</div>
 	</div>

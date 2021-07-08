@@ -206,6 +206,7 @@ def jobread_view(request, id=0):
 					'email': empresa.email,
 					'logo': settings.MEDIA_URL + resultado[2],
 					'titulo': resultado[3],
+					'url': resultado[8],
 					'data_exp': resultado[4],
 					'descricao': resultado[5],
 				}
@@ -240,6 +241,7 @@ def jobpdf_view(request, id=0):
 					'email': empresa.email,
 					'logo': settings.MEDIA_ROOT + '/' + resultado[2],
 					'titulo': resultado[3],
+					'url': resultado[8],
 					'data_exp': resultado[4],
 					'descricao': resultado[5],
 				}
