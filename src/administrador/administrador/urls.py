@@ -23,7 +23,7 @@ from administrador.views import login_view, camera_view, forgot_view, readmore_v
 from administrador.views import changepassword_view, joblist_view, jobread_view, jobpdf_view
 from administrador.views import resumelist_view, resumeread_view, resumedelete_view
 from administradores.views import adminlist_view, admincreate_view, adminedit_view, admindelete_view
-from associados.views import associatedlist_view, associatedcreate_view, associatededit_view, associateddelete_view
+from associados.views import associatedlist_view, associatedcreate_view, associatededit_view, associateddelete_view, associatedpdf_view
 from cursos.views import courselist_view, coursecreate_view, courseedit_view, coursedelete_view
 from empresas.views import companylist_view, companycreate_view, companyedit_view, companydelete_view
 from eventos.views import eventlist_view, eventcreate_view, eventedit_view, eventdelete_view
@@ -51,6 +51,7 @@ urlpatterns = [
 	path(base + 'associados/formulario/', associatedcreate_view, name='associatedcreate'),
 	path(base + 'associados/formulario/<int:id>/', associatededit_view, name='associatededit'),
 	path(base + 'associados/excluir/<int:id>/', associateddelete_view, name='associateddelete'),
+	path(base + 'associados/pdf/<int:id>/', associatedpdf_view, name='associatedpdf'),
 
 	path(base + 'curriculos/', resumelist_view, name='resumelist'),
 	path(base + 'curriculos/<int:id>/', resumeread_view, name='resumeread'),
