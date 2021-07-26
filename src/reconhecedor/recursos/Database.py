@@ -2,7 +2,7 @@ import mysql.connector as mysql
 
 class Database:
 	def __init__(self):
-		conexao = mysql.connect(host='localhost', user='vit_reconhecedor', password='reconhecedor$vitalita', database='db_vitalita', auth_plugin='mysql_native_password')
+		conexao = mysql.connect(host='localhost', user='vit_reconhecedor', password='reconhecedor$extcomp', database='db_extcomp', auth_plugin='mysql_native_password')
 		cursor = conexao.cursor()
 
 		self.__criarTabela(cursor)
@@ -14,7 +14,7 @@ class Database:
 		cursor.execute("CREATE TABLE IF NOT EXISTS `treinamento`(`id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT, `foto` VARCHAR(100), `codificações` TEXT, `grupo` VARCHAR(100)) ENGINE=InnoDB")
 
 	def obterFaces(self):
-		conexao = mysql.connect(host='localhost', user='vit_reconhecedor', password='reconhecedor$vitalita', database='db_vitalita', auth_plugin='mysql_native_password')
+		conexao = mysql.connect(host='localhost', user='vit_reconhecedor', password='reconhecedor$extcomp', database='db_extcomp', auth_plugin='mysql_native_password')
 		cursor = conexao.cursor()
 
 		faces = []
@@ -41,7 +41,7 @@ class Database:
 		return faces
 
 	def salvarFace(self, arquivo, codigos, grupo):
-		conexao = mysql.connect(host='localhost', user='vit_reconhecedor', password='reconhecedor$vitalita', database='db_vitalita', auth_plugin='mysql_native_password')
+		conexao = mysql.connect(host='localhost', user='vit_reconhecedor', password='reconhecedor$extcomp', database='db_extcomp', auth_plugin='mysql_native_password')
 		cursor = conexao.cursor()
 
 		cursor.execute("INSERT INTO `treinamento`(`foto`, `codificações`, `grupo`) VALUES (%s, %s, %s)",
@@ -52,7 +52,7 @@ class Database:
 		return cursor.lastrowid
 
 	def deletarFace(self, id_):
-		conexao = mysql.connect(host='localhost', user='vit_reconhecedor', password='reconhecedor$vitalita', database='db_vitalita', auth_plugin='mysql_native_password')
+		conexao = mysql.connect(host='localhost', user='vit_reconhecedor', password='reconhecedor$extcomp', database='db_extcomp', auth_plugin='mysql_native_password')
 		cursor = conexao.cursor()
 
 		try:
