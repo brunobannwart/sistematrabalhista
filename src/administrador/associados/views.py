@@ -6,6 +6,10 @@ import os, requests
 from .models import Associado
 from .forms import FormCadastro, FormEditar
 from administrador.utils import validate_cpf
+from django.db import connection
+from django.conf import settings
+from administrador.utils import render_to_pdf
+from django.http import HttpResponse
 
 # Create your views here.
 @login_required(login_url='login')
@@ -181,4 +185,48 @@ def associateddelete_view(request, id=0):
 		finally:
 			return redirect('associatedlist')
 	else:
+		return redirect('associatedlist')
+
+@login_required(login_url='login')
+def associatedpdf_view(request, id=0):
+	if id == 0:
+		return redirect('associatedlist')
+
+	try:
+		associado = Associado.objects.get(id=id)
+		formulario = {
+			'id': id,
+			'foto': settings.MEDIA_ROOT + '/' + associado.foto.name,
+			'nome': associado.nome,
+			'data_nascimento': associado.data_nascimento,
+			'cpf': associado.cpf,
+			'celular': associado.celular,
+			'email': associado.email,
+			'cep': associado.cep,
+			'numero': associado.numero,
+			'pcd': associado.pcd,
+			'outras_informacoes': associado.outras_informacoes,
+			'instituicao_ensino': associado.instituicao_ensino,
+			'curso_extra': associado.curso_extra,
+			'empresa_trabalhada': associado.empresa_trabalhada,
+			'cargo_ocupado': associado.cargo_ocupado,
+		}
+
+		contexto = {
+			'form': formulario,
+		}
+
+		pdf = render_to_pdf('associated/pdf.html', contexto)
+
+		if pdf:
+			resposta = HttpResponse(pdf, content_type='application/pdf')
+			nomearquivo = associado.nome.replace(' ', '_').lower() + '.pdf'
+			conteudo = 'inline; filename=%s' % (nomearquivo)
+			resposta['Content-Disposition'] = conteudo
+			return resposta
+
+		else:
+			return redirect('associatedlist', id=id)
+
+	except:
 		return redirect('associatedlist')

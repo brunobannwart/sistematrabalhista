@@ -182,6 +182,15 @@
 					{% endif %}
 
 					<footer>
+						{% if editar is True and request.user.pcd is False %}
+							<a
+								role='button'
+								class='btn btn-link'
+								href='{% url "resumepdf" %}'
+							>
+								Gerar PDF
+							</a>
+						{% endif %}
 						<button
 							type='button'
 							class='btn btn-danger btn-lg'

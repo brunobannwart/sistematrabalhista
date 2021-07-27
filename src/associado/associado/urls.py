@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.views.static import serve
 
 from associado.views import login_view, camera_view, forgot_view, readmore_view, logout_view
-from curriculos.views import resumecreate_view, resumelist_view, resumeedit_view
+from curriculos.views import resumecreate_view, resumelist_view, resumeedit_view, resumepdf_view
 from session.views import home_view
 from session.views import courselist_view, courseread_view
 from session.views import eventlist_view, eventread_view
@@ -42,6 +42,7 @@ urlpatterns = [
 	path(base + 'curriculos/', resumelist_view, name='resumelist'),
 	path(base + 'curriculos/formulario/', resumecreate_view, name='resumecreate'),
 	path(base + 'curriculos/formulario/<int:id>/', resumeedit_view, name='resumeedit'),
+	path('curriculos/formulario/pdf/', resumepdf_view, name='resumepdf'),
 
 	path(base + 'cursos/', courselist_view, name='courselist'),
 	path(base + 'cursos/<int:id>/', courseread_view, name='courseread'),
