@@ -16,7 +16,7 @@
 				<button class='btn btn-info' type='button' onclick='pesquisarAdministrador()'>Pesquisar</button>
 			</div>
 		</div>
-		<div class='table-responsive-lg'>
+		<div class='table-responsive-lg shadow'>
 			<table class='table table-bordered table-hover'>
 				<thead class='thead-dark'>
 					<th scope='col' class='text-center align-middle'>Foto</th>
@@ -64,7 +64,7 @@
 		</div>
 	{% else %}
 		<div class='empty'>
-			<div class='card'>
+			<div class='card shadow'>
 				<div class='card-body' onclick='window.location.href=`{% url "admincreate" %}`'>
 					<header>
 						<strong>Aviso</strong>
