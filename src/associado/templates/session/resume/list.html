@@ -9,7 +9,7 @@
 		<ul class='row pt-4'>
 			{% for curriculo in curriculos %}
 				<li class='col-sm-2 pb-4'>
-					<div class='card'>
+					<div class='card shadow'>
 						<div class='card-body'>
 							<h5 class='card-title text-center'>Curriculo {{ forloop.counter }}</h5> 
 							<p class='card-text text-center'>{{ curriculo.created_at|date:"d-m-Y" }}</p>
@@ -27,7 +27,7 @@
 		</ul>
 	{% else %}
 		<div class='empty' style='cursor: pointer;' onclick='window.location.href=`{% url "resumecreate" %}`'>
-			<div class='card'>
+			<div class='card shadow'>
 				<div class='card-body'>
 					<header>
 						<strong>Aviso</strong>
