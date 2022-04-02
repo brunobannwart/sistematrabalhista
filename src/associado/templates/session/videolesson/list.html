@@ -6,7 +6,7 @@
 		<ul class='row'>
 			{% for videoaula in videoaulas %}
 				<li class='col-sm-2 pb-4'>
-					<div class='card'>
+					<div class='card shadow'>
 						<img 
 							src='{{ videoaula.logo }}'
 							alt='{{ videoaula.titulo }}'
@@ -29,7 +29,7 @@
 		</ul>
 	{% else %}
 		<div class='empty'>
-			<div class='card'>
+			<div class='card shadow'>
 				<div class='card-body'>
 					<header>
 						<strong>Aviso</strong>
