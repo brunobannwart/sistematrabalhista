@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
 
-from associado.views import login_view, camera_view, forgot_view, readmore_view, logout_view
+from associado.views import login_view, forgot_view, readmore_view, logout_view
 from curriculos.views import resumecreate_view, resumelist_view, resumeedit_view, resumepdf_view
 from session.views import home_view
 from session.views import courselist_view, courseread_view
@@ -31,7 +31,6 @@ base = 'extcomp/associado/'
 
 urlpatterns = [
 	path(base, login_view, name='login'),
-	path(base + 'camera/', camera_view, name='camera'),
 	path(base + 'esquecidados/', forgot_view, name='forgot'),
 	path(base + 'saibamais/', readmore_view, name='readmore'),
 	path(base + 'sair/', logout_view, name='logout'),

@@ -61,38 +61,6 @@ def login_view(request):
 	contexto.update(csrf(request))
 	return render(request, 'login/index.html', contexto)
 
-@csrf_protect
-def camera_view(request):
-	os.environ['NO_PROXY'] = '127.0.0.1'
-
-	if request.method == 'POST':
-		endereco = request.POST.get('url')
-		foto = rebuild_image(endereco)
-
-		try:
-			resposta = requests.post('http://127.0.0.1:5000/api/reconhecimento', data={'grupo': 'administrador'}, files={ 'file': ('foto.png', foto, 'image/png')})
-
-			if resposta.status_code  == 200:
-				resposta = resposta.json()
-
-				try:
-					administrador = Administrador.objects.get(treino=resposta['reconhecimento'])
-					administrador.is_authenticated = True
-					administrador.save()
-
-					login(request, administrador, backend='administrador.backend.BackendLogin')
-					return redirect('adminlist')
-
-				except Exception as e:
-					print(e)
-					return redirect('login')
-			else:
-				return redirect('login')
-		except:
-			return redirect('login')
-	else:
-		return render(request, 'login/camera.html', {})
-
 def forgot_view(request):
 	return render(request, 'login/forgot.html', {})
 

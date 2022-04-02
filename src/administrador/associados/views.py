@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
-import os, requests
 from .models import Associado
 from .forms import FormCadastro, FormEditar
 from administrador.utils import validate_cpf
@@ -25,7 +24,6 @@ def associatedlist_view(request):
 @login_required(login_url='login')
 @csrf_protect
 def associatedcreate_view(request):
-	os.environ['NO_PROXY'] = '127.0.0.1'
 	editar = False
 
 	if request.method == 'POST':
@@ -44,22 +42,13 @@ def associatedcreate_view(request):
 			else:
 				if validate_cpf(campos['cpf']):
 					try:
-						resposta = requests.post('http://127.0.0.1:5000/api/treino', data={'grupo': 'associado'}, files={ 'file': campos['foto'] })
+						novo_associado = Associado.objects.create(foto=campos['foto'], nome=campos['nome'], cpf=campos['cpf'], 
+							celular=campos['celular'], cep=campos['cep'], data_nascimento=campos['data_nascimento'], 
+							numero=campos['numero'], email=campos['email'], senha_hash=campos['senha_hash'], pcd=campos['pcd'], 
+							outras_informacoes=campos['outras_informacoes'], acessibilidade=campos['acessibilidade'])
 
-						if resposta.status_code == 200:
-							resposta = resposta.json()
-
-							novo_associado = Associado.objects.create(foto=campos['foto'], nome=campos['nome'], cpf=campos['cpf'], 
-												celular=campos['celular'], cep=campos['cep'], data_nascimento=campos['data_nascimento'], 
-												numero=campos['numero'], email=campos['email'], senha_hash=campos['senha_hash'], treino=resposta['treino'],
-												pcd=campos['pcd'], outras_informacoes=campos['outras_informacoes'], acessibilidade=campos['acessibilidade'])
-
-							novo_associado.save()
-							return redirect('associatedlist')
-
-						else:
-							formulario = request.POST
-							erro = 'Foto inválida'
+						novo_associado.save()
+						return redirect('associatedlist')
 					except:
 						formulario = request.POST
 						erro = 'Não foi possível cadastrar novo associado'
@@ -176,12 +165,7 @@ def associateddelete_view(request, id=0):
 	if request.method == 'POST':
 		try:
 			associado = Associado.objects.get(id=id)
-			treino = associado.treino
-			resposta = requests.post('http://127.0.0.1:5000/api/remover', data={'treino': treino})
-			
-			if resposta.status_code == 200:
-				associado.delete()
-
+			associado.delete()
 		finally:
 			return redirect('associatedlist')
 	else:
