@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
-import os, requests
 from .models import Administrador
 from .forms import FormCadastro, FormEditar
 
@@ -20,7 +19,6 @@ def adminlist_view(request):
 @login_required(login_url='login')
 @csrf_protect
 def admincreate_view(request):
-	os.environ['NO_PROXY'] = '127.0.0.1'
 	editar = False
 
 	if request.method == 'POST':
@@ -38,21 +36,11 @@ def admincreate_view(request):
 					erro = 'Já existe administrador com esse RF cadastrado'
 			else:
 				try:
-					resposta = requests.post('http://127.0.0.1:5000/api/treino', data={'grupo': 'administrador'}, files={ 'file': campos['foto'] })
+					novo_administrador = Administrador.objects.create(foto=campos['foto'], nome=campos['nome'], rf=campos['rf'],
+						email=campos['email'], senha_hash=campos['senha_hash'], acessibilidade=campos['acessibilidade'])
 
-					if resposta.status_code == 200:
-						resposta = resposta.json()
-
-						novo_administrador = Administrador.objects.create(foto=campos['foto'], nome=campos['nome'], rf=campos['rf'],
-												email=campos['email'], senha_hash=campos['senha_hash'], treino=resposta['treino'], 
-												acessibilidade=campos['acessibilidade'])
-
-						novo_administrador.save()
-						return redirect('adminlist')
-
-					else:
-						formulario = request.POST
-						erro = 'Foto inválida'
+					novo_administrador.save()
+					return redirect('adminlist')
 				except:
 					formulario = request.POST
 					erro = 'Não foi possível cadastrar novo administrador'
@@ -154,12 +142,7 @@ def admindelete_view(request, id=0):
 	if request.method == 'POST':
 		try:
 			administrador = Administrador.objects.get(id=id)
-			treino = administrador.treino
-			resposta = requests.post('http://127.0.0.1:5000/api/remover', data={'treino': treino})
-			
-			if resposta.status_code == 200:
-				administrador.delete()
-
+			administrador.delete()
 		finally:
 			return redirect('adminlist')
 	else:

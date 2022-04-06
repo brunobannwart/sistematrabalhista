@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
-import os, requests
 from .models import Empresa
 from .forms import FormCadastro, FormEditar
 from administrador.utils import validate_cnpj
@@ -21,7 +20,6 @@ def companylist_view(request):
 @login_required(login_url='login')
 @csrf_protect
 def companycreate_view(request):
-	os.environ['NO_PROXY'] = '127.0.0.1'
 	editar = False
 
 	if request.method == 'POST':
@@ -40,22 +38,12 @@ def companycreate_view(request):
 			else:
 				if validate_cnpj(campos['cnpj']):
 					try:
-						resposta = requests.post('http://127.0.0.1:5000/api/treino', data={'grupo': 'empresa'}, files={ 'file': campos['foto'] })
+						nova_empresa = Empresa.objects.create(foto=campos['foto'], logo=campos['logo'], razao_social=campos['razao_social'],
+							nome_contato=campos['nome_contato'], cnpj=campos['cnpj'], telefone=campos['telefone'], cep=campos['cep'], 
+							numero=campos['numero'], email=campos['email'], senha_hash=campos['senha_hash'], acessibilidade=campos['acessibilidade'])
 
-						if resposta.status_code == 200:
-							resposta = resposta.json()
-
-							nova_empresa = Empresa.objects.create(foto=campos['foto'], logo=campos['logo'], razao_social=campos['razao_social'],
-												nome_contato=campos['nome_contato'], cnpj=campos['cnpj'], telefone=campos['telefone'], cep=campos['cep'], 
-												numero=campos['numero'], email=campos['email'], senha_hash=campos['senha_hash'], treino=resposta['treino'],
-												acessibilidade=campos['acessibilidade'])
-
-							nova_empresa.save()
-							return redirect('companylist')
-
-						else:
-							formulario = request.POST
-							erro = 'Foto inválida'
+						nova_empresa.save()
+						return redirect('companylist')
 					except:
 						formulario = request.POST
 						erro = 'Não foi possível cadastrar nova empresa'
@@ -173,12 +161,7 @@ def companydelete_view(request, id=0):
 	if request.method == 'POST':
 		try:
 			empresa = Empresa.objects.get(id=id)
-			treino = empresa.treino
-			resposta = requests.post('http://127.0.0.1:5000/api/remover', data={'treino': treino})
-			
-			if resposta.status_code == 200:
-				empresa.delete()
-
+			empresa.delete()
 		finally:
 			return redirect('companylist')
 	else:

@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
 
-from administrador.views import login_view, camera_view, forgot_view, readmore_view, logout_view
+from administrador.views import login_view, forgot_view, readmore_view, logout_view
 from administrador.views import changepassword_view, joblist_view, jobread_view, jobpdf_view
 from administrador.views import resumelist_view, resumeread_view, resumedelete_view
 from administradores.views import adminlist_view, admincreate_view, adminedit_view, admindelete_view
@@ -36,7 +36,6 @@ urlpatterns = [
 	path(base + 'superadmin/', admin.site.urls),
 
 	path(base , login_view, name='login'),
-	path(base + 'camera/', camera_view, name='camera'),
 	path(base + 'esquecidados/', forgot_view, name='forgot'),
 	path(base + 'saibamais/', readmore_view, name='readmore'),
 	path(base + 'trocarsenha/', changepassword_view, name='changepassword'),

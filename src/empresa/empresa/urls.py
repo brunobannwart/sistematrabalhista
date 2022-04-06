@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
 
-from empresa.views import login_view, camera_view, forgot_view, readmore_view, changepassword_view, logout_view
+from empresa.views import login_view, forgot_view, readmore_view, changepassword_view, logout_view
 from core.views import associatedlist_view, associatedread_view, associatedpdf_view
 from vagas.views import joblist_view, jobcreate_view, jobedit_view, jobdelete_view
 
@@ -26,7 +26,6 @@ base = 'extcomp/empresa/'
 
 urlpatterns = [
 	path(base, login_view, name='login'),
-	path(base + 'camera/', camera_view, name='camera'),
 	path(base + 'esquecidados/', forgot_view, name='forgot'),
 	path(base + 'saibamais/', readmore_view, name='readmore'),
 	path(base + 'trocarsenha/', changepassword_view, name='changepassword'),

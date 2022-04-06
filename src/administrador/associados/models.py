@@ -29,7 +29,6 @@ class Associado(models.Model):
 
 	laudo_medico = models.CharField(verbose_name='Laudo médico', max_length=255, blank=True, null=False)
 	acessibilidade = models.CharField(verbose_name='Acessibilidade', max_length=6, blank=True, null=False)
-	treino = models.IntegerField(verbose_name='Treino facial', null=True)
 
 	created_at = models.DateTimeField(verbose_name='Criado em', auto_now_add=True)
 	updated_at = models.DateTimeField(verbose_name='Atualizado em', auto_now=True)

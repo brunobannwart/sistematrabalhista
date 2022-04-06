@@ -10,8 +10,6 @@ class Administrador(models.Model):
 	rf = models.CharField(verbose_name='RF', max_length=8, unique=True)
 	email = models.EmailField(verbose_name='Email', unique=True, max_length=45)
 	senha_hash = models.CharField(verbose_name='Hash senha', max_length=64)
-
-	treino = models.IntegerField(verbose_name='Treino facial', null=True)
 	acessibilidade = models.CharField(verbose_name='Acessibilidade', max_length=6, blank=True, null=False)
 
 	is_authenticated = models.BooleanField(verbose_name='Autenticado', default=False)

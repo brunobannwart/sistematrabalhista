@@ -10,8 +10,6 @@ from .backend import BackendLogin
 from .forms import FormLogin
 from .utils import rebuild_image
 
-import os, requests
-
 @csrf_protect
 def login_view(request):
 	if request.method == 'POST':
@@ -55,52 +53,6 @@ def login_view(request):
 
 	contexto.update(csrf(request))
 	return render(request, 'login/index.html', contexto)
-
-@csrf_protect
-def camera_view(request):
-	os.environ['NO_PROXY'] = '127.0.0.1'
-
-	if request.method == 'POST':
-		endereco = request.POST.get('url')
-		foto = rebuild_image(endereco)
-
-		try:
-			resposta = requests.post('http://127.0.0.1:5000/api/reconhecimento', data={'grupo': 'empresa'}, files={ 'file': ('foto.png', foto, 'image/png')})
-
-			if resposta.status_code  == 200:
-				resposta = resposta.json()
-
-				try:
-					with connection.cursor() as cursor:
-						cursor.execute("SELECT email, senha_hash FROM empresa WHERE treino=%s", [resposta['reconhecimento']])
-						resultado = cursor.fetchone()
-
-						if resultado != None:
-							campos = {
-								'email': resultado[0],
-								'senha_hash': resultado[1],
-							}
-
-							empresa = BackendLogin.authenticate(request, campos['email'], campos['senha_hash'])
-
-							if empresa != None and empresa != False:
-								empresa.is_authenticated = True
-								empresa.save()
-								login(request, empresa, backend='empresa.backend.BackendLogin')
-								return redirect('joblist')
-
-							else:
-								return redirect('login')
-						else:
-							return redirect('login')
-				except:
-					return redirect('login')
-			else:
-				return redirect('login')
-		except:
-			return redirect('login')
-	else:
-		return render(request, 'login/camera.html', {})
 
 def forgot_view(request):
 	return render(request, 'login/forgot.html', {})
