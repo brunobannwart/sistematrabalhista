@@ -51,9 +51,9 @@ def courseread_view(request, id=0):
 				'id': resultado[0],
 				'logo': settings.MEDIA_URL + resultado[1],
 				'titulo': resultado[2],
-				'url': resultado[7],
-				'data_exp': resultado[3],
-				'descricao': resultado[4],
+				'url': resultado[3],
+				'data_exp': resultado[4],
+				'descricao': resultado[5],
 			}
 
 			contexto = {

@@ -21,6 +21,8 @@ class BackendLogin(BaseBackend):
 						'acessibilidade': resultado[6]
 					}
 
+					print(campos)
+
 					if senha == campos['senha_hash']:
 						if LoginEmpresa.objects.filter(id=campos['id']):
 							sessao = LoginEmpresa.objects.get(id=campos['id'])
