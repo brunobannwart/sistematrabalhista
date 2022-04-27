@@ -143,8 +143,8 @@ def joblist_view(request):
 					'email': empresa.email,
 					'logo': settings.MEDIA_URL + resultado[2],
 					'titulo': resultado[3],
-					'data_exp': resultado[4],
-					'descricao': resultado[5],
+					'data_exp': resultado[5],
+					'descricao': resultado[6],
 				}
 
 				vagas.append(vaga)
@@ -174,9 +174,9 @@ def jobread_view(request, id=0):
 					'email': empresa.email,
 					'logo': settings.MEDIA_URL + resultado[2],
 					'titulo': resultado[3],
-					'url': resultado[8],
-					'data_exp': resultado[4],
-					'descricao': resultado[5],
+					'url': resultado[4],
+					'data_exp': resultado[5],
+					'descricao': resultado[6],
 				}
 
 				contexto = {
@@ -209,9 +209,9 @@ def jobpdf_view(request, id=0):
 					'email': empresa.email,
 					'logo': settings.MEDIA_ROOT + '/' + resultado[2],
 					'titulo': resultado[3],
-					'url': resultado[8],
-					'data_exp': resultado[4],
-					'descricao': resultado[5],
+					'url': resultado[4],
+					'data_exp': resultado[5],
+					'descricao': resultado[6],
 				}
 
 				contexto = {
